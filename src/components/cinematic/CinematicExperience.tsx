@@ -10,15 +10,12 @@ import {
   Icosahedron,
   Sphere,
   Ring,
-  Trail,
   Line,
-  shaderMaterial,
 } from "@react-three/drei";
 import { EffectComposer, Bloom, Vignette, ChromaticAberration } from "@react-three/postprocessing";
 import { BlendFunction } from "postprocessing";
 import { Suspense, useMemo, useRef } from "react";
 import * as THREE from "three";
-import { extend } from "@react-three/fiber";
 
 const GOLD = new THREE.Color("#e7c277");
 const DEEP = new THREE.Color("#0a0a14");
