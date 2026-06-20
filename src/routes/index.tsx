@@ -1,36 +1,33 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import LithosHero from "../components/sections/LithosHero";
+import ToonhubCarousel from "../components/sections/ToonhubCarousel";
+import AetheraHero from "../components/sections/AetheraHero";
+import OrbisNft from "../components/sections/OrbisNft";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Mirastra Tech — A Cinematic Journey" },
-      { name: "description", content: "Travel through Mirastra's futuristic worlds — a cinematic experience built for the year 2035." },
-      { property: "og:title", content: "Mirastra Tech — A Cinematic Journey" },
-      { property: "og:description", content: "Scroll, fly, and discover the Mirastra universe — services, technology and vision rendered as cinema." },
+      { title: "Mirastra Showcase — Premium Interfaces" },
+      { name: "description", content: "Experience next-generation interactive designs: Lithos Spotlight, Toonhub Carousel, Aethera Loop, and Orbis NFT Space." },
     ],
   }),
   component: Index,
 });
 
 function Index() {
-  const [Mod, setMod] = useState<null | { default: React.ComponentType }>(null);
-  useEffect(() => {
-    import("@/components/cinematic/CinematicExperience").then((m) =>
-      setMod({ default: m.default }),
-    );
-  }, []);
+  return (
+    <main className="w-full bg-black text-white min-h-screen">
+      {/* Concept 1: Spotlight Reveal Hero (Lithos Geology theme) */}
+      <LithosHero />
 
-  if (!Mod) {
-    return (
-      <div className="fixed inset-0 flex flex-col items-center justify-center bg-[#04030a] text-[#e7c277]">
-        <div className="mirastra-eyebrow mirastra-pulse">INITIALIZING MIRASTRA UNIVERSE</div>
-        <div className="mt-6 h-px w-40 bg-[#e7c277]/40 overflow-hidden">
-          <div className="h-full w-1/2 bg-[#e7c277] animate-[mirastra-pulse_1.6s_ease-in-out_infinite]" />
-        </div>
-      </div>
-    );
-  }
-  const Cinematic = Mod.default;
-  return <Cinematic />;
+      {/* Concept 2: Rotating 3D Figurines Carousel (Toonhub theme) */}
+      <ToonhubCarousel />
+
+      {/* Concept 3: Seamless manual loops video background hero (Aethera theme) */}
+      <AetheraHero />
+
+      {/* Concept 4: Deep dark space glassmorphic layouts (Orbis.Nft theme) */}
+      <OrbisNft />
+    </main>
+  );
 }

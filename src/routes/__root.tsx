@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { initLenis } from "../lib/lenis";
 
 function NotFoundComponent() {
   return (
@@ -77,11 +78,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Mirastra Tech — Building the Future" },
-      { name: "description", content: "A cinematic journey through Mirastra Tech's futuristic digital universe." },
+      { title: "Mirastra Tech — Technology Solutions" },
+      { name: "description", content: "We transform businesses through websites, software, automation, mobile applications, browser extensions, and digital growth solutions." },
       { name: "author", content: "Mirastra Tech" },
-      { property: "og:title", content: "Mirastra Tech — Building the Future" },
-      { property: "og:description", content: "Travel through worlds of technology. A cinematic experience by Mirastra Tech." },
+      { property: "og:title", content: "Mirastra Tech — Technology Solutions" },
+      { property: "og:description", content: "Building the future. Beyond limits." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@MirastraTech" },
@@ -95,7 +96,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Unbounded:wght@200;400;700;900&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Anton&family=Condiment&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@1,400;1,500;1,600&display=swap",
       },
     ],
   }),
@@ -122,6 +123,13 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
+  useEffect(() => {
+    const lenis = initLenis();
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
@@ -129,3 +137,4 @@ function RootComponent() {
     </QueryClientProvider>
   );
 }
+
