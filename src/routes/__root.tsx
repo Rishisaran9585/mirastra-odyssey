@@ -79,7 +79,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Mirastra Tech — Technology Solutions" },
-      { name: "description", content: "We transform businesses through websites, software, automation, mobile applications, browser extensions, and digital growth solutions." },
+      {
+        name: "description",
+        content:
+          "We transform businesses through websites, software, automation, mobile applications, browser extensions, and digital growth solutions.",
+      },
       { name: "author", content: "Mirastra Tech" },
       { property: "og:title", content: "Mirastra Tech — Technology Solutions" },
       { property: "og:description", content: "Building the future. Beyond limits." },
@@ -137,4 +141,3 @@ function RootComponent() {
     </QueryClientProvider>
   );
 }
-
