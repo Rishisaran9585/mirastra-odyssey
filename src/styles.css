@@ -146,6 +146,9 @@ body {
 .font-instrument {
   font-family: "Instrument Serif", serif;
 }
+.font-outfit {
+  font-family: "Outfit", sans-serif;
+}
 
 /* Lithos Hero animations */
 @keyframes heroReveal {
@@ -223,4 +226,76 @@ body {
 .animate-fade-rise-delay-2 {
   animation: fadeRise 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
   opacity: 0;
+}
+
+/* Homepage Hero Redesign Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+}
+@keyframes float-delayed {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(10px) rotate(-1deg);
+  }
+}
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.15;
+    transform: scale(1) translate(0px, 0px);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1.1) translate(10px, -10px);
+  }
+}
+.animate-float-hero {
+  animation: float 6s ease-in-out infinite;
+}
+.animate-float-card-1 {
+  animation: float-delayed 5s ease-in-out infinite;
+}
+.animate-float-card-2 {
+  animation: float 7s ease-in-out infinite;
+}
+.animate-pulse-glow {
+  animation: pulse-glow 8s ease-in-out infinite;
+}
+
+/* Glassmorphism custom classes */
+.hero-glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.hero-glass-card:hover {
+  border-color: rgba(191, 255, 0, 0.25);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* About Page Redesign Custom Styles */
+.pushpin-card {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 5px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.pushpin-card:hover {
+  transform: translateY(-8px) rotate(0deg) !important;
+  box-shadow: 0 20px 40px rgba(191, 255, 0, 0.15), 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.wavy-bg {
+  background-color: #0d0d0d;
+  background-image: radial-gradient(circle at 100% 150%, #bfff00 24%, #0a0a0a 24%, #0a0a0a 28%, #bfff00 28%, #bfff00 36%, #0a0a0a 36%, #0a0a0a 40%, #bfff00 40%, #bfff00 48%, #0a0a0a 48%, #0a0a0a 52%, #bfff00 52%, #bfff00 60%, #0a0a0a 60%, #0a0a0a 64%, #bfff00 64%, #bfff00 72%, #0a0a0a 72%, #0a0a0a 76%, #bfff00 76%, #bfff00 84%, #0a0a0a 84%, #0a0a0a 88%, #bfff00 88%, #bfff00 96%, #0a0a0a 96%, #0a0a0a 100%);
+  background-size: 40px 40px;
+  opacity: 0.15;
 }

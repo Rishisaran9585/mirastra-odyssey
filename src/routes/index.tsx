@@ -1,4 +1,4 @@
-﻿import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import Nav from "../components/Nav";
 import {
   ArrowUpRight,
@@ -44,30 +44,36 @@ function Index() {
       {/* Navigation */}
       <Nav />
 
-      {/* 1. HERO SECTION (Aeline Sky-Blue Panel) */}
+      {/* 1. HERO SECTION (Redesigned Cinematic Dark Mesh Panel) */}
       <div
-        className="w-full min-h-screen relative overflow-hidden flex flex-col justify-between pt-32 pb-8 px-6 sm:px-12 md:px-20"
-        style={{
-          background: "radial-gradient(circle at 78% 30%, #a8d4f0 0%, #3a8cd7 45%, #1245a0 100%)",
-        }}
+        className="w-full min-h-screen relative overflow-hidden flex flex-col justify-between pt-32 pb-8 px-6 sm:px-12 md:px-20 bg-[#020203]"
       >
-        {/* Grid overlay */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
+        {/* Ambient background glows */}
+        <div className="absolute top-[-10%] right-[-10%] w-[55%] aspect-square rounded-full bg-[radial-gradient(circle,rgba(191,255,0,0.12)_0%,transparent,transparent)] pointer-events-none animate-pulse-glow" style={{ filter: "blur(90px)" }} />
+        <div className="absolute bottom-[-20%] left-[-10%] w-[60%] aspect-square rounded-full bg-[radial-gradient(circle,rgba(58,140,215,0.18)_0%,transparent,transparent)] pointer-events-none animate-pulse-glow" style={{ filter: "blur(100px)" }} />
+        <div className="absolute top-[30%] left-[40%] w-[45%] aspect-square rounded-full bg-[radial-gradient(circle,rgba(168,85,247,0.06)_0%,transparent,transparent)] pointer-events-none animate-pulse-glow" style={{ filter: "blur(100px)" }} />
+
+        {/* Tech Grid overlays */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:1.5rem_1.5rem] opacity-35 pointer-events-none" />
+        
         {/* Vignette edges */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_50%,rgba(10,30,80,0.35)_100%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_45%,rgba(0,0,0,0.85)_100%)] pointer-events-none" />
 
         <div className="flex-1 grid grid-cols-1 md:grid-cols-12 gap-8 items-center z-10 relative mt-4 md:mt-8">
           {/* Hero Left Column */}
           <div className="md:col-span-7 flex flex-col items-start text-left">
             {/* Eyebrow label */}
-            <div className="flex items-center gap-2 mb-5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-1.5">
+            <div className="flex items-center gap-2 mb-6 bg-white/[0.04] backdrop-blur-md border border-white/[0.08] hover:border-white/20 rounded-full px-4 py-1.5 transition-colors duration-300">
               <span className="w-1.5 h-1.5 rounded-full bg-[#bfff00] animate-pulse" />
               <span className="text-white/80 text-[10px] font-mono uppercase tracking-[0.25em]">MSME Registered · Est. 2026</span>
             </div>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white leading-[1.08] max-w-[620px]" style={{ textShadow: "0 2px 40px rgba(0,0,50,0.25)" }}>
-              Building the future with AI and strategy
+            
+            <h1 className="text-4xl sm:text-5xl md:text-[62px] font-outfit font-black tracking-tight text-white leading-[1.05] max-w-[640px]">
+              Building the future with <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#bfff00] to-[#54e3ff]">AI &amp; strategy</span>
             </h1>
-            <p className="text-white/80 text-base sm:text-lg md:text-xl font-medium mt-6 max-w-[520px] leading-relaxed">
+            
+            <p className="text-white/70 text-base sm:text-lg md:text-xl font-normal mt-6 max-w-[540px] leading-relaxed">
               We help organizations unlock growth and efficiency through data-driven consulting and
               intelligent automation.
             </p>
@@ -77,7 +83,7 @@ function Index() {
               <Link
                 to="/services"
                 className="bg-[#bfff00] hover:bg-[#aee600] text-black text-xs sm:text-sm font-bold uppercase tracking-widest py-4 px-8 rounded-full inline-flex items-center gap-3 transition-all duration-300 transform hover:scale-105 active:scale-95 decoration-none cursor-pointer"
-                style={{ boxShadow: "0 8px 32px rgba(191,255,0,0.35), 0 2px 8px rgba(0,0,0,0.2)" }}
+                style={{ boxShadow: "0 8px 32px rgba(191,255,0,0.25), 0 2px 8px rgba(0,0,0,0.3)" }}
               >
                 <span>Get Started</span>
                 <div className="w-6 h-6 rounded-full bg-black flex items-center justify-center text-white">
@@ -87,7 +93,7 @@ function Index() {
 
               {/* Stars review */}
               <div className="flex flex-col items-start gap-1">
-                <span className="text-xs font-semibold text-white/80 tracking-wider">
+                <span className="text-xs font-semibold text-white/60 tracking-wider">
                   Rated 4.9/5 by 4,900+ clients
                 </span>
                 <div className="flex text-amber-300">
@@ -100,38 +106,64 @@ function Index() {
           </div>
 
           {/* Hero Right Column */}
-          <div className="md:col-span-5 flex justify-center md:justify-end relative">
-            <div className="relative w-full max-w-[380px] aspect-square sm:aspect-[4/5] md:aspect-square flex items-center justify-center z-10">
+          <div className="md:col-span-5 flex justify-center md:justify-end relative min-h-[380px]">
+            {/* Soft backdrop glow behind main asset */}
+            <div className="absolute top-[20%] left-[20%] w-[60%] h-[60%] rounded-full bg-[#bfff00]/8 blur-[60px] pointer-events-none animate-pulse" />
+
+            <div className="relative w-full max-w-[360px] aspect-square flex items-center justify-center z-10 animate-float-hero">
               <img
                 src="/assets/home_consulting_hero.png"
                 alt="Consulting Hero"
-                className="w-full h-full object-contain scale-110 sm:scale-120 md:scale-125"
+                className="w-full h-full object-contain scale-110 sm:scale-120 md:scale-125 select-none"
                 style={{
                   maskImage: "radial-gradient(circle, black 65%, transparent 100%)",
                   WebkitMaskImage: "radial-gradient(circle, black 65%, transparent 100%)",
                 }}
               />
+
+              {/* Floating Dashboard Card 1 */}
+              <div className="absolute -top-3 -left-4 bg-black/75 backdrop-blur-xl border border-white/10 rounded-2xl p-3.5 shadow-2xl flex items-center gap-3 animate-float-card-1 select-none pointer-events-none w-[175px]">
+                <div className="w-8 h-8 rounded-lg bg-[#bfff00]/10 border border-[#bfff00]/25 flex items-center justify-center text-[#bfff00]">
+                  <Zap size={15} />
+                </div>
+                <div>
+                  <p className="text-[9px] text-white/40 font-mono uppercase tracking-wider leading-none">AI CORE</p>
+                  <p className="text-xs font-bold text-white mt-1 leading-none">Engine Active</p>
+                </div>
+              </div>
+
+              {/* Floating Dashboard Card 2 */}
+              <div className="absolute -bottom-3 -right-2 bg-black/75 backdrop-blur-xl border border-white/10 rounded-2xl p-4 shadow-2xl animate-float-card-2 select-none pointer-events-none w-[190px]">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-[9px] text-white/40 font-mono uppercase tracking-wider">EFFICIENCY</span>
+                  <span className="text-[10px] text-[#bfff00] font-bold">+84.6%</span>
+                </div>
+                <p className="text-xs font-bold text-white leading-none">Automations Scaled</p>
+                <div className="w-full bg-white/10 h-1.5 rounded-full overflow-hidden mt-2.5">
+                  <div className="bg-gradient-to-r from-[#bfff00] to-[#3a8cd7] h-full" style={{ width: "84%" }} />
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Feature Cards Carousel */}
-        <div className="w-full mt-10 md:mt-6 z-20 overflow-x-auto no-scrollbar pb-2">
+        <div className="w-full mt-12 md:mt-8 z-20 overflow-x-auto no-scrollbar pb-2">
           <div className="flex gap-4 min-w-[850px] md:min-w-0 md:grid md:grid-cols-5">
             {/* Tag Card */}
-            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-[20px] p-4 flex flex-col justify-between shadow-lg h-36">
+            <div className="hero-glass-card rounded-[20px] p-4.5 flex flex-col justify-between transition-all duration-300 h-36">
               <div className="flex flex-wrap gap-1">
                 {homeTags.slice(0, 4).map((tag, idx) => (
                   <span
                     key={idx}
-                    className="text-[9px] font-semibold bg-white/20 text-white rounded-full px-2 py-0.5 uppercase tracking-wide"
+                    className="text-[9px] font-semibold bg-white/[0.06] border border-white/10 text-white/90 rounded-full px-2 py-0.5 uppercase tracking-wide transition-colors hover:border-[#bfff00]/30 hover:bg-[#bfff00]/5 cursor-default"
                   >
                     {tag}
                   </span>
                 ))}
               </div>
               <div>
-                <p className="text-[10px] uppercase font-bold tracking-wider text-white/50">
+                <p className="text-[10px] uppercase font-bold tracking-wider text-white/40 font-mono">
                   Clients Launched
                 </p>
                 <h4 className="text-xl font-bold text-white leading-none mt-1">14+ Projects</h4>
@@ -139,20 +171,20 @@ function Index() {
             </div>
 
             {/* Client Snapshot Card */}
-            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-[20px] p-4 flex items-center gap-3 shadow-lg h-36">
-              <div className="w-12 h-12 rounded-full overflow-hidden border border-white/30 flex-shrink-0 bg-white/20 flex items-center justify-center">
+            <div className="hero-glass-card rounded-[20px] p-4.5 flex items-center gap-3 transition-all duration-300 h-36">
+              <div className="w-12 h-12 rounded-full overflow-hidden border border-white/15 flex-shrink-0 bg-white/5 flex items-center justify-center">
                 <span className="text-white font-bold text-lg leading-none select-none">MT</span>
               </div>
               <div className="flex-1">
                 <p className="text-xs font-bold text-white leading-none">Mugai Technologies</p>
-                <p className="text-[9px] text-white/60 mt-1 uppercase">Business &amp; Corporate</p>
+                <p className="text-[9px] text-[#bfff00] font-mono mt-1 uppercase tracking-wide">Corporate</p>
                 <div className="flex justify-between mt-3 text-[10px] font-mono">
                   <div>
-                    <span className="text-white/40 block">STATUS</span>
-                    <span className="text-emerald-300 font-bold">Live</span>
+                    <span className="text-white/30 block">STATUS</span>
+                    <span className="text-emerald-400 font-bold">Live</span>
                   </div>
                   <div>
-                    <span className="text-white/40 block">TYPE</span>
+                    <span className="text-white/30 block">TYPE</span>
                     <span className="text-sky-300 font-bold">Website</span>
                   </div>
                 </div>
@@ -160,43 +192,43 @@ function Index() {
             </div>
 
             {/* Dark Expertise Card */}
-            <div className="bg-black/40 border border-white/10 rounded-[20px] p-4 flex flex-col justify-between shadow-lg h-36">
-              <div className="w-5 h-5 rounded-full bg-[#bfff00]/20 flex items-center justify-center text-[#bfff00]">
+            <div className="bg-black/55 border border-white/10 rounded-[20px] p-4.5 flex flex-col justify-between shadow-lg hover:border-[#bfff00]/25 transition-all duration-300 h-36">
+              <div className="w-5 h-5 rounded-full bg-[#bfff00]/10 border border-[#bfff00]/20 flex items-center justify-center text-[#bfff00]">
                 <Zap size={10} />
               </div>
               <div>
-                <p className="text-xs font-medium text-white/90 leading-tight">
+                <p className="text-xs font-normal text-white/80 leading-normal">
                   Code That Scales. Designs That Convert. Results That Matter.
                 </p>
               </div>
             </div>
 
             {/* Progress Card */}
-            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-[20px] p-4 flex flex-col justify-between shadow-lg h-36">
+            <div className="hero-glass-card rounded-[20px] p-4.5 flex flex-col justify-between transition-all duration-300 h-36">
               <div>
-                <p className="text-[10px] uppercase font-bold tracking-wider text-white/50">
-                  Project Success Rate
+                <p className="text-[10px] uppercase font-bold tracking-wider text-white/40 font-mono">
+                  Project Success
                 </p>
                 <h4 className="text-lg font-bold text-white mt-1">
-                  100% <span className="text-xs text-white/40 font-normal">On-Time Delivery</span>
+                  100% <span className="text-xs text-white/40 font-normal font-mono">On-Time</span>
                 </h4>
               </div>
-              <div className="w-full bg-white/20 h-1.5 rounded-full overflow-hidden">
-                <div className="bg-[#bfff00] h-full" style={{ width: "100%" }} />
+              <div className="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+                <div className="bg-gradient-to-r from-[#bfff00] to-[#3a8cd7] h-full" style={{ width: "100%" }} />
               </div>
             </div>
 
             {/* Notification Card */}
-            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-[20px] p-4 flex flex-col justify-between shadow-lg h-36">
+            <div className="hero-glass-card rounded-[20px] p-4.5 flex flex-col justify-between transition-all duration-300 h-36">
               <div className="flex justify-between items-center">
-                <span className="text-[9px] bg-sky-400 text-white rounded-full px-2 py-0.5 uppercase tracking-wide">
+                <span className="text-[9px] bg-[#3a8cd7]/20 border border-[#3a8cd7]/30 text-sky-300 rounded-full px-2 py-0.5 uppercase tracking-wide font-mono">
                   MSME Registered
                 </span>
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
               </div>
               <div>
                 <p className="text-xs font-bold text-white">Est. May 2026</p>
-                <p className="text-[10px] text-white/60 leading-tight mt-1 font-mono">
+                <p className="text-[10px] text-white/50 leading-tight mt-1.5 font-mono">
                   India's growing tech studio for SMEs.
                 </p>
               </div>
@@ -212,7 +244,7 @@ function Index() {
           <h2 className="text-[#3a8cd7] text-xs font-semibold uppercase tracking-[0.2em] font-mono mb-3">
            About
           </h2>
-          <h3 className="text-3xl sm:text-5xl font-instrument text-slate-950 tracking-tight leading-tight max-w-2xl mx-auto">
+          <h3 className="text-3xl sm:text-5xl font-outfit font-bold text-slate-950 tracking-tight leading-tight max-w-2xl mx-auto">
             Experience Excellence In Technology Solutions
           </h3>
         </div>
