@@ -1,594 +1,702 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import Nav from "../components/Nav";
 import React, { useState } from "react";
-import {
-  ArrowUpRight,
-  Check,
-  Infinity as InfinityIcon,
-  FastForward,
-  Play,
-  Award,
-  Terminal,
-  Code,
-  Database,
-  Cloud,
-  ToggleRight,
-  HelpCircle,
-  ChevronDown,
-  CheckSquare,
-} from "lucide-react";
+import { ArrowUpRight, ChevronDown } from "lucide-react";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
     meta: [
       { title: "Our Services — Mirastra Tech" },
-      {
-        name: "description",
-        content:
-          "Explore our technology solutions: website development, web apps, custom software, browser extensions, automation solutions, QA, and digital marketing.",
-      },
+      { name: "description", content: "Explore our technology solutions: website development, web apps, custom software, browser extensions, automation, QA, and digital marketing." },
     ],
   }),
   component: Services,
 });
 
+const SERVICES = [
+  { num: "01", title: "Website Development",       tags: ["Static", "Dynamic", "Animated", "SEO-Ready"],   img: "https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=600&h=500&q=80" },
+  { num: "02", title: "Web Applications",           tags: ["SaaS", "Dashboards", "Portals", "Analytics"],   img: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&h=500&q=80" },
+  { num: "03", title: "Mobile Apps",                tags: ["Android", "iOS", "Cross-Platform", "Enterprise"],img: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=600&h=500&q=80" },
+  { num: "04", title: "Custom Software",            tags: ["CRM", "ERP", "HRM", "Billing"],                 img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&h=500&q=80" },
+  { num: "05", title: "Automation & Extensions",    tags: ["Chrome Ext.", "Bots", "Pipelines", "Scripts"],  img: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&h=500&q=80" },
+  { num: "06", title: "Digital Marketing",          tags: ["Meta Ads", "Social Media", "Video", "SEO"],     img: "https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?auto=format&fit=crop&w=600&h=500&q=80" },
+  { num: "07", title: "QA & Testing",               tags: ["Manual", "Automated", "Performance", "Audits"], img: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=600&h=500&q=80" },
+  { num: "08", title: "UI/UX Design",               tags: ["Wireframes", "Prototypes", "Design", "Brand"],  img: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=600&h=500&q=80" },
+];
+
+const METRICS = [
+  { icon: "⚡", label: "Launch Speed",     value: "7",    unit: "days avg", sub: "First delivery" },
+  { icon: "🛡️", label: "Code Quality",     value: "100%", unit: "",         sub: "Custom, no templates" },
+  { icon: "🔋", label: "On-Time Delivery", value: "100%", unit: "",         sub: "Across all projects" },
+  { icon: "🔄", label: "Revision Cycles",  value: "∞",    unit: "",         sub: "Until you're satisfied" },
+];
+
+const STANDARDS = [
+  { badge: "🥇", title: "MSME Registered", sub: "Govt. of India Certified", stat: "Est. 2026" },
+  { badge: "🥈", title: "14+ Projects",    sub: "Live client launches",     stat: "Worldwide" },
+  { badge: "🥉", title: "100% Remote",     sub: "Serving globally",         stat: "Certified Delivery" },
+];
+
+const FAQS = [
+  { q: "How long does a website take to build?",            a: "Static websites are delivered in 3–5 days. Dynamic and animated sites take 1–2 weeks. Web applications and custom software range from 3–8 weeks." },
+  { q: "What does website development pricing include?",    a: "All packages include custom UI/UX design, responsive layout, contact forms, WhatsApp integration, SEO structure, and 30 days post-launch support." },
+  { q: "Do you offer post-deployment support?",             a: "Yes. Every project includes 30 days of complimentary monitoring, bug fixes, and backup support. We also offer affordable monthly retainer packages." },
+  { q: "Can I pause or cancel a digital marketing package?",a: "Absolutely. Marketing operates on month-to-month contracts — pause or cancel at any month-end to match your active budget." },
+  { q: "Do you build cross-platform mobile apps?",          a: "Yes. We build Android and iOS apps using React Native, ensuring a single codebase delivers a native experience on both platforms." },
+];
+
+function ServiceCard({ svc, idx, hoveredCard, setHoveredCard }: {
+  svc: typeof SERVICES[0]; idx: number;
+  hoveredCard: number | null; setHoveredCard: (v: number | null) => void;
+}) {
+  const isHovered = hoveredCard === idx;
+  return (
+    <div
+      onMouseEnter={() => setHoveredCard(idx)}
+      onMouseLeave={() => setHoveredCard(null)}
+      className="relative flex flex-col justify-between rounded-[20px] overflow-hidden cursor-pointer select-none"
+      style={{ minHeight: "220px", background: isHovered ? "#0e0e0e" : "#e4e4e2", transition: "background 0.35s ease" }}
+    >
+      <img src={svc.img} alt="" aria-hidden="true"
+        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+        style={{ opacity: isHovered ? 1 : 0, filter: "brightness(0.32) saturate(0.7)", transition: "opacity 0.4s ease" }} />
+      <div className="absolute inset-0 pointer-events-none"
+        style={{ background: "linear-gradient(to top,rgba(0,0,0,0.92) 0%,rgba(191,255,0,0.03) 65%,transparent 100%)", opacity: isHovered ? 1 : 0, transition: "opacity 0.4s ease" }} />
+      <div className="relative z-10 p-4">
+        <span className="inline-flex text-[9px] font-semibold tracking-[0.15em] uppercase px-2.5 py-1 rounded-full"
+          style={{ background: isHovered ? "rgba(255,255,255,0.10)" : "rgba(0,0,0,0.06)", color: isHovered ? "rgba(255,255,255,0.55)" : "rgba(0,0,0,0.40)", border: isHovered ? "1px solid rgba(255,255,255,0.14)" : "1px solid rgba(0,0,0,0.08)", transition: "all 0.3s ease" }}>
+          {svc.tags[0]}
+        </span>
+      </div>
+      <div className="relative z-10 p-4">
+        <h3 className="font-bold leading-tight mb-3"
+          style={{ fontSize: "clamp(14px,1.5vw,17px)", color: isHovered ? "#ffffff" : "#111111", transition: "color 0.3s ease" }}>
+          {svc.title}
+        </h3>
+        <div style={{ maxHeight: isHovered ? "40px" : "0px", opacity: isHovered ? 1 : 0, overflow: "hidden", transition: "max-height 0.35s ease, opacity 0.3s ease" }}>
+          <Link to="/contact" className="inline-flex items-center bg-white text-black text-[10px] font-black px-4 py-1.5 rounded-full hover:bg-[#bfff00] transition-colors decoration-none cursor-pointer">
+            Get started
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const ACCORDION_ITEMS = [
+  {
+    title: "CUSTOM\nCODE &\nDELIVERY",
+    body: "We write every line from scratch — tailored to your product, your workflow, and your users. No templates, no limits.",
+    bg: "#bfff00",
+    textColor: "#000",
+    bodyColor: "rgba(0,0,0,0.55)",
+    // Code editor window illustration
+    visual: (
+      <svg width="120" height="90" viewBox="0 0 120 90" fill="none" aria-hidden="true">
+        {/* Window frame */}
+        <rect x="0" y="0" width="120" height="90" rx="8" fill="rgba(0,0,0,0.18)"/>
+        {/* Title bar */}
+        <rect x="0" y="0" width="120" height="18" rx="8" fill="rgba(0,0,0,0.25)"/>
+        <rect x="6" y="6" width="6" height="6" rx="3" fill="rgba(0,0,0,0.4)"/>
+        <rect x="16" y="6" width="6" height="6" rx="3" fill="rgba(0,0,0,0.3)"/>
+        <rect x="26" y="6" width="6" height="6" rx="3" fill="rgba(0,0,0,0.2)"/>
+        {/* Code lines */}
+        <rect x="8" y="26" width="30" height="3" rx="1.5" fill="rgba(0,0,0,0.35)"/>
+        <rect x="42" y="26" width="20" height="3" rx="1.5" fill="rgba(0,0,0,0.5)"/>
+        <rect x="8" y="34" width="14" height="3" rx="1.5" fill="rgba(0,0,0,0.25)"/>
+        <rect x="26" y="34" width="36" height="3" rx="1.5" fill="rgba(0,0,0,0.4)"/>
+        <rect x="8" y="42" width="50" height="3" rx="1.5" fill="rgba(0,0,0,0.3)"/>
+        <rect x="8" y="50" width="22" height="3" rx="1.5" fill="rgba(0,0,0,0.45)"/>
+        <rect x="34" y="50" width="28" height="3" rx="1.5" fill="rgba(0,0,0,0.25)"/>
+        <rect x="8" y="58" width="40" height="3" rx="1.5" fill="rgba(0,0,0,0.3)"/>
+        <rect x="8" y="66" width="16" height="3" rx="1.5" fill="rgba(0,0,0,0.4)"/>
+        {/* Cursor blink */}
+        <rect x="28" y="66" width="2" height="10" rx="1" fill="rgba(0,0,0,0.6)"/>
+        {/* Deploy button */}
+        <rect x="74" y="60" width="38" height="20" rx="5" fill="rgba(0,0,0,0.5)"/>
+        <rect x="78" y="67" width="20" height="3" rx="1.5" fill="rgba(0,0,0,0.5)"/>
+        <rect x="100" y="67" width="6" height="3" rx="1.5" fill="rgba(0,0,0,0.7)"/>
+      </svg>
+    ),
+  },
+  {
+    title: "SPRINT\nBASED\nLAUNCH",
+    body: "Agile two-week sprints keep your project moving fast. You always know what ships next and exactly when.",
+    bg: "#1a1a1a",
+    textColor: "#fff",
+    bodyColor: "rgba(255,255,255,0.45)",
+    // Rocket launch illustration
+    visual: (
+      <svg width="90" height="110" viewBox="0 0 90 110" fill="none" aria-hidden="true">
+        {/* Rocket body */}
+        <path d="M45 10 C45 10, 62 28, 62 55 L45 65 L28 55 C28 28, 45 10, 45 10Z" fill="rgba(191,255,0,0.15)" stroke="rgba(191,255,0,0.6)" strokeWidth="1.5"/>
+        {/* Nose cone */}
+        <path d="M45 10 C38 22, 35 35, 35 45 L45 50 L55 45 C55 35, 52 22, 45 10Z" fill="rgba(191,255,0,0.3)"/>
+        {/* Window */}
+        <circle cx="45" cy="42" r="7" fill="none" stroke="rgba(191,255,0,0.7)" strokeWidth="1.5"/>
+        <circle cx="45" cy="42" r="4" fill="rgba(191,255,0,0.2)"/>
+        {/* Left fin */}
+        <path d="M28 55 L16 68 L28 65Z" fill="rgba(191,255,0,0.25)" stroke="rgba(191,255,0,0.4)" strokeWidth="1"/>
+        {/* Right fin */}
+        <path d="M62 55 L74 68 L62 65Z" fill="rgba(191,255,0,0.25)" stroke="rgba(191,255,0,0.4)" strokeWidth="1"/>
+        {/* Exhaust flames */}
+        <path d="M38 65 Q40 82 45 88 Q50 82 52 65" fill="rgba(191,255,0,0.12)" stroke="rgba(191,255,0,0.35)" strokeWidth="1"/>
+        <path d="M41 65 Q43 77 45 82 Q47 77 49 65" fill="rgba(191,255,0,0.25)"/>
+        {/* Speed lines */}
+        <line x1="8" y1="30" x2="22" y2="30" stroke="rgba(191,255,0,0.3)" strokeWidth="1" strokeDasharray="3 2"/>
+        <line x1="6" y1="40" x2="18" y2="40" stroke="rgba(191,255,0,0.2)" strokeWidth="1" strokeDasharray="2 3"/>
+        <line x1="68" y1="35" x2="82" y2="35" stroke="rgba(191,255,0,0.3)" strokeWidth="1" strokeDasharray="3 2"/>
+        <line x1="70" y1="45" x2="82" y2="45" stroke="rgba(191,255,0,0.2)" strokeWidth="1" strokeDasharray="2 3"/>
+      </svg>
+    ),
+  },
+  {
+    title: "FULL\nSTACK\nEXECUTION",
+    body: "We handle front-end, back-end, database, DevOps, and cloud deploy — one team, zero handoff friction.",
+    bg: "#111",
+    textColor: "#fff",
+    bodyColor: "rgba(255,255,255,0.45)",
+    // Stacked layers / tech stack illustration
+    visual: (
+      <svg width="110" height="100" viewBox="0 0 110 100" fill="none" aria-hidden="true">
+        {/* Layer 1 — Cloud */}
+        <rect x="10" y="8" width="90" height="18" rx="5" fill="rgba(191,255,0,0.18)" stroke="rgba(191,255,0,0.5)" strokeWidth="1.5"/>
+        <text x="18" y="21" fontFamily="monospace" fontSize="8" fill="rgba(191,255,0,0.8)">CLOUD / DEVOPS</text>
+        {/* Connector */}
+        <line x1="55" y1="26" x2="55" y2="34" stroke="rgba(191,255,0,0.3)" strokeWidth="1" strokeDasharray="2 2"/>
+        {/* Layer 2 — Backend */}
+        <rect x="10" y="34" width="90" height="18" rx="5" fill="rgba(191,255,0,0.12)" stroke="rgba(191,255,0,0.4)" strokeWidth="1.5"/>
+        <text x="18" y="47" fontFamily="monospace" fontSize="8" fill="rgba(191,255,0,0.7)">BACKEND / API</text>
+        {/* Connector */}
+        <line x1="55" y1="52" x2="55" y2="60" stroke="rgba(191,255,0,0.3)" strokeWidth="1" strokeDasharray="2 2"/>
+        {/* Layer 3 — Database */}
+        <rect x="10" y="60" width="90" height="18" rx="5" fill="rgba(191,255,0,0.08)" stroke="rgba(191,255,0,0.3)" strokeWidth="1.5"/>
+        <text x="18" y="73" fontFamily="monospace" fontSize="8" fill="rgba(191,255,0,0.55)">DATABASE / STORE</text>
+        {/* Connector */}
+        <line x1="55" y1="78" x2="55" y2="86" stroke="rgba(191,255,0,0.3)" strokeWidth="1" strokeDasharray="2 2"/>
+        {/* Layer 4 — Frontend */}
+        <rect x="10" y="86" width="90" height="12" rx="5" fill="rgba(191,255,0,0.05)" stroke="rgba(191,255,0,0.2)" strokeWidth="1"/>
+        <text x="18" y="95" fontFamily="monospace" fontSize="7" fill="rgba(191,255,0,0.4)">FRONT-END / UI</text>
+      </svg>
+    ),
+  },
+  {
+    title: "MULTI-\nCHANNEL\nGROWTH\nSTRATEGY",
+    body: "Ready to scale? We help you build and manage a network of channels that multiply reach, revenue, and market dominance.",
+    bg: "#0a0a0a",
+    textColor: "#fff",
+    bodyColor: "rgba(255,255,255,0.45)",
+    // 3D-style orbit / globe illustration
+    visual: (
+      <svg width="110" height="110" viewBox="0 0 110 110" fill="none" aria-hidden="true">
+        {/* Outer glow circle */}
+        <circle cx="55" cy="55" r="48" fill="rgba(191,255,0,0.04)" stroke="rgba(191,255,0,0.12)" strokeWidth="1"/>
+        {/* Orbital rings */}
+        <ellipse cx="55" cy="55" rx="44" ry="16" stroke="rgba(191,255,0,0.35)" strokeWidth="1.5" fill="none"/>
+        <ellipse cx="55" cy="55" rx="44" ry="16" stroke="rgba(191,255,0,0.15)" strokeWidth="1" fill="none" transform="rotate(60 55 55)"/>
+        <ellipse cx="55" cy="55" rx="44" ry="16" stroke="rgba(191,255,0,0.1)" strokeWidth="1" fill="none" transform="rotate(120 55 55)"/>
+        {/* Centre planet */}
+        <circle cx="55" cy="55" r="14" fill="rgba(191,255,0,0.12)" stroke="rgba(191,255,0,0.5)" strokeWidth="2"/>
+        <circle cx="55" cy="55" r="8" fill="rgba(191,255,0,0.2)"/>
+        {/* Highlight on planet */}
+        <circle cx="50" cy="50" r="4" fill="rgba(255,255,255,0.15)"/>
+        {/* Orbiting dots */}
+        <circle cx="99" cy="55" r="4" fill="#bfff00" opacity="0.8"/>
+        <circle cx="27" cy="38" r="3" fill="#bfff00" opacity="0.5"/>
+        <circle cx="72" cy="18" r="2.5" fill="#bfff00" opacity="0.4"/>
+        {/* Connection lines to dots */}
+        <line x1="55" y1="55" x2="99" y2="55" stroke="rgba(191,255,0,0.2)" strokeWidth="1" strokeDasharray="3 3"/>
+        <line x1="55" y1="55" x2="27" y2="38" stroke="rgba(191,255,0,0.15)" strokeWidth="1" strokeDasharray="3 3"/>
+        <line x1="55" y1="55" x2="72" y2="18" stroke="rgba(191,255,0,0.1)" strokeWidth="1" strokeDasharray="3 3"/>
+      </svg>
+    ),
+  },
+];
+
+function AccordionCards() {
+  const [active, setActive] = useState<number>(3);
+  return (
+    <div className="flex gap-3 h-[340px] md:h-[380px]">
+      {ACCORDION_ITEMS.map((item, i) => {
+        const isActive = active === i;
+        return (
+          <div
+            key={i}
+            onMouseEnter={() => setActive(i)}
+            className="relative flex flex-col justify-between rounded-[20px] overflow-hidden cursor-pointer flex-shrink-0"
+            style={{
+              flex: isActive ? "4 1 0%" : "1 1 0%",
+              background: item.bg,
+              transition: "flex 0.5s cubic-bezier(0.4,0,0.2,1)",
+              padding: "28px 24px",
+              minWidth: "60px",
+            }}
+          >
+            {/* Title — always visible, clips when narrow */}
+            <h3
+              className="font-black leading-[1.0] uppercase whitespace-pre-line overflow-hidden"
+              style={{
+                color: item.textColor,
+                fontSize: isActive ? "clamp(22px,2.8vw,36px)" : "clamp(11px,1.4vw,18px)",
+                letterSpacing: isActive ? "-0.5px" : "0px",
+                transition: "font-size 0.4s ease",
+              }}
+            >
+              {item.title}
+            </h3>
+
+            {/* Body + visual — only visible when active */}
+            <div
+              style={{
+                opacity: isActive ? 1 : 0,
+                transition: "opacity 0.3s ease",
+                pointerEvents: isActive ? "auto" : "none",
+              }}
+            >
+              <div className="flex items-end justify-between gap-4">
+                <p className="text-xs leading-relaxed max-w-[200px]" style={{ color: item.bodyColor }}>
+                  {item.body}
+                </p>
+                {item.visual && (
+                  <div className="flex-shrink-0">{item.visual}</div>
+                )}
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 function Services() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
-
-  const features = [
-    {
-      title: "Unlimited Requests",
-      desc: "Submit as many custom software requests as needed. We prioritize and execute them systematically.",
-      icon: <InfinityIcon size={18} />,
-    },
-    {
-      title: "Launch Fast",
-      desc: "Agile delivery cycles mean your websites and browser tools get launched in days, not months.",
-      icon: <FastForward size={18} />,
-    },
-    {
-      title: "Start Today",
-      desc: "No long procurement bottlenecks. Jump right into scoping and coding your project immediately.",
-      icon: <Play size={18} />,
-    },
-    {
-      title: "Pause Or Cancel Anytime",
-      desc: "Flexible subscription and package support matching your active operational budgets.",
-      icon: <ToggleRight size={18} />,
-    },
-    {
-      title: "Affordable Pricing",
-      desc: "Customized quotes aligned with requirements. Premium tech made affordable.",
-      icon: <Award size={18} />,
-    },
-  ];
-
-  const packages = [
-    {
-      title: "Static Websites",
-      price: "₹5,000+",
-      desc: "Clean, fast-loading informational corporate websites with custom designs.",
-    },
-    {
-      title: "Dynamic Websites",
-      price: "₹7,000 - ₹10,000+",
-      desc: "Interactive pages, custom database entries, blogs, and backend control portals.",
-    },
-    {
-      title: "Animated Websites",
-      price: "₹10,000+",
-      desc: "Premium immersive visual animations, scroll-triggered designs, and micro-interactions.",
-    },
-  ];
-
-  const marketingPackages = [
-    {
-      title: "Package 1",
-      price: "₹25,000 / Month",
-      features: ["Video Shoot", "Video Editing", "Social Media Handling", "Meta Ads Management"],
-    },
-    {
-      title: "Package 2",
-      price: "₹18,000 / Month",
-      features: ["Video Editing", "Social Media Handling", "Meta Ads Management"],
-    },
-    {
-      title: "Package 3",
-      price: "₹15,000 / Month",
-      features: ["Social Media Handling", "Meta Ads Management"],
-    },
-    { title: "Package 4", price: "₹7,000 / Month", features: ["Meta Ads Management Only"] },
-  ];
-
-  const faqs = [
-    {
-      q: "Why do static websites start at ₹5,000?",
-      a: "Static sites are perfect for small businesses needing a clean digital presence. This package covers custom UI layout, contact form setup, domain mapping, hosting config, and WhatsApp buttons.",
-    },
-    {
-      q: "How long does a custom web application take?",
-      a: "Typically 3 to 6 weeks depending on scale. Basic admin portals or SaaS dashboards take around 2-3 weeks, while complex ERP solutions take 6+ weeks.",
-    },
-    {
-      q: "Do you offer post-deployment support?",
-      a: "Yes. All projects include 30 days of complimentary monitoring, backup checkups, and bug fixes. We also offer affordable monthly support retainers.",
-    },
-    {
-      q: "Can we pause digital marketing packages?",
-      a: "Absolutely. Marketing works on month-to-month contracts. You can pause or cancel at any month-end to match your active budget allocations.",
-    },
-  ];
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
   return (
-    <main className="w-full bg-black text-white min-h-screen relative font-sans p-3 sm:p-5 md:p-6 overflow-hidden">
-      {/* Navigation */}
+    <main className="w-full bg-black text-white min-h-screen font-sans overflow-hidden">
       <Nav />
 
-      {/* Outer Panel Container (Wen Launch Bezel) */}
-      <div
-        className="w-full min-h-[92vh] rounded-[24px] md:rounded-[40px] border border-white/10 relative overflow-hidden flex flex-col justify-between pt-24 pb-8 px-6 sm:px-12 md:px-20"
-        style={{
-          backgroundColor: "#0a0a0a",
-        }}
-      >
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:6rem_6rem] pointer-events-none" />
+      {/* ── HERO ── */}
+      <section className="w-full min-h-screen relative overflow-hidden flex items-stretch" style={{ minHeight: "100svh" }}>
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0" style={{ background: "#050507" }} />
+          <svg className="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true" style={{ opacity: 0.22 }}>
+            <defs><pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M 48 0 L 0 0 0 48" fill="none" stroke="rgba(191,255,0,0.3)" strokeWidth="0.5"/></pattern></defs>
+            <rect width="100%" height="100%" fill="url(#grid)" />
+          </svg>
+          <svg className="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" style={{ opacity: 0.18 }}>
+            <path d="M0 200 H400 V350 H900 V200 H1440" fill="none" stroke="#bfff00" strokeWidth="1" strokeDasharray="6 3"/>
+            <path d="M0 520 H250 V420 H700 V520 H1100 V620 H1440" fill="none" stroke="#bfff00" strokeWidth="1" strokeDasharray="8 4"/>
+            <path d="M700 0 V220 H1000 V380 H1300 V220 H1440" fill="none" stroke="#bfff00" strokeWidth="1" strokeDasharray="6 4"/>
+            {([[400,200],[900,200],[250,420],[700,420],[1100,520],[1000,220],[1300,220]] as [number,number][]).map(([cx,cy],i) => (
+              <g key={i}><circle cx={cx} cy={cy} r="4" fill="#bfff00" opacity="0.5"/><circle cx={cx} cy={cy} r="8" fill="none" stroke="#bfff00" strokeWidth="0.8" opacity="0.25"/></g>
+            ))}
+          </svg>
+          <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 50% 60% at 50% 50%, rgba(191,255,0,0.10) 0%, transparent 68%)" }} />
+          <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(100deg, rgba(5,5,7,0.88) 0%, rgba(5,5,7,0.55) 38%, rgba(5,5,7,0.10) 60%, rgba(5,5,7,0.55) 100%)" }} />
+          <div className="absolute bottom-0 left-0 w-full h-48 pointer-events-none" style={{ background: "linear-gradient(to top, #050507 0%, transparent 100%)" }} />
+        </div>
 
-        {/* 1. HERO SECTION: Wen Launch Style */}
-        <div className="flex-1 flex flex-col justify-center py-16 relative z-10">
-          <p className="text-[10px] tracking-[0.25em] text-white/40 uppercase font-mono mb-4">
-            CREATIVE TECHNOLOGY STUDIO
-          </p>
-
-          <div className="flex justify-between items-start w-full">
-            <h1 className="text-4xl sm:text-6xl md:text-8xl font-serif tracking-tight leading-[1.05] max-w-[800px] uppercase font-light">
-              We Are <br />
-              <span className="font-sans font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-white/80 to-white/40">
-                Full-Service
-              </span>{" "}
-              <br />
-              Agency
-            </h1>
-            <div className="w-16 h-16 rounded-full border border-white/20 flex items-center justify-center text-white hover:text-rose-500 hover:border-rose-500/40 hover:bg-rose-500/5 transition-all cursor-pointer flex-shrink-0">
-              <ArrowUpRight size={24} />
+        <div className="relative z-10 w-full flex flex-col md:flex-row items-end justify-between px-6 sm:px-10 md:px-14 pt-28 pb-12 gap-8">
+          <div className="flex flex-col justify-between flex-1 max-w-xl min-h-[calc(100svh-160px)]">
+            <div>
+              <div className="inline-flex items-center gap-2 bg-white/8 border border-white/15 rounded-full px-4 py-1.5 mb-8">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#bfff00] animate-pulse" />
+                <span className="text-white/60 text-[11px] font-mono tracking-[0.15em]">Tech-Driven Agency</span>
+              </div>
+              <h1 className="text-[clamp(52px,7vw,88px)] font-black text-white leading-[0.97]" style={{ letterSpacing: "-3px" }}>
+                Your Digital<br /><span className="text-[#bfff00]">Sprint Team</span><br />On Demand
+              </h1>
+              <p className="text-white/45 text-sm leading-relaxed max-w-sm mt-6">
+                From discovery to deployment, we plug into your stack to prototype, validate, and launch digital experiences your users actually love.
+              </p>
+              <div className="flex items-center gap-3 mt-8 flex-wrap">
+                <Link to="/works" className="bg-white/10 hover:bg-white/15 text-white text-sm font-semibold px-7 py-3 rounded-full border border-white/20 transition-all decoration-none cursor-pointer">Explore Services</Link>
+                <Link to="/contact" className="bg-[#bfff00] hover:bg-[#d4ff33] text-black text-sm font-bold px-7 py-3 rounded-full transition-all decoration-none cursor-pointer" style={{ boxShadow: "0 6px 20px rgba(191,255,0,0.30)" }}>View Pricing Plans</Link>
+              </div>
+            </div>
+            <div className="flex items-stretch gap-3 mt-auto pt-16 flex-wrap">
+              {[{ label: "Happy people", value: "14+", sub: "Clients Launched" }, { label: "KPI Improvement", value: "100%", sub: "On-Time Delivery" }, { label: "Client Retention", value: "92%", sub: "Satisfaction Rate" }].map((s, i) => (
+                <div key={i} className="flex-1 min-w-[110px] bg-white/6 border border-white/10 rounded-[16px] px-4 py-4 backdrop-blur-sm">
+                  <p className="text-[10px] text-white/35 font-mono uppercase tracking-wider mb-2">{s.label}</p>
+                  <p className="text-3xl font-black text-white leading-none tracking-tight">{s.value}</p>
+                  <p className="text-[10px] text-white/35 mt-1">{s.sub}</p>
+                </div>
+              ))}
             </div>
           </div>
 
-          <p className="text-white/60 text-xs sm:text-sm font-mono mt-8 max-w-[420px] leading-relaxed">
-            The first full-stack digital agency integrating advanced automation and modern
-            programming to deliver best-in-class user experiences globally.
-          </p>
-        </div>
+          <div className="hidden lg:flex flex-col items-center gap-4 pb-16 self-end">
+            {["f","in","𝕏"].map((s,i) => (
+              <a key={i} href="#" className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-white/40 hover:text-white hover:border-white/40 transition-all text-xs font-bold">{s}</a>
+            ))}
+          </div>
 
-        {/* 2. FEATURES GRID (Wen Launch Grid Layout) */}
-        <div className="w-full mt-12 border-t border-white/10 pt-12 z-20">
-          <h2 className="text-2xl font-bold uppercase tracking-widest text-white/90 mb-8 font-mono">
-            Features
+          <div className="hidden md:flex flex-col gap-3 w-[220px] lg:w-[260px] flex-shrink-0 self-start mt-16">
+            <div className="bg-[#111]/90 border border-white/10 rounded-[20px] overflow-hidden backdrop-blur-md">
+              <div className="flex items-center justify-between px-4 pt-4 pb-2">
+                <span className="text-[10px] text-white/40 font-mono uppercase tracking-wider">Mirastra</span>
+                <span className="text-[10px] text-white/40 font-mono uppercase tracking-wider">SAAS</span>
+              </div>
+              <div className="mx-3 rounded-[12px] overflow-hidden h-[100px] bg-[#0a0a0a] border border-white/8 flex flex-col justify-start p-3 gap-1.5">
+                <div className="flex items-center gap-1.5 mb-1">
+                  <div className="w-2 h-2 rounded-full bg-red-500/60" /><div className="w-2 h-2 rounded-full bg-yellow-500/60" /><div className="w-2 h-2 rounded-full bg-[#bfff00]/60" />
+                </div>
+                <div className="h-1.5 w-3/4 bg-[#bfff00]/25 rounded-full" />
+                <div className="h-1.5 w-full bg-white/10 rounded-full" />
+                <div className="h-1.5 w-5/6 bg-white/8 rounded-full" />
+                <div className="h-1.5 w-2/3 bg-[#bfff00]/18 rounded-full" />
+              </div>
+              <div className="px-4 pt-4 pb-3">
+                <p className="text-4xl font-black text-white leading-none tracking-tight">14+</p>
+                <p className="text-[11px] text-white/40 mt-1 leading-snug">Projects successfully launched worldwide</p>
+              </div>
+            </div>
+            <div className="bg-[#111]/90 border border-white/10 rounded-[20px] p-5 backdrop-blur-md">
+              <p className="text-4xl font-black text-white leading-none tracking-tight mb-1">8+</p>
+              <p className="text-[11px] text-white/40 mb-4">Trusted Services</p>
+              <div className="flex flex-wrap gap-1.5">
+                {["React","Node","Flutter","AWS","Firebase","Mongo"].map((t,i) => (
+                  <span key={i} className="text-[9px] font-semibold bg-white/6 border border-white/8 text-white/50 rounded-full px-2 py-0.5">{t}</span>
+                ))}
+              </div>
+            </div>
+            <Link to="/contact" className="w-full bg-[#bfff00] hover:bg-[#d4ff33] text-black text-sm font-black py-3.5 rounded-full text-center transition-all decoration-none cursor-pointer" style={{ boxShadow: "0 6px 20px rgba(191,255,0,0.25)" }}>
+              Book a Call
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── SERVICES HEADING + HOVER CARDS ── */}
+      <section className="w-full bg-[#f0f0ee] py-20 px-6 sm:px-10 md:px-14 border-t border-black/6">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex justify-center mb-6">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+              <rect x="0" y="0" width="12" height="12" rx="2" fill="#bfff00"/><rect x="16" y="0" width="12" height="12" rx="2" fill="#bfff00"/>
+              <rect x="0" y="16" width="12" height="12" rx="2" fill="#bfff00" opacity="0.5"/><rect x="16" y="16" width="12" height="12" rx="2" fill="#bfff00" opacity="0.5"/>
+            </svg>
+          </div>
+          <div className="relative text-center mb-14">
+            <h2 className="font-black text-black leading-[0.97] block" style={{ fontSize: "clamp(38px,7vw,92px)", letterSpacing: "-3px" }}>We build scalable software</h2>
+            <h2 className="font-black text-black/18 leading-[0.97] block" style={{ fontSize: "clamp(38px,7vw,92px)", letterSpacing: "-3px" }}>that launches your business</h2>
+            <h2 className="font-black text-black/18 leading-[0.97] block" style={{ fontSize: "clamp(38px,7vw,92px)", letterSpacing: "-3px" }}>beyond limits</h2>
+            <div className="hidden md:block absolute left-0 top-[50%] -translate-y-1/2 max-w-[190px] text-left">
+              <p className="text-black/35 text-[11px] leading-relaxed">We combine strategy, design, and code to build brands that inspire, connect, and grow across every platform.</p>
+            </div>
+            <div className="hidden md:block absolute right-0 top-[50%] -translate-y-1/2 max-w-[190px] text-left">
+              <p className="text-black/35 text-[11px] leading-relaxed">Our creative process blends innovation with research — delivering measurable results for modern businesses.</p>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
+            {SERVICES.slice(0,4).map((svc,i) => <ServiceCard key={i} svc={svc} idx={i} hoveredCard={hoveredCard} setHoveredCard={setHoveredCard} />)}
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {SERVICES.slice(4,8).map((svc,i) => <ServiceCard key={i+4} svc={svc} idx={i+4} hoveredCard={hoveredCard} setHoveredCard={setHoveredCard} />)}
+          </div>
+        </div>
+      </section>
+
+      {/* ── WHY MIRASTRA (USD Bloom style) ── */}
+      <section className="w-full py-20 px-6 sm:px-10 md:px-16 bg-[#f0f0ee] border-t border-black/6">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start mb-12">
+            <div>
+              <h2 className="text-4xl sm:text-5xl font-black text-black leading-[1.06] mb-6" style={{ letterSpacing: "-1.5px" }}>
+                What is<br />Mirastra Tech?
+              </h2>
+              <Link to="/contact" className="inline-flex items-center gap-2 bg-black hover:bg-zinc-800 text-white text-xs font-bold px-6 py-2.5 rounded-full transition-all decoration-none cursor-pointer">
+                Explore now
+              </Link>
+            </div>
+            <div className="flex items-start md:pt-2">
+              <p className="text-black/50 text-base sm:text-lg leading-relaxed">
+                Mirastra Tech is a full-service digital agency that builds scalable websites, apps, and automation systems — helping your business grow faster while staying lean and fully in control.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-[1.35fr_1fr_1fr] gap-4 items-stretch">
+            {/* Card 1 — wide lime-tinted */}
+            <div className="relative rounded-[24px] overflow-hidden flex flex-col justify-between p-7 min-h-[300px]"
+              style={{ background: "linear-gradient(140deg, #d6f5a8 0%, #c8ed94 50%, #bfe884 100%)" }}>
+              <div className="absolute bottom-0 right-0 w-[55%] h-[75%] pointer-events-none flex items-end justify-end pr-4 pb-4" aria-hidden="true">
+                <div className="relative w-32 h-32">
+                  <div className="absolute inset-0 rounded-full" style={{ background: "radial-gradient(circle at 35% 30%, rgba(255,255,255,0.9) 0%, rgba(191,255,0,0.6) 40%, rgba(120,200,0,0.3) 70%, transparent 100%)", boxShadow: "0 8px 32px rgba(100,180,0,0.4), inset 0 -4px 12px rgba(0,0,0,0.12)" }} />
+                  <div className="absolute top-3 left-4 w-8 h-5 rounded-full" style={{ background: "rgba(255,255,255,0.55)", filter: "blur(4px)" }} />
+                  <div className="absolute bottom-[-40px] left-1/2 -translate-x-1/2 w-2 h-10 rounded-full" style={{ background: "rgba(80,140,0,0.5)" }} />
+                </div>
+              </div>
+              <div className="relative z-10">
+                <h3 className="text-black font-black text-2xl leading-tight mb-2" style={{ letterSpacing: "-0.5px" }}>Code that<br />scales with you</h3>
+              </div>
+              <p className="text-black/55 text-xs leading-relaxed max-w-[200px] relative z-10">
+                Custom-built around your business goals — no templates, no vendor lock-in, full ownership of your source code.
+              </p>
+            </div>
+
+            {/* Card 2 — dark */}
+            <div className="rounded-[24px] flex flex-col justify-between p-7 min-h-[300px]" style={{ background: "#111111" }}>
+              <h3 className="text-white font-black text-[1.6rem] leading-[1.1]" style={{ letterSpacing: "-0.5px" }}>
+                Always shipped,<br />always stable
+              </h3>
+              <p className="text-white/40 text-xs leading-relaxed">
+                Stay fully on-schedule with structured sprint delivery and instant access to your project status — no delays, no surprises.
+              </p>
+            </div>
+
+            {/* Card 3 — dark with arrows + partial disc */}
+            <div className="relative rounded-[24px] flex flex-col justify-between p-7 min-h-[300px] overflow-hidden" style={{ background: "#111111" }}>
+              <div className="absolute bottom-5 right-5 flex items-center gap-1" aria-hidden="true">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                  <path d="M26 6 L6 26" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
+                  <path d="M8 6 H26 V24" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.35"/>
+                </svg>
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                  <path d="M6 26 L26 6" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
+                  <path d="M24 26 H6 V8" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.35"/>
+                </svg>
+              </div>
+              <div className="absolute bottom-[-36px] right-[-36px] w-32 h-32 rounded-full pointer-events-none" style={{ background: "#2a2a2a" }} />
+              <h3 className="text-white font-black text-[1.6rem] leading-[1.1]" style={{ letterSpacing: "-0.5px" }}>
+                100%<br />hands-free ops
+              </h3>
+              <p className="text-white/40 text-xs leading-relaxed max-w-[180px] relative z-10">
+                No need to manage technical complexity manually. Mirastra handles deployment, security, and ongoing support for you.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── PERFORMANCE METRICS — accordion fan ── */}
+      <section className="w-full py-20 px-6 sm:px-10 md:px-16 border-t border-white/8 bg-[#080808]">
+        <div className="max-w-6xl mx-auto">
+
+          {/* Heading */}
+          <h2
+            className="text-4xl sm:text-5xl md:text-[3.2rem] font-black text-white text-center leading-[1.05] mb-14 uppercase"
+            style={{ letterSpacing: "-1px" }}
+          >
+            PRECISION, DELIVERY,<br />
+            <span className="text-[#bfff00]">RESULTS</span> — WE'VE GOT YOU COVERED.
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-px bg-white/10 border border-white/10 rounded-2xl overflow-hidden shadow-2xl">
-            {features.map((feat, idx) => (
-              <div
-                key={idx}
-                className="bg-[#0e0e0e] p-6 flex flex-col justify-between min-h-[200px] hover:bg-[#121212] transition-colors relative group"
-              >
-                <div className="absolute top-4 right-4 text-rose-500/30 group-hover:text-rose-500 transition-colors">
-                  {feat.icon}
-                </div>
-                <div>
-                  <span className="text-[10px] text-white/30 font-bold font-mono">0{idx + 1}</span>
-                  <h4 className="text-white font-bold text-sm tracking-tight mt-4 font-mono group-hover:text-rose-500 transition-colors">
-                    {feat.title}
-                  </h4>
-                </div>
-                <p className="text-[11px] text-white/50 leading-relaxed mt-4">{feat.desc}</p>
+          {/* Accordion cards row */}
+          <AccordionCards />
+
+        </div>
+      </section>
+
+      {/* ── STANDARDS ── */}
+      <section className="w-full py-24 px-6 sm:px-10 md:px-16 border-t border-white/8">
+        <div className="text-center mb-14">
+          <div className="inline-flex items-center gap-2 border border-white/20 rounded-full px-4 py-1.5 mb-6">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#bfff00]" />
+            <span className="text-white/55 text-[11px] font-mono tracking-[0.15em]">Trust Markers</span>
+          </div>
+          <h2 className="text-4xl sm:text-5xl font-black text-white leading-[1.04] mb-4" style={{ letterSpacing: "-1.5px" }}>Industry Standards &amp;<br />Proven Results</h2>
+          <p className="text-white/40 text-sm max-w-md mx-auto leading-relaxed">We maintain professional standards at every layer — from registration to delivery.</p>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto mb-10">
+          {STANDARDS.map((s,i) => (
+            <div key={i} className="bg-white text-black rounded-[20px] p-6 flex flex-col items-center text-center hover:scale-[1.02] transition-transform duration-300 cursor-default">
+              <span className="text-4xl mb-3">{s.badge}</span>
+              <p className="font-black text-base leading-tight mb-1">{s.title}</p>
+              <p className="text-black/45 text-xs leading-snug mb-3">{s.sub}</p>
+              <div className="w-full border-t border-black/8 pt-3"><span className="text-[10px] font-semibold text-black/40 uppercase tracking-widest">{s.stat}</span></div>
+            </div>
+          ))}
+        </div>
+        <div className="text-center">
+          <Link to="/contact" className="inline-flex items-center gap-2 border border-white/20 rounded-full px-7 py-3 text-sm text-white/60 hover:text-white hover:border-white/40 transition-all decoration-none cursor-pointer">
+            Download Performance Report <ArrowUpRight size={13} />
+          </Link>
+        </div>
+      </section>
+
+      {/* ── FAQ ── */}
+      <section className="w-full py-24 px-6 sm:px-10 md:px-16 border-t border-white/8">
+        <div className="max-w-3xl mx-auto">
+          <div className="mb-12 text-center">
+            <h2 className="text-4xl sm:text-5xl font-black text-white leading-[1.04] mb-3" style={{ letterSpacing: "-1.5px" }}>Questions &amp; Answers</h2>
+            <p className="text-white/40 text-sm">Everything you need to know before we start.</p>
+          </div>
+          <div className="flex flex-col gap-3">
+            {FAQS.map((faq,idx) => (
+              <div key={idx} className="bg-[#111] border border-white/8 rounded-[16px] overflow-hidden">
+                <button onClick={() => setActiveFaq(activeFaq === idx ? null : idx)}
+                  className="w-full p-5 text-left flex justify-between items-center bg-transparent border-none outline-none cursor-pointer">
+                  <span className="font-semibold text-sm text-white pr-4">{faq.q}</span>
+                  <ChevronDown size={16} className={`text-white/40 flex-shrink-0 transition-transform duration-300 ${activeFaq === idx ? "rotate-180 text-[#bfff00]" : ""}`} />
+                </button>
+                {activeFaq === idx && (
+                  <div className="px-5 pb-5 text-xs text-white/50 leading-relaxed border-t border-white/6"><div className="pt-4">{faq.a}</div></div>
+                )}
               </div>
             ))}
           </div>
         </div>
-      </div>
-
-      {/* 3. CORE SERVICES DETAILED SECTION */}
-      <section className="w-full mt-20 px-4 sm:px-8 md:px-12 py-10 z-10 relative">
-        <h2 className="text-3xl sm:text-4xl font-serif uppercase tracking-tight text-white mb-12">
-          Core Services & Pricing
-        </h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
-          {/* Left Column */}
-          <div className="md:col-span-6 flex flex-col gap-8">
-            {/* Website Development block */}
-            <div className="bg-[#0e0e0e] border border-white/10 rounded-2xl p-6 sm:p-8">
-              <span className="text-[10px] bg-rose-500/10 border border-rose-500/30 text-rose-500 font-bold rounded px-2.5 py-1 uppercase tracking-wider font-mono">
-                Website Development
-              </span>
-              <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-white mt-4 font-mono">
-                Pricing Packages
-              </h3>
-
-              <div className="flex flex-col gap-4 mt-6">
-                {packages.map((pkg, idx) => (
-                  <div
-                    key={idx}
-                    className="flex justify-between items-start border-b border-white/5 pb-3"
-                  >
-                    <div>
-                      <h4 className="text-white font-bold text-sm">{pkg.title}</h4>
-                      <p className="text-[11px] text-white/50 mt-1">{pkg.desc}</p>
-                    </div>
-                    <span className="text-rose-400 font-bold text-sm font-mono flex-shrink-0">
-                      {pkg.price}
-                    </span>
-                  </div>
-                ))}
-              </div>
-
-              <h4 className="text-xs font-bold text-white uppercase tracking-wider mt-8 mb-3 font-mono">
-                Features Included:
-              </h4>
-              <div className="grid grid-cols-2 gap-2">
-                {[
-                  "Responsive Design",
-                  "Mobile Friendly Layout",
-                  "WhatsApp Integration",
-                  "Contact Forms",
-                  "SEO-Friendly Structure",
-                  "Fast Loading Performance",
-                  "Custom UI/UX Design",
-                  "Secure Hosting Support",
-                ].map((feat, idx) => (
-                  <div key={idx} className="flex items-center gap-2 text-[11px] text-white/70">
-                    <Check size={12} className="text-rose-500" />
-                    <span>{feat}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Custom Software Development */}
-            <div className="bg-[#0e0e0e] border border-white/10 rounded-2xl p-6 sm:p-8">
-              <span className="text-[10px] bg-rose-500/10 border border-rose-500/30 text-rose-500 font-bold rounded px-2.5 py-1 uppercase tracking-wider font-mono">
-                Custom Software Development
-              </span>
-              <p className="text-xs text-white/60 mt-4 leading-relaxed">
-                Bespoke systems mapped to your administrative processes to automate workflows and
-                minimize administrative errors.
-              </p>
-              <div className="grid grid-cols-2 gap-3 mt-6">
-                {[
-                  "CRM Systems",
-                  "HRM Systems",
-                  "ERP Solutions",
-                  "Inventory Management",
-                  "Billing Software",
-                  "Lead Management Systems",
-                  "Business Process Automation",
-                  "Workflow Systems",
-                ].map((sft, idx) => (
-                  <div
-                    key={idx}
-                    className="border border-white/5 bg-black/45 rounded-lg p-3 text-xs text-white/80 font-mono hover:border-rose-500/20 transition-all"
-                  >
-                    {sft}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* QA Testing block */}
-            <div className="bg-[#0e0e0e] border border-white/10 rounded-2xl p-6 sm:p-8">
-              <span className="text-[10px] bg-rose-500/10 border border-rose-500/30 text-rose-500 font-bold rounded px-2.5 py-1 uppercase tracking-wider font-mono">
-                Quality Assurance & Testing
-              </span>
-              <div className="grid grid-cols-2 gap-3 mt-6">
-                {[
-                  "Manual Testing",
-                  "Automation Testing",
-                  "Functional Testing",
-                  "Regression Testing",
-                  "Performance Testing",
-                  "Quality Audits",
-                ].map((qa, idx) => (
-                  <div key={idx} className="flex items-center gap-2 text-xs text-white/80">
-                    <Check size={12} className="text-rose-500" />
-                    <span>{qa}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Right Column */}
-          <div className="md:col-span-6 flex flex-col gap-8">
-            {/* Web Application Development */}
-            <div className="bg-[#0e0e0e] border border-white/10 rounded-2xl p-6 sm:p-8">
-              <span className="text-[10px] bg-rose-500/10 border border-rose-500/30 text-rose-500 font-bold rounded px-2.5 py-1 uppercase tracking-wider font-mono">
-                Web Application Development
-              </span>
-              <p className="text-xs text-white/60 mt-4 leading-relaxed">
-                Scalable and robust portals built with custom databases and analytical capabilities.
-              </p>
-              <div className="grid grid-cols-2 gap-2 mt-6">
-                {[
-                  "SaaS Platforms",
-                  "Admin Dashboards",
-                  "Customer Portals",
-                  "Booking Systems",
-                  "Workflow Management",
-                  "Business Management Platforms",
-                  "Automation Portals",
-                  "Analytics Dashboards",
-                ].map((app, idx) => (
-                  <div key={idx} className="flex items-center gap-2 text-xs text-white/70">
-                    <Check size={12} className="text-rose-500" />
-                    <span>{app}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Mobile Applications */}
-            <div className="bg-[#0e0e0e] border border-white/10 rounded-2xl p-6 sm:p-8">
-              <span className="text-[10px] bg-rose-500/10 border border-rose-500/30 text-rose-500 font-bold rounded px-2.5 py-1 uppercase tracking-wider font-mono">
-                Mobile Applications
-              </span>
-              <div className="grid grid-cols-2 gap-2 mt-4">
-                {[
-                  "Android Applications",
-                  "iOS Applications",
-                  "Cross-Platform Apps",
-                  "Enterprise Applications",
-                  "Business Apps",
-                  "Customer Service Apps",
-                ].map((mob, idx) => (
-                  <span
-                    key={idx}
-                    className="text-xs text-white/80 font-mono bg-black p-2 border border-white/5 rounded block"
-                  >
-                    {mob}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Browser Extensions & Automation */}
-            <div className="bg-[#0e0e0e] border border-white/10 rounded-2xl p-6 sm:p-8">
-              <span className="text-[10px] bg-rose-500/10 border border-rose-500/30 text-rose-500 font-bold rounded px-2.5 py-1 uppercase tracking-wider font-mono">
-                Extensions & Automation
-              </span>
-              <h4 className="text-white font-bold text-sm tracking-tight mt-4 font-mono">
-                Browser Extensions
-              </h4>
-              <p className="text-xs text-white/50 mt-1 leading-relaxed">
-                Chrome extensions, lead-gen scripts, productivity utilities.
-              </p>
-
-              <h4 className="text-white font-bold text-sm tracking-tight mt-6 font-mono">
-                Automation Solutions
-              </h4>
-              <p className="text-xs text-white/50 mt-1 leading-relaxed">
-                Lead pipelines, social automations, customer workflow scripts.
-              </p>
-            </div>
-
-            {/* Digital Marketing block */}
-            <div className="bg-[#0e0e0e] border border-white/10 rounded-2xl p-6 sm:p-8">
-              <span className="text-[10px] bg-rose-500/10 border border-rose-500/30 text-rose-500 font-bold rounded px-2.5 py-1 uppercase tracking-wider font-mono">
-                Digital Marketing Services
-              </span>
-
-              <div className="flex flex-col gap-4 mt-6">
-                {marketingPackages.map((mpkg, idx) => (
-                  <div key={idx} className="border-b border-white/5 pb-4 last:border-none">
-                    <div className="flex justify-between items-center">
-                      <h4 className="text-white font-bold text-sm font-mono">{mpkg.title}</h4>
-                      <span className="text-rose-400 font-bold text-sm font-mono">
-                        {mpkg.price}
-                      </span>
-                    </div>
-                    <div className="flex flex-wrap gap-1.5 mt-2">
-                      {mpkg.features.map((f, i) => (
-                        <span
-                          key={i}
-                          className="text-[9px] bg-white/5 text-white/70 rounded-full px-2 py-0.5 border border-white/5"
-                        >
-                          {f}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
       </section>
 
-      {/* 4. CODE QUALITY & COMPARISON GRID */}
-      <section className="w-full mt-16 md:mt-24 px-4 sm:px-8 md:px-12 py-12 border-t border-white/10 z-10 relative">
-        <h2 className="text-3xl sm:text-4xl font-serif uppercase tracking-tight text-white mb-12">
-          Custom Code vs. Template SaaS
-        </h2>
+      {/* ── CTA SECTION (same as homepage) ── */}
+      <section className="w-full bg-black px-6 sm:px-12 md:px-20 py-12 relative z-10">
+        <div className="max-w-7xl mx-auto">
+          <div
+            className="relative rounded-[28px] overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 px-10 py-12 md:py-14"
+            style={{ background: "linear-gradient(135deg, #1c1c1e 0%, #2a2a2e 50%, #1a1a1c 100%)" }}
+          >
+            <div className="absolute inset-0 opacity-[0.03] bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjY1IiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIzMDAiIGZpbHRlcj0idXJsKCNhKSIgb3BhY2l0eT0iMSIvPjwvc3ZnPg==')] pointer-events-none" />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Custom Code */}
-          <div className="bg-[#0e0e0e] border border-[#rose-500]/20 rounded-2xl p-6 sm:p-8">
-            <h3 className="text-lg font-bold text-white font-mono flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-rose-500" />
-              Bespoke Code Architecture
-            </h3>
-            <p className="text-white/50 text-xs mt-3 leading-relaxed">
-              We write custom algorithms uniquely tailored to your project. This guarantees absolute
-              flexibility, lightweight execution, and seamless integration with your existing
-              services.
-            </p>
-            <ul className="flex flex-col gap-2 mt-6">
-              {[
-                "100% custom database integrations",
-                "Lightweight bundles (Vite + TypeScript)",
-                "Full ownership of your source code repository",
-                "Absolute freedom in styling (no templates limits)",
-              ].map((item, idx) => (
-                <li key={idx} className="flex items-center gap-2 text-xs text-white/80">
-                  <CheckSquare size={14} className="text-rose-500 flex-shrink-0" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Template SaaS */}
-          <div className="bg-[#0e0e0e] border border-white/5 rounded-2xl p-6 sm:p-8 opacity-70">
-            <h3 className="text-lg font-bold text-white/80 font-mono flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-zinc-600" />
-              Off-the-Shelf SaaS
-            </h3>
-            <p className="text-white/40 text-xs mt-3 leading-relaxed">
-              Off-the-shelf software models often impose restrictions, heavy dependencies, and
-              monthly recurring licensing costs that scale unfavorably as your database grows.
-            </p>
-            <ul className="flex flex-col gap-2 mt-6">
-              {[
-                "Locked vendor API ecosystems",
-                "Heavy boilerplate codes affecting loading speeds",
-                "No direct database access or manual control",
-                "Unfavorable scaling cost parameters",
-              ].map((item, idx) => (
-                <li key={idx} className="flex items-center gap-2 text-xs text-white/50">
-                  <CheckSquare size={14} className="text-zinc-600 flex-shrink-0" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. TECHNOLOGY EXPERTISE */}
-      <section className="w-full mt-16 md:mt-24 px-4 sm:px-8 md:px-12 py-12 border-t border-white/10 z-10 relative">
-        <h2 className="text-3xl sm:text-4xl font-serif uppercase tracking-tight text-white mb-12">
-          Technology Expertise
-        </h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
-          {[
-            {
-              title: "Frontend",
-              icon: <Code size={16} />,
-              tags: [
-                "React.js",
-                "Next.js",
-                "Angular",
-                "JavaScript",
-                "TypeScript",
-                "HTML5",
-                "CSS3",
-                "Tailwind CSS",
-              ],
-            },
-            {
-              title: "Backend",
-              icon: <Terminal size={16} />,
-              tags: ["Node.js", "Express.js", "PHP", "REST APIs", "Custom APIs", "Auth Systems"],
-            },
-            {
-              title: "Database",
-              icon: <Database size={16} />,
-              tags: ["MongoDB", "PostgreSQL", "MySQL", "Firebase", "Real-Time DB"],
-            },
-            {
-              title: "Cloud & Devops",
-              icon: <Cloud size={16} />,
-              tags: [
-                "Cloud Deploy",
-                "VPS Management",
-                "DNS Configuration",
-                "SSL Setup",
-                "Optimization",
-                "Security",
-              ],
-            },
-            {
-              title: "Automation",
-              icon: <InfinityIcon size={16} />,
-              tags: [
-                "Chrome Extensions",
-                "Browser Automation",
-                "Lead Pipelines",
-                "Workflow Scripts",
-                "Process Automation",
-              ],
-            },
-          ].map((stack, idx) => (
-            <div key={idx} className="bg-[#0e0e0e] border border-white/10 rounded-xl p-5">
-              <h4 className="text-white font-bold text-xs uppercase tracking-widest font-mono flex items-center gap-2 pb-3 border-b border-white/5">
-                <span className="text-rose-500">{stack.icon}</span>
-                {stack.title}
-              </h4>
-              <div className="flex flex-wrap gap-1.5 mt-4">
-                {stack.tags.map((t, i) => (
-                  <span
-                    key={i}
-                    className="text-[10px] font-semibold bg-white/5 hover:bg-[#rose-500]/10 text-white/80 hover:text-white rounded-full px-3 py-1 border border-white/5 transition-all"
-                  >
-                    {t}
-                  </span>
-                ))}
+            {/* Left: text + CTA */}
+            <div className="relative z-10 flex flex-col gap-5 max-w-lg">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-[1.1] tracking-tight">
+                Ready to Build Your<br />
+                <span className="text-white/60">Digital Presence?</span>
+              </h2>
+              <p className="text-white/45 text-sm leading-relaxed">
+                Partner with Mirastra Tech to craft scalable websites, apps, and automation solutions. Start your project today — fast delivery, expert execution.
+              </p>
+              <div className="flex items-center gap-4 mt-1">
+                <Link to="/contact"
+                  className="bg-white hover:bg-white/90 text-black text-xs font-bold px-7 py-3.5 rounded-full tracking-widest uppercase decoration-none cursor-pointer inline-flex items-center gap-2 transition-all">
+                  Get Started <ArrowUpRight size={13} />
+                </Link>
+                <a href="mailto:mirastratech@gmail.com"
+                  className="text-white/40 text-xs font-semibold hover:text-white transition-colors decoration-none cursor-pointer">
+                  or Email Us →
+                </a>
               </div>
             </div>
-          ))}
-        </div>
-      </section>
 
-      {/* 6. FAQ SECTION (Wen Launch Accordion Layout) */}
-      <section className="w-full mt-16 md:mt-24 px-4 sm:px-8 md:px-12 py-12 border-t border-white/10 z-10 relative">
-        <h2 className="text-3xl sm:text-4xl font-serif uppercase tracking-tight text-white mb-12">
-          Frequently Asked Questions
-        </h2>
-
-        <div className="max-w-3xl flex flex-col gap-4">
-          {faqs.map((faq, idx) => (
-            <div
-              key={idx}
-              className="bg-[#0e0e0e] border border-white/10 rounded-2xl overflow-hidden"
-            >
-              <button
-                onClick={() => setActiveFaq(activeFaq === idx ? null : idx)}
-                className="w-full p-6 text-left flex justify-between items-center text-white bg-transparent border-none outline-none cursor-pointer"
-              >
-                <span className="font-bold text-sm sm:text-base font-mono flex items-center gap-3">
-                  <HelpCircle size={16} className="text-rose-500" />
-                  {faq.q}
-                </span>
-                <ChevronDown
-                  size={16}
-                  className={`text-white/60 transition-transform duration-300 ${activeFaq === idx ? "rotate-180 text-rose-500" : ""}`}
-                />
-              </button>
-
-              {activeFaq === idx && (
-                <div className="px-6 pb-6 pt-2 text-xs sm:text-sm text-white/60 leading-relaxed border-t border-white/5 animate-fade-in">
-                  {faq.a}
+            {/* Right: floating UI mockup cards */}
+            <div className="relative z-10 flex-shrink-0 w-full md:w-[420px] h-[220px] hidden md:block">
+              <div className="absolute right-8 top-0 w-[220px] bg-[#111] border border-white/10 rounded-[16px] overflow-hidden shadow-2xl rotate-[3deg]">
+                <div className="bg-zinc-900 px-3 py-2 flex items-center gap-1.5">
+                  <div className="w-2 h-2 rounded-full bg-red-500/60" />
+                  <div className="w-2 h-2 rounded-full bg-yellow-500/60" />
+                  <div className="w-2 h-2 rounded-full bg-emerald-500/60" />
+                  <div className="flex-1 h-3 bg-white/5 rounded-full ml-2" />
                 </div>
-              )}
+                <div className="p-3 flex flex-col gap-1.5">
+                  <div className="h-2 bg-white/10 rounded-full w-3/4" />
+                  <div className="h-2 bg-white/6 rounded-full w-full" />
+                  <div className="h-2 bg-white/6 rounded-full w-5/6" />
+                  <div className="mt-1 h-12 bg-gradient-to-r from-[#bfff00]/10 to-emerald-900/20 rounded-lg border border-white/5" />
+                  <div className="h-2 bg-white/6 rounded-full w-2/3" />
+                </div>
+              </div>
+              <div className="absolute left-4 top-8 w-[160px] bg-[#bfff00] rounded-[14px] p-4 shadow-xl -rotate-[2deg]">
+                <p className="text-black/50 text-[9px] font-mono uppercase tracking-widest">Project Status</p>
+                <p className="text-black font-black text-2xl leading-tight mt-0.5">100%</p>
+                <p className="text-black/60 text-[10px] font-medium">On-Time Delivery</p>
+                <div className="mt-2 h-1.5 bg-black/15 rounded-full overflow-hidden">
+                  <div className="h-full bg-black/40 rounded-full w-full" />
+                </div>
+              </div>
+              <div className="absolute right-2 bottom-0 w-[180px] bg-white rounded-[14px] p-4 shadow-xl rotate-[1deg]">
+                <div className="flex items-center gap-2.5 mb-2">
+                  <div className="w-8 h-8 rounded-full bg-[#bfff00] flex items-center justify-center text-black text-[10px] font-bold flex-shrink-0">MT</div>
+                  <div>
+                    <p className="text-black font-bold text-xs leading-tight">Mirastra Tech</p>
+                    <p className="text-black/40 text-[9px]">MSME Registered</p>
+                  </div>
+                </div>
+                <div className="flex text-[#bfff00]">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} className="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                  ))}
+                </div>
+                <p className="text-black/40 text-[9px] mt-1">Est. May 2026</p>
+              </div>
             </div>
-          ))}
+          </div>
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="w-full mt-24 border-t border-white/10 pt-12 pb-8 px-6 sm:px-12 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-6">
-        <div>
-          <span className="text-base font-bold tracking-wider uppercase text-white font-mono">
-            Mirastra Tech
-          </span>
-          <p className="text-xs text-white/40 mt-2 font-mono">
-            Building the Future. Beyond Limits.
-          </p>
+      {/* ── FOOTER (same as homepage) ── */}
+      <footer className="w-full bg-black relative overflow-hidden border-t border-white/5">
+        {/* Giant brand name */}
+        <div className="relative w-full overflow-hidden select-none" style={{ lineHeight: 0.85 }}>
+          <h2 className="font-black text-center w-full px-4"
+            style={{
+              fontSize: "clamp(72px, 18vw, 260px)",
+              letterSpacing: "-0.03em",
+              paddingBottom: "0.05em",
+              background: "linear-gradient(180deg, rgba(255,255,255,0.13) 0%, rgba(255,255,255,0.06) 55%, rgba(255,255,255,0.02) 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}>
+            Mirastra
+          </h2>
+          <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-black to-transparent pointer-events-none" />
         </div>
-        <p className="text-xs text-white/30 font-mono">
-          &copy; 2026 Mirastra Tech. MSME-registered. Serving Clients Worldwide.
-        </p>
+
+        {/* Bottom info bar */}
+        <div className="relative z-10 border-t border-white/6 px-8 sm:px-12 md:px-16 py-12">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-10">
+
+            {/* Col 1: logo + address + status + socials */}
+            <div className="md:col-span-3 flex flex-col gap-5">
+              <img src="/mirastra_wlogo.png" alt="Mirastra Tech" className="h-25 w-auto object-contain object-left" />
+              <p className="text-white/30 text-xs leading-relaxed font-mono">
+                Mirastra Tech<br />MSME Registered, India<br />Serving Clients Worldwide
+              </p>
+              <div className="inline-flex items-center gap-2 bg-white/5 border border-white/8 rounded-full px-3 py-1.5 self-start">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_4px_rgba(52,211,153,0.8)] animate-pulse" />
+                <span className="text-white/50 text-[10px] font-mono uppercase tracking-wider">All systems operational</span>
+              </div>
+              <div className="flex items-center gap-3">
+                {[
+                  { href: "#", icon: <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> },
+                  { href: "#", icon: <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> },
+                  { href: "#", icon: <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg> },
+                ].map((s, i) => (
+                  <a key={i} href={s.href} className="w-8 h-8 rounded-lg bg-white/5 border border-white/8 flex items-center justify-center text-white/40 hover:text-white hover:bg-white/10 hover:border-white/15 transition-all duration-200">{s.icon}</a>
+                ))}
+              </div>
+            </div>
+
+            {/* Nav columns */}
+            <div className="md:col-span-7 grid grid-cols-2 sm:grid-cols-4 gap-8">
+              {[
+                { heading: "Services",  links: ["Website Development", "Web Applications", "Mobile Apps", "Custom Software", "Browser Extensions"] },
+                { heading: "Solutions", links: ["Automation", "Digital Marketing", "QA Testing", "UI/UX Design", "Consulting"] },
+                { heading: "Company",  links: ["About Us", "Our Works", "Blog", "Contact", "Careers"] },
+                { heading: "Legal",    links: ["Privacy Policy", "Terms of Service", "Refund Policy", "Cookie Policy"] },
+              ].map((col, ci) => (
+                <div key={ci} className="flex flex-col gap-3">
+                  <p className="text-white/60 text-[11px] font-semibold uppercase tracking-[0.18em]">{col.heading}</p>
+                  {col.links.map((link, li) => (
+                    <a key={li} href="#" className="text-white/28 text-xs hover:text-white/70 transition-colors decoration-none leading-snug">{link}</a>
+                  ))}
+                </div>
+              ))}
+            </div>
+
+            {/* Right: email + WhatsApp icon buttons */}
+            <div className="md:col-span-2 flex flex-col gap-3 items-end justify-start">
+              <a href="mailto:mirastratech@gmail.com"
+                className="w-14 h-14 rounded-[16px] bg-[#1c1c1e] border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/8 hover:border-white/20 transition-all duration-200" title="Email Us">
+                <ArrowUpRight size={22} />
+              </a>
+              <a href="https://wa.me/919047432540" target="_blank" rel="noopener noreferrer"
+                className="w-14 h-14 rounded-[16px] bg-[#1c1c1e] border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/8 hover:border-white/20 transition-all duration-200" title="WhatsApp">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              </a>
+            </div>
+          </div>
+
+          {/* Copyright strip */}
+          <div className="max-w-7xl mx-auto mt-10 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <p className="text-white/20 text-[10px] font-mono uppercase tracking-widest">© 2026 Mirastra Tech — MSME Registered</p>
+            <p className="text-white/15 text-[10px] font-mono">Building the Future. Beyond Limits.</p>
+          </div>
+        </div>
       </footer>
+
     </main>
   );
 }
