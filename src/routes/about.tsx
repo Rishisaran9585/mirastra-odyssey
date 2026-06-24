@@ -1,11 +1,6 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+﻿import { createFileRoute, Link } from "@tanstack/react-router";
 import Nav from "../components/Nav";
-import React from "react";
-import {
-  ArrowUpRight,
-  Star,
-  Zap,
-} from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -14,7 +9,7 @@ export const Route = createFileRoute("/about")({
       {
         name: "description",
         content:
-          "Learn about Mirastra Tech, our mission to help businesses grow with technology solutions, and our 4-stage development methodology.",
+          "Learn about Mirastra Tech — an MSME-registered technology solutions company. Discover our mission, vision, and 7-stage development process.",
       },
     ],
   }),
@@ -32,129 +27,68 @@ function About() {
   ];
 
   return (
-    <main className="w-full bg-[#020203] text-white min-h-screen relative font-sans p-3 sm:p-5 md:p-6 overflow-hidden">
+    <main className="w-full bg-[#eeeeec] text-black min-h-screen relative font-sans overflow-hidden">
       {/* Navigation */}
       <Nav />
 
-      {/* Background Glowing Lights */}
-      <div className="absolute top-[-10%] right-[-10%] w-[55%] aspect-square rounded-full bg-[radial-gradient(circle,rgba(191,255,0,0.08)_0%,transparent,transparent)] pointer-events-none animate-pulse-glow" style={{ filter: "blur(90px)" }} />
-      <div className="absolute bottom-[20%] left-[-10%] w-[60%] aspect-square rounded-full bg-[radial-gradient(circle,rgba(58,140,215,0.12)_0%,transparent,transparent)] pointer-events-none animate-pulse-glow" style={{ filter: "blur(100px)" }} />
+      {/* 1. HERO SECTION — mountain style */}
+      <div className="w-full h-screen relative overflow-hidden flex flex-col bg-[#eeeeec]">
 
-      {/* 1. HERO SECTION (Dark background) */}
-      <div
-        className="w-full min-h-screen relative overflow-hidden flex flex-col justify-between pt-32 pb-8 px-6 sm:px-12 md:px-20 bg-[#020203] rounded-[24px] md:rounded-[40px] border border-white/10"
-      >
-        {/* Tech Grid overlays */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:1.5rem_1.5rem] opacity-35 pointer-events-none" />
-        
-        {/* Vignette edges */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_45%,rgba(0,0,0,0.85)_100%)] pointer-events-none" />
+        {/* TOP: text content */}
+        <div className="relative z-10 flex flex-col items-center text-center px-6 pt-24 pb-6 max-w-3xl mx-auto w-full flex-shrink-0">
 
-        <div className="flex-1 grid grid-cols-1 md:grid-cols-12 gap-8 items-center z-10 relative mt-4 md:mt-8">
-          {/* Hero Left Column */}
-          <div className="md:col-span-7 flex flex-col items-start text-left">
-            {/* Eyebrow label */}
-            <div className="flex items-center gap-2 mb-6 bg-white/[0.04] backdrop-blur-md border border-white/[0.08] rounded-full px-4 py-1.5 transition-colors duration-300">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#bfff00] animate-pulse" />
-              <span className="text-white/80 text-[10px] font-mono uppercase tracking-[0.25em]">Welcome to Mirastra</span>
-            </div>
-            
-            <div className="relative w-full">
-              <h1 className="text-4xl sm:text-5xl md:text-[64px] font-outfit font-black tracking-tight text-white leading-[1.05] max-w-[620px] uppercase">
-                We craft brands &amp; digital experiences
-              </h1>
-              {/* Sparkle icon from lucide */}
-              <div className="absolute right-4 bottom-2 text-[#bfff00] animate-pulse hidden md:block">
-                <Star size={36} className="fill-[#bfff00]" />
-              </div>
-            </div>
-            
-            <p className="text-white/70 text-base sm:text-lg md:text-xl font-normal mt-6 max-w-[540px] leading-relaxed">
-              Elevate your business with bespoke digital systems, performance-driven web development, and intelligent workflow automations.
-            </p>
-
-            {/* Circular CTA Button */}
-            <div className="mt-10 flex items-center gap-6">
-              <Link
-                to="/contact"
-                className="group w-28 h-28 rounded-full bg-[#bfff00] hover:bg-[#aee600] text-black font-outfit font-extrabold text-xs uppercase tracking-widest flex flex-col items-center justify-center gap-1 transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-[0_8px_32px_rgba(191,255,0,0.25)] relative decoration-none cursor-pointer"
-              >
-                <span>Let's talk</span>
-                <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                {/* Radial stroke accents */}
-                <div className="absolute -bottom-2 right-[-10px] text-white/30 text-xs font-light select-none font-mono">///</div>
-              </Link>
-            </div>
+          {/* Pill badge */}
+          <div className="inline-flex items-center gap-2 bg-white/80 border border-black/10 rounded-full px-4 py-1.5 mb-5 shadow-sm">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#3a8cd7] animate-pulse flex-shrink-0" />
+            <span className="text-black/50 text-[11px] font-mono tracking-[0.15em]">Welcome to Mirastra Tech</span>
           </div>
 
-          {/* Hero Right Column (Terminal Console Mockup) */}
-          <div className="md:col-span-5 flex justify-center md:justify-end relative min-h-[380px]">
-            {/* Soft backdrop glow behind console */}
-            <div className="absolute top-[20%] left-[20%] w-[60%] h-[60%] rounded-full bg-[#bfff00]/8 blur-[60px] pointer-events-none animate-pulse" />
+          {/* Headline — 2 lines */}
+          <h1 className="text-5xl sm:text-6xl md:text-[64px] font-black tracking-tight text-black leading-[1.06] mb-4">
+            We craft digital<br />
+            experiences that last.
+          </h1>
 
-            <div className="relative w-full max-w-[340px] aspect-[4/5] rounded-[24px] overflow-hidden border border-white/10 bg-black/90 p-4 animate-float-hero shadow-2xl flex flex-col justify-between font-mono">
-              
-              {/* Terminal Window Header */}
-              <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-4 flex-shrink-0">
-                <div className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
-                </div>
-                <span className="text-[10px] text-white/40 tracking-wider">mirastra-system.sh</span>
-                <span className="w-4" />
-              </div>
+          {/* Subtitle */}
+          <p className="text-black/45 text-sm sm:text-base max-w-md leading-relaxed mb-6">
+            Elevate your business with bespoke digital systems, performance-driven web development, and intelligent workflow automations.
+          </p>
 
-              {/* Terminal Output Code */}
-              <div className="flex-1 text-left text-[11px] sm:text-xs leading-relaxed overflow-hidden text-white/80 select-none">
-                <p className="text-white/40 mb-1">$ ./initialize_studio.sh</p>
-                <p className="text-[#bfff00] mb-2">✔ Connection established</p>
-                
-                <p className="text-white/40 mb-1">$ cat mirastra.json</p>
-                <div className="text-[#3a8cd7] pl-3">
-                  <p>&#123;</p>
-                  <p className="pl-3">"status": <span className="text-[#bfff00]">"MSME_ACTIVE"</span>,</p>
-                  <p className="pl-3">"delivery": <span className="text-[#bfff00]">"100_PERCENT"</span>,</p>
-                  <p className="pl-3">"location": <span className="text-white">"GLOBAL_REMOTE"</span>,</p>
-                  <p className="pl-3">"core": [</p>
-                  <p className="pl-6 text-white/60">"web", "mobile", "saas",</p>
-                  <p className="pl-6 text-white/60">"automation", "strategy"</p>
-                  <p className="pl-3">]</p>
-                  <p>&#125;</p>
-                </div>
-
-                <p className="text-white/40 mt-3 mb-1">$ npm run dev</p>
-                <p className="text-emerald-400">➜ Local: http://localhost:8082/</p>
-              </div>
-
-              {/* Floating bottom-right badge */}
-              <div className="bg-white/[0.03] border border-white/10 rounded-full px-4 py-1.5 select-none pointer-events-none self-center mt-4">
-                <p className="text-[9px] font-outfit font-black uppercase tracking-wider text-white/50 text-center leading-none">
-                  SYSTEM READY
-                </p>
-              </div>
-
-            </div>
+          {/* CTA buttons */}
+          <div className="flex items-center gap-3 flex-wrap justify-center">
+            <Link
+              to="/contact"
+              className="bg-black hover:bg-zinc-800 text-white text-sm font-bold px-8 py-3 rounded-full inline-flex items-center gap-2 transition-all decoration-none cursor-pointer shadow-lg"
+            >
+              Start a Project →
+            </Link>
+            <Link
+              to="/services"
+              className="bg-white/70 hover:bg-white text-black/65 hover:text-black text-sm font-semibold px-8 py-3 rounded-full border border-black/10 inline-flex items-center gap-2 transition-all decoration-none cursor-pointer"
+            >
+              Our Services ›
+            </Link>
           </div>
         </div>
 
-        {/* Partners/Logos Bar */}
-        <div className="w-full border-t border-white/8 pt-10 mt-16 z-10 relative">
-          <div className="flex flex-wrap justify-between items-center gap-6 px-4 md:px-8 text-white/40 text-xs font-mono font-bold tracking-widest">
-            <span>REACT.JS</span>
-            <span className="text-white/10">◆</span>
-            <span>NODEJS</span>
-            <span className="text-white/10">◆</span>
-            <span>POSTGRESQL</span>
-            <span className="text-white/10">◆</span>
-            <span>TYPESCRIPT</span>
-            <span className="text-white/10">◆</span>
-            <span>NEXTJS</span>
-            <span className="text-white/10">◆</span>
-            <span>PYTHON</span>
-          </div>
+        {/* BOTTOM: mountain fills remaining height */}
+        <div className="relative flex-1 w-full overflow-hidden">
+          <img
+            src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1600&h=900&q=85"
+            alt="Mountain emerging from clouds"
+            className="absolute inset-0 w-full h-full select-none pointer-events-none"
+            style={{
+              objectFit: "cover",
+              objectPosition: "center 25%",
+              filter: "grayscale(100%) contrast(0.82) brightness(1.02)",
+              maskImage: "radial-gradient(ellipse 95% 90% at 50% 100%, black 35%, transparent 88%)",
+              WebkitMaskImage: "radial-gradient(ellipse 95% 90% at 50% 100%, black 35%, transparent 88%)",
+            }}
+          />
+          <div className="absolute top-0 left-0 w-full h-16 bg-gradient-to-b from-[#eeeeec] to-transparent pointer-events-none z-10" />
+          <div className="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-[#eeeeec] to-transparent pointer-events-none z-10" />
         </div>
+
       </div>
 
       {/* 2. ABOUT US PREVIEW SECTION (White background) */}
@@ -168,7 +102,7 @@ function About() {
               </span>
               <div className="relative">
                 <h3 className="text-3xl sm:text-5xl font-outfit font-black tracking-tight text-slate-950 leading-tight uppercase">
-                  Meet Mirastra: Your Design Partners
+                  Your Trusted Partner in Building the Future
                 </h3>
                 {/* Specs decoration */}
                 <div className="absolute right-0 top-0 text-slate-200 hidden md:block">
@@ -180,8 +114,28 @@ function About() {
                 </div>
               </div>
               <p className="text-slate-600 text-base mt-6 leading-relaxed max-w-xl">
-                We're not just programmers; we're creators, problem solvers, and your business's closest technology allies. At Mirastra Tech, we live and breathe custom software. From websites to custom extensions and workflows, we align deep technical capabilities with strategic business growth.
+                Mirastra Tech is an MSME-registered technology solutions company dedicated to helping businesses grow through innovative digital solutions. Established in May 2026, we specialize in website development, software development, mobile applications, browser extensions, automation systems, digital marketing, and QA services. Operating remotely, serving clients worldwide.
               </p>
+              <div className="mt-8 flex flex-col gap-5 max-w-xl">
+                <div className="flex flex-col gap-1.5">
+                  <span className="text-[#3a8cd7] text-[10px] font-semibold uppercase tracking-[0.2em] font-mono">Our Mission</span>
+                  <p className="text-slate-700 text-sm leading-relaxed">
+                    To empower businesses with innovative technology solutions that improve efficiency, enhance customer engagement, and accelerate growth.
+                  </p>
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <span className="text-[#3a8cd7] text-[10px] font-semibold uppercase tracking-[0.2em] font-mono">Our Vision</span>
+                  <p className="text-slate-700 text-sm leading-relaxed">
+                    To become a trusted global technology partner known for delivering impactful digital solutions that help businesses thrive in the digital world.
+                  </p>
+                </div>
+              </div>
+              <Link
+                to="/about"
+                className="mt-8 inline-flex items-center gap-2 bg-black hover:bg-zinc-800 text-white text-sm font-bold px-7 py-3 rounded-full transition-all decoration-none cursor-pointer shadow-md self-start"
+              >
+                About Us →
+              </Link>
             </div>
 
             <div className="md:col-span-5 flex justify-center md:justify-end">
@@ -242,112 +196,126 @@ function About() {
         </div>
       </section>
 
-      {/* 3. OPERATIONAL FLOW: PUSHPIN ROADMAP (White background) */}
-      <section className="w-full bg-[#f8fafc] text-slate-900 py-24 px-6 sm:px-12 md:px-20 z-10 relative overflow-hidden border-t border-slate-200/50 rounded-[24px] md:rounded-[40px] mt-6">
-        <div className="absolute top-[30%] left-[20%] w-[50%] h-[50%] rounded-full bg-[#3a8cd7]/5 blur-[120px] pointer-events-none" />
+      {/* FEATURE GRID SECTION — 2×2 bento cards */}
+      <section className="w-full bg-[#eeeeec] py-16 px-6 sm:px-12 md:px-20">
+        <div className="max-w-5xl mx-auto">
 
-        <div className="max-w-5xl mx-auto relative">
-          {/* Centered Heading */}
-          <div className="text-center mb-20">
-            <span className="text-[#3a8cd7] text-xs font-semibold uppercase tracking-[0.2em] font-mono mb-3 block">
-              How We Work
-            </span>
-            <h3 className="text-3xl sm:text-5xl font-outfit font-black tracking-tight text-slate-950 leading-tight uppercase max-w-2xl mx-auto">
-              Let us show you how we drive your projects to new heights
-            </h3>
-            <p className="text-slate-500 text-xs sm:text-sm mt-4 max-w-md mx-auto leading-relaxed">
-              Our 4-stage operational roadmap guarantees high transparency, strict timelines, and flawless software execution.
-            </p>
-          </div>
+          {/* Left-aligned headline like reference */}
+          <h2 className="text-3xl sm:text-4xl md:text-[44px] font-black tracking-tight text-black leading-[1.1] mb-10 max-w-xl">
+            Build. Launch. Scale.<br />
+            Wherever your business grows.
+          </h2>
 
-          {/* Staggered cards roadmap with connecting line */}
-          <div className="relative w-full z-10 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
-            
-            {/* SVG Connecting Dotted Line - Hidden on Mobile */}
-            <div className="absolute inset-0 z-0 hidden md:block pointer-events-none">
-              <svg className="w-full h-full" viewBox="0 0 1000 800" fill="none" stroke="rgba(0,0,0,0.08)" strokeWidth="3" strokeDasharray="6 8">
-                <path d="M 750 80 C 600 80, 500 240, 250 240 C 100 240, 400 480, 750 480 C 950 480, 800 680, 250 680" />
-              </svg>
-            </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
-            {/* STEP 1 */}
-            <div className="hidden md:block pointer-events-none" />
-            <div className="relative">
-              <div className="pushpin-card bg-white text-black rounded-3xl p-8 relative max-w-[380px] mx-auto transform rotate-[1.5deg] border border-slate-100">
-                <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4.5 h-4.5 rounded-full bg-gradient-to-br from-zinc-300 to-zinc-500 shadow-md border border-zinc-400 z-20 flex items-center justify-center">
-                  <div className="w-1.5 h-1.5 rounded-full bg-zinc-700" />
+            {/* Card 1 — Website Development */}
+            <div className="bg-white rounded-[20px] p-6 flex flex-col gap-5 border border-black/6 hover:shadow-lg transition-all duration-300 min-h-[320px]">
+              {/* Visual mockup */}
+              <div className="flex-1 flex flex-col items-center justify-center gap-3 bg-[#f5f5f3] rounded-[14px] p-5 relative overflow-hidden">
+                {/* Browser bar */}
+                <div className="w-full bg-white rounded-xl px-4 py-2.5 shadow-sm border border-black/6 flex items-center justify-between">
+                  <div className="flex gap-1.5">
+                    <div className="w-2 h-2 rounded-full bg-red-400/70" />
+                    <div className="w-2 h-2 rounded-full bg-yellow-400/70" />
+                    <div className="w-2 h-2 rounded-full bg-green-400/70" />
+                  </div>
+                  <div className="bg-black text-white text-[9px] font-bold px-3 py-1 rounded-full">Book a Call ›</div>
                 </div>
-                <div className="flex justify-between items-start mb-4">
-                  <span className="text-[10px] font-mono tracking-widest uppercase text-black/40">Phase 01</span>
-                  <span className="text-2xl font-outfit font-black text-black/10">01</span>
+                {/* Nav icons row */}
+                <div className="flex items-center gap-3 self-start px-1 text-black/25 text-xl">
+                  <span>⌂</span><span>□</span><span>✕</span>
                 </div>
-                <h4 className="text-2xl font-outfit font-black tracking-tight text-black mb-3">Define</h4>
-                <p className="text-black/60 text-xs leading-relaxed font-sans">
-                  We discover business scope, analyze bottlenecks, detail custom technology specs, and outline detailed architecture plans before any line of code is written.
-                </p>
+                {/* Skeleton lines */}
+                <div className="w-full space-y-2 px-1">
+                  <div className="h-2 bg-black/8 rounded-full w-3/4" />
+                  <div className="h-2 bg-black/5 rounded-full w-full" />
+                  <div className="h-2 bg-black/5 rounded-full w-5/6" />
+                </div>
+                <div className="self-start pl-1 text-black/15 text-2xl select-none">↩</div>
+              </div>
+              <div>
+                <h3 className="text-black font-bold text-lg leading-tight mb-1.5">Website Development</h3>
+                <p className="text-black/45 text-xs leading-relaxed">Responsive, fast-loading websites built for conversion — static, dynamic, animated, and SEO-ready. Delivered to timeline.</p>
               </div>
             </div>
 
-            {/* STEP 2 */}
-            <div className="relative">
-              <div className="pushpin-card bg-white text-black rounded-3xl p-8 relative max-w-[380px] mx-auto transform rotate-[-2deg] border border-slate-100">
-                <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4.5 h-4.5 rounded-full bg-gradient-to-br from-zinc-300 to-zinc-500 shadow-md border border-zinc-400 z-20 flex items-center justify-center">
-                  <div className="w-1.5 h-1.5 rounded-full bg-zinc-700" />
-                </div>
-                <div className="flex justify-between items-start mb-4">
-                  <span className="text-[10px] font-mono tracking-widest uppercase text-black/40">Phase 02</span>
-                  <span className="text-2xl font-outfit font-black text-black/10">02</span>
-                </div>
-                <h4 className="text-2xl font-outfit font-black tracking-tight text-black mb-3">Design</h4>
-                <p className="text-black/60 text-xs leading-relaxed font-sans">
-                  Our design processes detail interactive wireframes, custom UI/UX elements, brand systems, and glassmorphic micro-interaction states.
-                </p>
+            {/* Card 2 — Mobile App Development */}
+            <div className="bg-white rounded-[20px] p-6 flex flex-col gap-5 border border-black/6 hover:shadow-lg transition-all duration-300 min-h-[320px]">
+              {/* Visual: feature list rows */}
+              <div className="flex-1 flex flex-col gap-2.5 justify-center">
+                {[
+                  { icon: "📱", label: "Android & iOS", sub: "Cross-platform native builds" },
+                  { icon: "⚡", label: "React Native", sub: "High-performance mobile UI" },
+                  { icon: "🔗", label: "API Integrations", sub: "Backend connected & synced" },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-3 bg-[#f5f5f3] rounded-[12px] px-4 py-3 border border-black/5">
+                    <div className="w-9 h-9 rounded-xl bg-white border border-black/8 flex items-center justify-center text-base flex-shrink-0 shadow-sm">
+                      {item.icon}
+                    </div>
+                    <div>
+                      <p className="text-black font-semibold text-xs leading-tight">{item.label}</p>
+                      <p className="text-black/35 text-[10px] mt-0.5">{item.sub}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
-            </div>
-            <div className="hidden md:block pointer-events-none" />
-
-            {/* STEP 3 */}
-            <div className="hidden md:block pointer-events-none" />
-            <div className="relative">
-              <div className="pushpin-card bg-white text-black rounded-3xl p-8 relative max-w-[380px] mx-auto transform rotate-[1deg] border border-slate-100">
-                <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4.5 h-4.5 rounded-full bg-gradient-to-br from-zinc-300 to-zinc-500 shadow-md border border-zinc-400 z-20 flex items-center justify-center">
-                  <div className="w-1.5 h-1.5 rounded-full bg-zinc-700" />
-                </div>
-                <div className="flex justify-between items-start mb-4">
-                  <span className="text-[10px] font-mono tracking-widest uppercase text-black/40">Phase 03</span>
-                  <span className="text-2xl font-outfit font-black text-black/10">03</span>
-                </div>
-                <h4 className="text-2xl font-outfit font-black tracking-tight text-black mb-3">Build</h4>
-                <p className="text-black/60 text-xs leading-relaxed font-sans">
-                  We program in clean TypeScript, establishing modular React panels, backend databases, API systems, and custom automation scripts.
-                </p>
+              <div>
+                <h3 className="text-black font-bold text-lg leading-tight mb-1.5">Mobile App Development</h3>
+                <p className="text-black/45 text-xs leading-relaxed">Android and iOS apps built with React Native — performant, intuitive, and ready for the Play Store &amp; App Store.</p>
               </div>
             </div>
 
-            {/* STEP 4 */}
-            <div className="relative">
-              <div className="pushpin-card bg-white text-black rounded-3xl p-8 relative max-w-[380px] mx-auto transform rotate-[-1.5deg] border border-slate-100">
-                <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4.5 h-4.5 rounded-full bg-gradient-to-br from-zinc-300 to-zinc-500 shadow-md border border-zinc-400 z-20 flex items-center justify-center">
-                  <div className="w-1.5 h-1.5 rounded-full bg-zinc-700" />
+            {/* Card 3 — Custom Software */}
+            <div className="bg-white rounded-[20px] p-6 flex flex-col gap-5 border border-black/6 hover:shadow-lg transition-all duration-300 min-h-[320px]">
+              {/* Visual: stacked pill arc */}
+              <div className="flex-1 flex flex-col items-center justify-center">
+                <div className="relative w-48 h-36 flex items-end justify-center">
+                  {[
+                    { label: "CRM System",    bg: "#111", w: "160px", bottom: "0px"  },
+                    { label: "ERP Platform",  bg: "#2a2a2e", w: "124px", bottom: "26px" },
+                    { label: "HRM Module",    bg: "#444",   w: "88px",  bottom: "52px" },
+                  ].map((pill, i) => (
+                    <div key={i} className="absolute h-10 rounded-full flex items-center justify-center shadow-md"
+                      style={{ background: pill.bg, width: pill.w, bottom: pill.bottom }}>
+                      <span className="text-white text-[11px] font-bold tracking-wide">{pill.label}</span>
+                    </div>
+                  ))}
                 </div>
-                <div className="flex justify-between items-start mb-4">
-                  <span className="text-[10px] font-mono tracking-widest uppercase text-black/40">Phase 04</span>
-                  <span className="text-2xl font-outfit font-black text-black/10">04</span>
-                </div>
-                <h4 className="text-2xl font-outfit font-black tracking-tight text-black mb-3">Launch</h4>
-                <p className="text-black/60 text-xs leading-relaxed font-sans">
-                  Rigorous audits, testing script runs, VPS setups, domains mappings, and post-launch maintenance ensure optimal page speed and security.
-                </p>
+              </div>
+              <div>
+                <h3 className="text-black font-bold text-lg leading-tight mb-1.5">Custom Software Development</h3>
+                <p className="text-black/45 text-xs leading-relaxed">Tailor-made CRM, ERP, HRM, and billing systems built to fit your exact workflow and scale with your business.</p>
               </div>
             </div>
 
-            {/* Final Text Label */}
-            <div className="flex items-center justify-center min-h-[150px] relative">
-              <div className="text-center md:text-left">
-                <p className="text-lg font-mono font-bold tracking-widest uppercase text-[#3a8cd7] animate-pulse">
-                  Ready to be delivered!
-                </p>
-                <div className="w-8 h-0.5 bg-gradient-to-r from-[#3a8cd7] to-transparent mt-2 mx-auto md:ml-0" />
+            {/* Card 4 — Automation & Digital Marketing */}
+            <div className="bg-white rounded-[20px] p-6 flex flex-col gap-5 border border-black/6 hover:shadow-lg transition-all duration-300 min-h-[320px]">
+              {/* Visual: concentric orbit diagram */}
+              <div className="flex-1 flex items-center justify-center">
+                <div className="relative w-40 h-40">
+                  <div className="absolute inset-0 rounded-full border border-black/8" />
+                  <div className="absolute inset-5 rounded-full border border-black/6" />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center shadow-lg">
+                      <span className="text-white text-lg">⚙️</span>
+                    </div>
+                  </div>
+                  {/* Orbit dots */}
+                  {[0, 120, 240].map((deg, i) => (
+                    <div key={i} className="absolute w-3 h-3 rounded-full bg-black/15 border-2 border-white shadow"
+                      style={{
+                        top:  `calc(50% + ${Math.sin(deg * Math.PI / 180) * 56}px - 6px)`,
+                        left: `calc(50% + ${Math.cos(deg * Math.PI / 180) * 56}px - 6px)`,
+                      }} />
+                  ))}
+                  {/* Floating labels */}
+                  <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-black text-white text-[9px] font-bold px-3 py-1 rounded-full whitespace-nowrap shadow-lg">Responsive</div>
+                  <div className="absolute -bottom-5 right-0 bg-black text-white text-[9px] font-bold px-3 py-1 rounded-full whitespace-nowrap shadow-lg">Under 3s</div>
+                </div>
+              </div>
+              <div>
+                <h3 className="text-black font-bold text-lg leading-tight mb-1.5">Automation &amp; Digital Marketing</h3>
+                <p className="text-black/45 text-xs leading-relaxed">Workflow bots, lead scrapers, Meta Ads, social media handling, and automation pipelines — always running, always live.</p>
               </div>
             </div>
 
@@ -355,28 +323,254 @@ function About() {
         </div>
       </section>
 
-      {/* 4. FOOTER BANNER SECTION (Dark background) */}
-      <section className="w-full bg-[#0a0a0c] text-white py-20 px-6 sm:px-12 md:px-20 border-t border-white/8 z-10 relative mt-6 rounded-[24px] md:rounded-[40px]">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-          <div className="md:col-span-6 text-left flex flex-col items-start gap-4">
-            <span className="text-[#3a8cd7] text-xs font-semibold uppercase tracking-[0.2em] font-mono border border-white/10 rounded-full px-3.5 py-1">
-              What we do
-            </span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-outfit font-black tracking-tight leading-tight text-white uppercase max-w-md">
-              We design meaningful not just quick impressions
+      {/* ── GROWTH SECTION — light bg, centered headline + bento stats ── */}
+      <section className="w-full bg-[#f0f0ee] py-20 px-6 sm:px-12 md:px-20">
+        <div className="max-w-5xl mx-auto">
+
+          {/* Centered headline */}
+          <div className="text-center mb-12">
+            <h2 className="text-4xl sm:text-5xl md:text-[58px] font-black tracking-tight text-black leading-[1.06] mb-4">
+              We drive growth to<br />
+              your business{" "}
+              <span className="inline-block align-middle text-3xl sm:text-4xl">↗</span>
+            </h2>
+            <p className="text-black/45 text-sm sm:text-base max-w-md mx-auto leading-relaxed mb-8">
+              Unlock your brand's potential with our proven technology expertise. From strategy to execution, we build and ship what matters.
+            </p>
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 bg-[#bfff00] hover:bg-[#aee600] text-black text-sm font-bold px-7 py-3 rounded-full transition-all decoration-none cursor-pointer shadow-md"
+            >
+              Book a call
+              <div className="w-5 h-5 rounded-full bg-black flex items-center justify-center">
+                <ArrowUpRight size={12} className="text-[#bfff00]" />
+              </div>
+            </Link>
+          </div>
+
+          {/* 3-col bento row */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+
+            {/* Card 1 — Services tag cloud */}
+            <div className="bg-white rounded-[20px] p-6 border border-black/6 flex flex-col gap-5 min-h-[260px]">
+              <p className="text-black font-semibold text-sm">Services</p>
+              <div className="flex-1 flex flex-wrap gap-2 content-center">
+                {[
+                  { label: "Web Design",      bg: "#111", color: "white" },
+                  { label: "Social Media",    bg: "transparent", color: "black", border: true },
+                  { label: "Marketing",       bg: "#111", color: "white" },
+                  { label: "Paid Ads",        bg: "transparent", color: "black", border: true },
+                  { label: "Branding",        bg: "#111", color: "white" },
+                  { label: "Content Creation",bg: "transparent", color: "black", border: true },
+                  { label: "SEO",             bg: "#bfff00", color: "black" },
+                  { label: "Automation",      bg: "transparent", color: "black", border: true },
+                ].map((tag, i) => (
+                  <span
+                    key={i}
+                    className="text-[11px] font-semibold px-3 py-1.5 rounded-full cursor-default"
+                    style={{
+                      background: tag.bg,
+                      color: tag.color,
+                      border: tag.border ? "1.5px solid rgba(0,0,0,0.15)" : "none",
+                    }}
+                  >
+                    {tag.label}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Card 2 — Stats */}
+            <div className="flex flex-col gap-4">
+              <div className="bg-black rounded-[20px] p-6 flex flex-col gap-1 flex-1">
+                <span className="text-4xl font-black text-white leading-none">14+</span>
+                <span className="text-white/50 text-xs leading-relaxed mt-1">clients have interacted with digital products built by us</span>
+              </div>
+              <div className="bg-white border border-black/6 rounded-[20px] p-6 flex flex-col gap-1 flex-1">
+                <span className="text-4xl font-black text-black leading-none">100%</span>
+                <span className="text-black/45 text-xs leading-relaxed mt-1">on-time delivery across all projects shipped</span>
+              </div>
+            </div>
+
+            {/* Card 3 — Testimonial */}
+            <div className="bg-white rounded-[20px] p-6 border border-black/6 flex flex-col justify-between min-h-[260px]">
+              <div className="text-3xl text-black/20 font-serif leading-none mb-3">"</div>
+              <div className="flex-1">
+                <p className="text-black font-semibold text-base leading-snug mb-1">
+                  The final product exceeded my expectations.
+                </p>
+                <p className="text-black/50 text-sm">Impressed with the results!</p>
+              </div>
+              <div className="flex items-center gap-2 mt-4 pt-3 border-t border-black/6">
+                <div className="flex -space-x-2">
+                  <div className="w-7 h-7 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 border-2 border-white flex-shrink-0" />
+                  <div className="w-7 h-7 rounded-full bg-gradient-to-br from-sky-400 to-indigo-500 border-2 border-white flex-shrink-0" />
+                </div>
+                <span className="text-black/35 text-[10px] font-mono">Client Review</span>
+                <div className="flex text-amber-400 ml-auto">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} className="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ── WHY CHOOSE US — dark bg, 2×2 reasons grid ── */}
+      <section className="w-full bg-black text-white py-20 px-6 sm:px-12 md:px-20">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
+
+          {/* Left: headline */}
+          <div className="md:col-span-4">
+            <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-white leading-[1.15]">
+              Why our clients<br />choose us as<br />partners
             </h2>
           </div>
 
-          <div className="md:col-span-6 text-left md:pl-8">
-            <p className="text-white/60 text-sm sm:text-base leading-relaxed">
-              We build technology solutions that stand the test of time. Every line of code and every UI component we build is architected with strict precision, clean documentation, and scalability in mind. We're here to help you automate, optimize, and grow with absolute trust.
-            </p>
+          {/* Right: 2×2 reasons */}
+          <div className="md:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-8">
+            {[
+              {
+                icon: (
+                  <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                    <rect x="0"  y="0"  width="12" height="12" rx="2" fill="#bfff00"/>
+                    <rect x="16" y="0"  width="12" height="12" rx="2" fill="#bfff00"/>
+                    <rect x="0"  y="16" width="12" height="12" rx="2" fill="#bfff00" opacity="0.5"/>
+                    <rect x="16" y="16" width="12" height="12" rx="2" fill="#bfff00" opacity="0.5"/>
+                  </svg>
+                ),
+                title: "Expertise & Specialisation",
+                desc: "Access a team with capabilities across web, mobile, software, and automation — ensuring your projects are well-rounded and effective.",
+              },
+              {
+                icon: (
+                  <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                    <rect x="0"  y="0"  width="12" height="12" rx="2" fill="#bfff00"/>
+                    <rect x="16" y="0"  width="12" height="12" rx="2" fill="#bfff00" opacity="0.5"/>
+                    <rect x="0"  y="16" width="12" height="12" rx="2" fill="#bfff00" opacity="0.5"/>
+                    <rect x="16" y="16" width="12" height="12" rx="2" fill="#bfff00"/>
+                  </svg>
+                ),
+                title: "Fresh Perspectives",
+                desc: "We bring an outsider's perspective to your brand. This fresh viewpoint helps you stay ahead of competitors and adapt to changing digital trends.",
+              },
+              {
+                icon: (
+                  <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                    <rect x="0"  y="0"  width="12" height="12" rx="2" fill="#bfff00" opacity="0.5"/>
+                    <rect x="16" y="0"  width="12" height="12" rx="2" fill="#bfff00"/>
+                    <rect x="0"  y="16" width="12" height="12" rx="2" fill="#bfff00"/>
+                    <rect x="16" y="16" width="12" height="12" rx="2" fill="#bfff00" opacity="0.5"/>
+                  </svg>
+                ),
+                title: "Scalability & Flexibility",
+                desc: "Whether you're a small startup or a large corporation, we scale our services to meet your needs — adapting as your business grows.",
+              },
+              {
+                icon: (
+                  <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                    <rect x="4"  y="4"  width="8"  height="8"  rx="2" fill="#bfff00"/>
+                    <rect x="16" y="4"  width="8"  height="8"  rx="2" fill="#bfff00" opacity="0.6"/>
+                    <rect x="4"  y="16" width="8"  height="8"  rx="2" fill="#bfff00" opacity="0.6"/>
+                    <rect x="16" y="16" width="8"  height="8"  rx="2" fill="#bfff00"/>
+                  </svg>
+                ),
+                title: "Resource Optimisation",
+                desc: "Instead of hiring and training an in-house team, you gain top-tier expertise without the overhead — saving both time and money.",
+              },
+            ].map((item, i) => (
+              <div key={i} className="flex flex-col gap-3">
+                <div>{item.icon}</div>
+                <h3 className="text-white font-bold text-base leading-tight">{item.title}</h3>
+                <p className="text-white/45 text-xs leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
           </div>
+
         </div>
       </section>
 
-      {/* 5. HOMEPAGE CTA INTEGRATION */}
-      <section className="w-full bg-black px-6 sm:px-12 md:px-20 py-12 relative z-10 mt-6 rounded-[24px] md:rounded-[40px]">
+      {/* 3. OPERATIONAL FLOW: PUSHPIN ROADMAP */}
+      <section className="w-full bg-[#f0f4f8] text-slate-900 py-24 px-6 sm:px-12 md:px-20 z-10 relative overflow-hidden border-t border-slate-200/50">
+        <div className="absolute top-1/3 left-1/4 w-1/2 h-1/2 rounded-full bg-[#3a8cd7]/5 blur-[120px] pointer-events-none" />
+
+        <div className="max-w-4xl mx-auto relative">
+
+          {/* Heading */}
+          <div className="text-center mb-16">
+            <span className="text-[#3a8cd7] text-xs font-semibold uppercase tracking-[0.2em] font-mono mb-3 block">How We Work</span>
+            <h3 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-950 leading-tight max-w-2xl mx-auto">
+              Our Development Process
+            </h3>
+            <p className="text-slate-500 text-sm mt-4 max-w-md mx-auto leading-relaxed">
+              A structured 7-stage methodology ensuring every project is delivered on time, on spec, and beyond expectations.
+            </p>
+          </div>
+
+          {/* Zigzag cards — alternating left / right */}
+          <div className="relative flex flex-col gap-0">
+
+            {/* Vertical connector line */}
+            <div className="absolute left-1/2 -translate-x-1/2 top-6 bottom-6 w-px border-l-2 border-dashed border-slate-300 hidden md:block pointer-events-none z-0" />
+
+            {[
+              { num: "01", phase: "Phase 01", title: "Discovery",           rot: "rotate-[1.5deg]",  side: "right",
+                desc: "Understanding business goals, target audience, challenges, and project requirements before any planning begins." },
+              { num: "02", phase: "Phase 02", title: "Planning",            rot: "rotate-[-1.5deg]", side: "left",
+                desc: "Defining scope, features, timelines, architecture, and implementation strategy to set a clear path forward." },
+              { num: "03", phase: "Phase 03", title: "Design",              rot: "rotate-[1deg]",    side: "right",
+                desc: "Creating intuitive, user-friendly, and visually appealing interfaces that align with your brand and goals." },
+              { num: "04", phase: "Phase 04", title: "Development",         rot: "rotate-[-2deg]",   side: "left",
+                desc: "Building scalable, secure, high-performance solutions using modern technologies and clean coding practices." },
+              { num: "05", phase: "Phase 05", title: "Testing",             rot: "rotate-[1.5deg]",  side: "right",
+                desc: "Performing comprehensive quality assurance to ensure reliability, performance, and security across all platforms." },
+              { num: "06", phase: "Phase 06", title: "Deployment",          rot: "rotate-[-1deg]",   side: "left",
+                desc: "Launching and configuring the solution in production with proper domain, hosting, SSL, and security setup." },
+              { num: "07", phase: "Phase 07", title: "Support & Maintenance", rot: "rotate-[1deg]",  side: "right",
+                desc: "Providing continuous updates, improvements, and technical support to keep your solution running at its best." },
+            ].map((step, i) => (
+              <div key={i} className="relative flex items-center py-6 md:py-8">
+
+                {/* Center dot on the line */}
+                <div className="absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-white border-2 border-slate-300 shadow-sm z-10 hidden md:flex items-center justify-center flex-shrink-0">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#3a8cd7]" />
+                </div>
+
+                {/* Card — alternates side */}
+                <div className={`w-full md:w-[46%] ${step.side === "right" ? "md:ml-auto md:pl-8" : "md:mr-auto md:pr-8"}`}>
+                  <div className={`bg-white rounded-2xl p-6 shadow-sm border border-slate-100 transform ${step.rot} hover:rotate-0 hover:shadow-md transition-all duration-300`}>
+                    {/* Pin dot */}
+                    <div className="flex items-center justify-center mb-4">
+                      <div className="w-3 h-3 rounded-full bg-gradient-to-br from-zinc-300 to-zinc-500 border border-zinc-400 shadow-sm" />
+                    </div>
+                    <div className="flex justify-between items-start mb-3">
+                      <span className="text-[10px] font-mono tracking-widest uppercase text-[#3a8cd7]/70">{step.phase}</span>
+                      <span className="text-xl font-black text-black/8">{step.num}</span>
+                    </div>
+                    <h4 className="text-xl font-black tracking-tight text-black mb-2">{step.title}</h4>
+                    <p className="text-black/55 text-xs leading-relaxed">{step.desc}</p>
+                  </div>
+                </div>
+
+              </div>
+            ))}
+
+            {/* End label */}
+            <div className="flex justify-center pt-4">
+              <div className="flex items-center gap-2 text-[#3a8cd7] font-mono text-xs uppercase tracking-widest font-semibold animate-pulse">
+                <div className="w-2 h-2 rounded-full bg-emerald-400" />
+                Ready to be delivered!
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+      {/* 5. CTA SECTION */}
+      <section className="w-full bg-black px-6 sm:px-12 md:px-20 py-12 relative z-10 mt-6">
         <div className="max-w-7xl mx-auto">
           <div
             className="relative rounded-[28px] overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 px-10 py-12 md:py-14"
@@ -462,7 +656,7 @@ function About() {
       </section>
 
       {/* 6. HOMEPAGE FOOTER INTEGRATION */}
-      <footer className="w-full bg-black relative overflow-hidden mt-12 rounded-[24px] md:rounded-[40px] border border-white/5">
+      <footer className="w-full bg-black relative overflow-hidden border-t border-white/5">
         {/* Giant brand name */}
         <div className="relative w-full overflow-hidden select-none" style={{ lineHeight: 0.85 }}>
           <h2
@@ -589,3 +783,4 @@ function About() {
     </main>
   );
 }
+

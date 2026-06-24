@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+﻿import { createFileRoute, Link } from "@tanstack/react-router";
 import Nav from "../components/Nav";
 import {
   ArrowUpRight,
@@ -40,200 +40,156 @@ function Index() {
   ];
 
   return (
-    <main className="w-full bg-black text-white min-h-screen relative font-sans overflow-hidden">
+    <main className="w-full bg-[#eeeeec] text-black min-h-screen relative font-sans overflow-hidden">
       {/* Navigation */}
       <Nav />
 
-      {/* 1. HERO SECTION (Redesigned Cinematic Dark Mesh Panel) */}
-      <div
-        className="w-full min-h-screen relative overflow-hidden flex flex-col justify-between pt-32 pb-8 px-6 sm:px-12 md:px-20 bg-[#020203]"
-      >
-        {/* Ambient background glows */}
-        <div className="absolute top-[-10%] right-[-10%] w-[55%] aspect-square rounded-full bg-[radial-gradient(circle,rgba(191,255,0,0.12)_0%,transparent,transparent)] pointer-events-none animate-pulse-glow" style={{ filter: "blur(90px)" }} />
-        <div className="absolute bottom-[-20%] left-[-10%] w-[60%] aspect-square rounded-full bg-[radial-gradient(circle,rgba(58,140,215,0.18)_0%,transparent,transparent)] pointer-events-none animate-pulse-glow" style={{ filter: "blur(100px)" }} />
-        <div className="absolute top-[30%] left-[40%] w-[45%] aspect-square rounded-full bg-[radial-gradient(circle,rgba(168,85,247,0.06)_0%,transparent,transparent)] pointer-events-none animate-pulse-glow" style={{ filter: "blur(100px)" }} />
+      {/* 1. HERO SECTION */}
+      <div className="w-full min-h-screen relative overflow-hidden flex flex-col bg-[#f0f0ee]">
 
-        {/* Tech Grid overlays */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:1.5rem_1.5rem] opacity-35 pointer-events-none" />
-        
-        {/* Vignette edges */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_45%,rgba(0,0,0,0.85)_100%)] pointer-events-none" />
+        {/* ── Top: centered text content ── */}
+        <div className="relative z-10 flex flex-col items-center text-center px-6 pt-24 pb-8 max-w-4xl mx-auto w-full">
 
-        <div className="flex-1 grid grid-cols-1 md:grid-cols-12 gap-8 items-center z-10 relative mt-4 md:mt-8">
-          {/* Hero Left Column */}
-          <div className="md:col-span-7 flex flex-col items-start text-left">
-            {/* Eyebrow label */}
-            <div className="flex items-center gap-2 mb-6 bg-white/[0.04] backdrop-blur-md border border-white/[0.08] hover:border-white/20 rounded-full px-4 py-1.5 transition-colors duration-300">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#bfff00] animate-pulse" />
-              <span className="text-white/80 text-[10px] font-mono uppercase tracking-[0.25em]">MSME Registered · Est. 2026</span>
-            </div>
-            
-            <h1 className="text-4xl sm:text-5xl md:text-[62px] font-outfit font-black tracking-tight text-white leading-[1.05] max-w-[640px]">
-              Building the future with <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#bfff00] to-[#54e3ff]">AI &amp; strategy</span>
-            </h1>
-            
-            <p className="text-white/70 text-base sm:text-lg md:text-xl font-normal mt-6 max-w-[540px] leading-relaxed">
-              We help organizations unlock growth and efficiency through data-driven consulting and
-              intelligent automation.
-            </p>
-
-            {/* Lime CTA Button */}
-            <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-6">
-              <Link
-                to="/services"
-                className="bg-[#bfff00] hover:bg-[#aee600] text-black text-xs sm:text-sm font-bold uppercase tracking-widest py-4 px-8 rounded-full inline-flex items-center gap-3 transition-all duration-300 transform hover:scale-105 active:scale-95 decoration-none cursor-pointer"
-                style={{ boxShadow: "0 8px 32px rgba(191,255,0,0.25), 0 2px 8px rgba(0,0,0,0.3)" }}
-              >
-                <span>Get Started</span>
-                <div className="w-6 h-6 rounded-full bg-black flex items-center justify-center text-white">
-                  <ArrowUpRight size={14} />
-                </div>
-              </Link>
-
-              {/* Stars review */}
-              <div className="flex flex-col items-start gap-1">
-                <span className="text-xs font-semibold text-white/60 tracking-wider">
-                  Rated 4.9/5 by 4,900+ clients
-                </span>
-                <div className="flex text-amber-300">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={14} className="fill-current" />
-                  ))}
-                </div>
-              </div>
-            </div>
+          {/* Pill badge */}
+          <div className="inline-flex items-center gap-2 bg-white border border-black/10 rounded-full px-4 py-1.5 mb-6 shadow-sm">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse flex-shrink-0" />
+            <span className="text-black/50 text-[11px] font-mono tracking-[0.15em]">+14 active client projects</span>
           </div>
 
-          {/* Hero Right Column */}
-          <div className="md:col-span-5 flex justify-center md:justify-end relative min-h-[380px]">
-            {/* Soft backdrop glow behind main asset */}
-            <div className="absolute top-[20%] left-[20%] w-[60%] h-[60%] rounded-full bg-[#bfff00]/8 blur-[60px] pointer-events-none animate-pulse" />
+          {/* Headline */}
+          <h1 className="text-5xl sm:text-6xl md:text-[66px] font-black tracking-tight text-black leading-[1.07] mb-5">
+            Accelerate Digital Growth At<br />
+            <span className="text-[#3a8cd7]">Your Startup</span>
+            {/* Toggle pill */}
+            <span className="inline-flex items-center mx-3 bg-[#3a8cd7] rounded-full px-2 py-1 align-middle" style={{ verticalAlign: "middle" }}>
+              <span className="w-5 h-5 bg-white rounded-full shadow-sm block" />
+            </span>
+            <span className="text-black/30">Business</span>
+          </h1>
 
-            <div className="relative w-full max-w-[360px] aspect-square flex items-center justify-center z-10 animate-float-hero">
-              <img
-                src="/assets/home_consulting_hero.png"
-                alt="Consulting Hero"
-                className="w-full h-full object-contain scale-110 sm:scale-120 md:scale-125 select-none"
-                style={{
-                  maskImage: "radial-gradient(circle, black 65%, transparent 100%)",
-                  WebkitMaskImage: "radial-gradient(circle, black 65%, transparent 100%)",
-                }}
-              />
+          {/* Subtitle */}
+          <p className="text-black/45 text-sm sm:text-base max-w-md leading-relaxed mb-7">
+            Mirastra's personalised web, app &amp; automation platform takes the heavy lifting out of digital adoption. Start getting results into production today.
+          </p>
 
-              {/* Floating Dashboard Card 1 */}
-              <div className="absolute -top-3 -left-4 bg-black/75 backdrop-blur-xl border border-white/10 rounded-2xl p-3.5 shadow-2xl flex items-center gap-3 animate-float-card-1 select-none pointer-events-none w-[175px]">
-                <div className="w-8 h-8 rounded-lg bg-[#bfff00]/10 border border-[#bfff00]/25 flex items-center justify-center text-[#bfff00]">
-                  <Zap size={15} />
-                </div>
-                <div>
-                  <p className="text-[9px] text-white/40 font-mono uppercase tracking-wider leading-none">AI CORE</p>
-                  <p className="text-xs font-bold text-white mt-1 leading-none">Engine Active</p>
-                </div>
+          {/* CTAs */}
+          <div className="flex items-center gap-3 flex-wrap justify-center mb-10">
+            <Link
+              to="/contact"
+              className="bg-white hover:bg-black/5 text-black text-sm font-semibold px-7 py-3 rounded-full border border-black/12 inline-flex items-center gap-2 transition-all decoration-none cursor-pointer"
+            >
+              Book a demo
+            </Link>
+            <Link
+              to="/services"
+              className="bg-[#3a8cd7] hover:bg-[#2b7abf] text-white text-sm font-bold px-7 py-3 rounded-full inline-flex items-center gap-2 transition-all decoration-none cursor-pointer shadow-lg"
+              style={{ boxShadow: "0 8px 24px rgba(58,140,215,0.35)" }}
+            >
+              Get started
+              <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center">
+                <ArrowUpRight size={12} />
               </div>
+            </Link>
+          </div>
 
-              {/* Floating Dashboard Card 2 */}
-              <div className="absolute -bottom-3 -right-2 bg-black/75 backdrop-blur-xl border border-white/10 rounded-2xl p-4 shadow-2xl animate-float-card-2 select-none pointer-events-none w-[190px]">
-                <div className="flex justify-between items-center mb-2">
-                  <span className="text-[9px] text-white/40 font-mono uppercase tracking-wider">EFFICIENCY</span>
-                  <span className="text-[10px] text-[#bfff00] font-bold">+84.6%</span>
-                </div>
-                <p className="text-xs font-bold text-white leading-none">Automations Scaled</p>
-                <div className="w-full bg-white/10 h-1.5 rounded-full overflow-hidden mt-2.5">
-                  <div className="bg-gradient-to-r from-[#bfff00] to-[#3a8cd7] h-full" style={{ width: "84%" }} />
-                </div>
-              </div>
-            </div>
+          {/* Client logo strip */}
+          <div className="flex items-center gap-6 sm:gap-10 flex-wrap justify-center opacity-30">
+            {["Google", "Microsoft", "Shopify", "Stripe", "Notion", "Slack"].map((logo, i) => (
+              <span key={i} className="text-sm font-bold tracking-tight text-black font-sans">{logo}</span>
+            ))}
           </div>
         </div>
 
-        {/* Feature Cards Carousel */}
-        <div className="w-full mt-12 md:mt-8 z-20 overflow-x-auto no-scrollbar pb-2">
-          <div className="flex gap-4 min-w-[850px] md:min-w-0 md:grid md:grid-cols-5">
-            {/* Tag Card */}
-            <div className="hero-glass-card rounded-[20px] p-4.5 flex flex-col justify-between transition-all duration-300 h-36">
-              <div className="flex flex-wrap gap-1">
-                {homeTags.slice(0, 4).map((tag, idx) => (
-                  <span
-                    key={idx}
-                    className="text-[9px] font-semibold bg-white/[0.06] border border-white/10 text-white/90 rounded-full px-2 py-0.5 uppercase tracking-wide transition-colors hover:border-[#bfff00]/30 hover:bg-[#bfff00]/5 cursor-default"
-                  >
-                    {tag}
-                  </span>
+        {/* ── Bottom: diagram section ── */}
+        <div className="relative flex-1 w-full flex items-center justify-center px-6 pb-10 min-h-[340px]">
+
+          {/* Central radial glow */}
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] rounded-full pointer-events-none"
+            style={{ background: "radial-gradient(circle, rgba(58,140,215,0.12) 0%, transparent 70%)" }} />
+
+          {/* LEFT: integration icon cards */}
+          <div className="absolute left-4 sm:left-12 md:left-24 top-1/2 -translate-y-1/2 flex flex-col gap-3 z-10">
+            {[
+              { bg: "#EA4335", label: "Gmail",    letter: "M" },
+              { bg: "#34A853", label: "Sheets",   letter: "S" },
+              { bg: "#0078D4", label: "Teams",    letter: "T" },
+              { bg: "#00A4EF", label: "Outlook",  letter: "O" },
+              { bg: "#FF6900", label: "Zapier",   letter: "Z" },
+            ].map((item, i) => (
+              <div key={i} className="flex items-center gap-2.5 bg-white rounded-2xl px-3 py-2.5 shadow-md border border-black/6 hover:scale-105 transition-transform cursor-default">
+                <div className="w-8 h-8 rounded-xl flex items-center justify-center text-white text-xs font-black flex-shrink-0" style={{ background: item.bg }}>
+                  {item.letter}
+                </div>
+                <span className="text-[11px] font-semibold text-black/60 whitespace-nowrap hidden sm:block">{item.label}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* CENTER: arc diagram */}
+          <div className="relative z-10 flex flex-col items-center">
+            {/* Arc SVG */}
+            <svg width="260" height="200" viewBox="0 0 260 200" fill="none" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-20">
+              <path d="M 20 180 A 120 120 0 0 1 240 180" stroke="#3a8cd7" strokeWidth="1.5" strokeDasharray="4 4"/>
+              <path d="M 50 160 A 90 90 0 0 1 210 160" stroke="#3a8cd7" strokeWidth="1" strokeDasharray="3 3"/>
+            </svg>
+
+            {/* Center hub — clients */}
+            <div className="relative w-28 h-28 rounded-full bg-white border-2 border-[#3a8cd7]/20 shadow-xl flex flex-col items-center justify-center gap-1">
+              <div className="flex -space-x-2">
+                {["#f87171","#60a5fa","#34d399"].map((c, i) => (
+                  <div key={i} className="w-7 h-7 rounded-full border-2 border-white flex-shrink-0" style={{ background: c }} />
                 ))}
               </div>
-              <div>
-                <p className="text-[10px] uppercase font-bold tracking-wider text-white/40 font-mono">
-                  Clients Launched
-                </p>
-                <h4 className="text-xl font-bold text-white leading-none mt-1">14+ Projects</h4>
-              </div>
+              <span className="text-[10px] font-semibold text-black/50 mt-1">Clients</span>
             </div>
 
-            {/* Client Snapshot Card */}
-            <div className="hero-glass-card rounded-[20px] p-4.5 flex items-center gap-3 transition-all duration-300 h-36">
-              <div className="w-12 h-12 rounded-full overflow-hidden border border-white/15 flex-shrink-0 bg-white/5 flex items-center justify-center">
-                <span className="text-white font-bold text-lg leading-none select-none">MT</span>
-              </div>
-              <div className="flex-1">
-                <p className="text-xs font-bold text-white leading-none">Mugai Technologies</p>
-                <p className="text-[9px] text-[#bfff00] font-mono mt-1 uppercase tracking-wide">Corporate</p>
-                <div className="flex justify-between mt-3 text-[10px] font-mono">
-                  <div>
-                    <span className="text-white/30 block">STATUS</span>
-                    <span className="text-emerald-400 font-bold">Live</span>
-                  </div>
-                  <div>
-                    <span className="text-white/30 block">TYPE</span>
-                    <span className="text-sky-300 font-bold">Website</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Dark Expertise Card */}
-            <div className="bg-black/55 border border-white/10 rounded-[20px] p-4.5 flex flex-col justify-between shadow-lg hover:border-[#bfff00]/25 transition-all duration-300 h-36">
-              <div className="w-5 h-5 rounded-full bg-[#bfff00]/10 border border-[#bfff00]/20 flex items-center justify-center text-[#bfff00]">
-                <Zap size={10} />
-              </div>
-              <div>
-                <p className="text-xs font-normal text-white/80 leading-normal">
-                  Code That Scales. Designs That Convert. Results That Matter.
-                </p>
-              </div>
-            </div>
-
-            {/* Progress Card */}
-            <div className="hero-glass-card rounded-[20px] p-4.5 flex flex-col justify-between transition-all duration-300 h-36">
-              <div>
-                <p className="text-[10px] uppercase font-bold tracking-wider text-white/40 font-mono">
-                  Project Success
-                </p>
-                <h4 className="text-lg font-bold text-white mt-1">
-                  100% <span className="text-xs text-white/40 font-normal font-mono">On-Time</span>
-                </h4>
-              </div>
-              <div className="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
-                <div className="bg-gradient-to-r from-[#bfff00] to-[#3a8cd7] h-full" style={{ width: "100%" }} />
-              </div>
-            </div>
-
-            {/* Notification Card */}
-            <div className="hero-glass-card rounded-[20px] p-4.5 flex flex-col justify-between transition-all duration-300 h-36">
-              <div className="flex justify-between items-center">
-                <span className="text-[9px] bg-[#3a8cd7]/20 border border-[#3a8cd7]/30 text-sky-300 rounded-full px-2 py-0.5 uppercase tracking-wide font-mono">
-                  MSME Registered
-                </span>
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-              </div>
-              <div>
-                <p className="text-xs font-bold text-white">Est. May 2026</p>
-                <p className="text-[10px] text-white/50 leading-tight mt-1.5 font-mono">
-                  India's growing tech studio for SMEs.
-                </p>
-              </div>
+            {/* Bottom label */}
+            <div className="mt-3 text-[10px] font-mono uppercase tracking-widest text-black/30">
+              Mirastra Platform
             </div>
           </div>
+
+          {/* RIGHT: output cards */}
+          <div className="absolute right-4 sm:right-12 md:right-20 top-1/2 -translate-y-1/2 flex flex-col gap-3 z-10 max-w-[200px]">
+            <div className="bg-white rounded-2xl px-4 py-3 shadow-md border border-black/6">
+              <div className="flex items-center gap-2 mb-1.5">
+                <div className="w-6 h-6 rounded-lg bg-[#3a8cd7]/15 flex items-center justify-center flex-shrink-0">
+                  <div className="w-2 h-2 rounded-full bg-[#3a8cd7]" />
+                </div>
+                <span className="text-[9px] font-mono text-black/40 uppercase tracking-wider">Web Agent</span>
+              </div>
+              <p className="text-[11px] font-semibold text-black/70 leading-snug">Website launched &amp; optimised</p>
+            </div>
+
+            <div className="bg-white rounded-2xl px-4 py-3 shadow-md border border-black/6">
+              <div className="flex items-center gap-2 mb-1.5">
+                <div className="w-6 h-6 rounded-lg bg-emerald-100 flex items-center justify-center flex-shrink-0">
+                  <div className="w-2 h-2 rounded-full bg-emerald-500" />
+                </div>
+                <span className="text-[9px] font-mono text-black/40 uppercase tracking-wider">App Dev</span>
+              </div>
+              <p className="text-[11px] font-semibold text-black/70 leading-snug">Mobile app delivered on-time</p>
+            </div>
+
+            <div className="bg-white rounded-2xl px-4 py-3 shadow-md border border-black/6">
+              <div className="flex items-center gap-2 mb-1.5">
+                <div className="w-6 h-6 rounded-lg bg-amber-100 flex items-center justify-center flex-shrink-0">
+                  <div className="w-2 h-2 rounded-full bg-amber-500" />
+                </div>
+                <span className="text-[9px] font-mono text-black/40 uppercase tracking-wider">Automation</span>
+              </div>
+              <p className="text-[11px] font-semibold text-black/70 leading-snug">Workflows automated &amp; live</p>
+            </div>
+          </div>
+
+          {/* Connector lines */}
+          <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" style={{ opacity: 0.12 }}>
+            <line x1="28%" y1="50%" x2="46%" y2="50%" stroke="#3a8cd7" strokeWidth="1" strokeDasharray="4 3"/>
+            <line x1="54%" y1="50%" x2="68%" y2="35%" stroke="#3a8cd7" strokeWidth="1" strokeDasharray="4 3"/>
+            <line x1="54%" y1="50%" x2="68%" y2="50%" stroke="#3a8cd7" strokeWidth="1" strokeDasharray="4 3"/>
+            <line x1="54%" y1="50%" x2="68%" y2="65%" stroke="#3a8cd7" strokeWidth="1" strokeDasharray="4 3"/>
+          </svg>
+
         </div>
       </div>
 
@@ -1318,5 +1274,6 @@ function Index() {
     </main>
   );
 }
+
 
 
