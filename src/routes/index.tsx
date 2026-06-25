@@ -1,10 +1,19 @@
-﻿import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState, useEffect } from "react";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import Nav from "../components/Nav";
 import {
   ArrowUpRight,
   Star,
   Zap,
+  Code,
+  Laptop,
+  CheckCircle,
 } from "lucide-react";
+import Antigravity from "../components/reactbits/Antigravity";
+import SplitText from "../components/reactbits/SplitText";
+import FadeContent from "../components/reactbits/FadeContent";
+import TiltedCard from "../components/reactbits/TiltedCard";
+import SpotlightCard from "../components/reactbits/SpotlightCard";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -27,6 +36,17 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const [isMounted, setIsMounted] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const homeTags = [
     "Web Dev",
@@ -42,155 +62,194 @@ function Index() {
   return (
     <main className="w-full bg-[#eeeeec] text-black min-h-screen relative font-sans overflow-hidden">
       {/* Navigation */}
-      <Nav />
+      <Nav theme={isScrolled ? "light" : "dark"} />
 
-      {/* 1. HERO SECTION */}
-      <div className="w-full min-h-screen relative overflow-hidden flex flex-col bg-[#f0f0ee]">
+      {/* 1. REDESIGNED HERO SECTION (Cinematic Dark Theme) */}
+      <div className="w-full min-h-screen relative overflow-hidden flex flex-col items-center justify-center bg-[#070708] text-white pt-28 pb-16 px-6 sm:px-12">
+        
+        {/* Background WebGL Particle Network */}
+        <div className="absolute inset-0 z-0 pointer-events-none opacity-50">
+          {isMounted && (
+            <Antigravity
+              count={240}
+              magnetRadius={16}
+              ringRadius={12}
+              waveSpeed={0.3}
+              waveAmplitude={1.8}
+              particleSize={1.6}
+              color="#3a8cd7"
+              autoAnimate={true}
+            />
+          )}
+        </div>
 
-        {/* ── Top: centered text content ── */}
-        <div className="relative z-10 flex flex-col items-center text-center px-6 pt-24 pb-8 max-w-4xl mx-auto w-full">
+        {/* Ambient Gradient Glows */}
+        <div className="absolute top-[-20%] left-[-10%] w-[55vw] h-[55vw] rounded-full bg-cyan-500/10 blur-[130px] pointer-events-none z-0" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-[#bfff00]/5 blur-[120px] pointer-events-none z-0" />
 
-          {/* Pill badge */}
-          <div className="inline-flex items-center gap-2 bg-white border border-black/10 rounded-full px-4 py-1.5 mb-6 shadow-sm">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse flex-shrink-0" />
-            <span className="text-black/50 text-[11px] font-mono tracking-[0.15em]">+14 active client projects</span>
+        {/* Hero Content Wrapper */}
+        <div className="relative z-10 max-w-7xl w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          {/* Left Column: Floating Card (Web / App / Custom Dev) */}
+          <div className="hidden lg:flex lg:col-span-3 justify-center">
+            <TiltedCard maxTilt={12} scale={1.03}>
+              <SpotlightCard
+                className="w-64 bg-white/[0.02] backdrop-blur-xl border border-white/[0.08] rounded-[24px] p-6 shadow-2xl transition-all duration-300 hover:border-[#3a8cd7]/30"
+                spotlightColor="rgba(58, 140, 215, 0.12)"
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-[#3a8cd7]/15 flex items-center justify-center text-[#3a8cd7]">
+                    <Code size={20} />
+                  </div>
+                  <span className="flex items-center gap-1 text-[9px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full uppercase tracking-wider">
+                    <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse" />
+                    Active
+                  </span>
+                </div>
+                <h3 className="text-white font-bold text-base leading-snug tracking-tight">
+                  Web &amp; Custom Apps
+                </h3>
+                <p className="text-white/50 text-[11px] leading-relaxed mt-2">
+                  Tailored web systems, SaaS architectures, and cloud services optimized for growth and lightning performance.
+                </p>
+                <div className="mt-5 pt-4 border-t border-white/[0.06] flex items-center justify-between">
+                  <span className="text-[10px] text-white/30 font-mono">React / Node</span>
+                  <span className="text-[11px] font-bold text-[#3a8cd7] flex items-center gap-0.5">
+                    100% Ship <ArrowUpRight size={10} />
+                  </span>
+                </div>
+              </SpotlightCard>
+            </TiltedCard>
           </div>
 
-          {/* Headline */}
-          <h1 className="text-5xl sm:text-6xl md:text-[66px] font-black tracking-tight text-black leading-[1.07] mb-5">
-            Accelerate Digital Growth At<br />
-            <span className="text-[#3a8cd7]">Your Startup</span>
-            {/* Toggle pill */}
-            <span className="inline-flex items-center mx-3 bg-[#3a8cd7] rounded-full px-2 py-1 align-middle" style={{ verticalAlign: "middle" }}>
-              <span className="w-5 h-5 bg-white rounded-full shadow-sm block" />
-            </span>
-            <span className="text-black/30">Business</span>
-          </h1>
-
-          {/* Subtitle */}
-          <p className="text-black/45 text-sm sm:text-base max-w-md leading-relaxed mb-7">
-            Mirastra's personalised web, app &amp; automation platform takes the heavy lifting out of digital adoption. Start getting results into production today.
-          </p>
-
-          {/* CTAs */}
-          <div className="flex items-center gap-3 flex-wrap justify-center mb-10">
-            <Link
-              to="/contact"
-              className="bg-white hover:bg-black/5 text-black text-sm font-semibold px-7 py-3 rounded-full border border-black/12 inline-flex items-center gap-2 transition-all decoration-none cursor-pointer"
-            >
-              Book a demo
-            </Link>
-            <Link
-              to="/services"
-              className="bg-[#3a8cd7] hover:bg-[#2b7abf] text-white text-sm font-bold px-7 py-3 rounded-full inline-flex items-center gap-2 transition-all decoration-none cursor-pointer shadow-lg"
-              style={{ boxShadow: "0 8px 24px rgba(58,140,215,0.35)" }}
-            >
-              Get started
-              <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center">
-                <ArrowUpRight size={12} />
+          {/* Center Column: Main Headline + CTAs */}
+          <div className="lg:col-span-6 flex flex-col items-center text-center">
+            
+            {/* Pill Badge */}
+            <FadeContent delay={0.1} y={15}>
+              <div className="inline-flex items-center gap-2 bg-white/[0.04] border border-white/[0.08] backdrop-blur-md rounded-full px-4 py-1.5 mb-6 shadow-xl">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#bfff00] animate-pulse flex-shrink-0" />
+                <span className="text-white/60 text-[10px] font-mono tracking-[0.15em] uppercase">
+                  +14 active client projects
+                </span>
               </div>
-            </Link>
+            </FadeContent>
+
+            {/* Headline */}
+            <h1 className="flex flex-col items-center justify-center text-center">
+              <SplitText
+                text="ACCELERATE DIGITAL GROWTH"
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.05] uppercase"
+                delay={0.02}
+                duration={0.6}
+              />
+              <FadeContent delay={0.35} y={12}>
+                <span className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-instrument italic font-light tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-[#bfff00] mt-2 block">
+                  beyond boundaries.
+                </span>
+              </FadeContent>
+            </h1>
+
+            {/* Subheading */}
+            <FadeContent delay={0.5} y={15}>
+              <p className="text-white/55 text-sm sm:text-base max-w-lg leading-relaxed mt-6 mb-8 font-sans">
+                Mirastra Tech is a registered studio crafting high-converting websites, custom software, and intelligent workflows that run like a well-oiled machine.
+              </p>
+            </FadeContent>
+
+            {/* Action Buttons */}
+            <FadeContent delay={0.6} y={15}>
+              <div className="flex items-center gap-4 flex-wrap justify-center mb-8">
+                <Link
+                  to="/services"
+                  className="bg-[#bfff00] hover:bg-[#d4ff33] text-black text-xs font-bold px-8 py-3.5 rounded-full inline-flex items-center gap-2 transition-all tracking-wider uppercase shadow-lg shadow-lime-500/20 active:scale-95 cursor-pointer border-none outline-none"
+                  style={{ boxShadow: "0 6px 20px rgba(191,255,0,0.25)" }}
+                >
+                  Get started
+                  <div className="w-4 h-4 rounded-full bg-black/10 flex items-center justify-center">
+                    <ArrowUpRight size={10} className="text-black" />
+                  </div>
+                </Link>
+                <Link
+                  to="/contact"
+                  className="bg-white/[0.04] hover:bg-white/[0.08] text-white text-xs font-bold px-8 py-3.5 rounded-full border border-white/[0.08] inline-flex items-center gap-2 transition-all tracking-wider uppercase cursor-pointer"
+                >
+                  Book a demo
+                </Link>
+              </div>
+            </FadeContent>
+
           </div>
 
-          {/* Client logo strip */}
-          <div className="flex items-center gap-6 sm:gap-10 flex-wrap justify-center opacity-30">
+          {/* Right Column: Floating Card (Workflow Automation) */}
+          <div className="hidden lg:flex lg:col-span-3 justify-center">
+            <TiltedCard maxTilt={12} scale={1.03}>
+              <SpotlightCard
+                className="w-64 bg-white/[0.02] backdrop-blur-xl border border-white/[0.08] rounded-[24px] p-6 shadow-2xl transition-all duration-300 hover:border-[#bfff00]/30"
+                spotlightColor="rgba(191, 255, 0, 0.1)"
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-[#bfff00]/15 flex items-center justify-center text-[#bfff00]">
+                    <Zap size={20} />
+                  </div>
+                  <span className="flex items-center gap-1 text-[9px] font-mono text-[#bfff00] bg-[#bfff00]/10 px-2 py-0.5 rounded-full uppercase tracking-wider">
+                    Uptime 99.9%
+                  </span>
+                </div>
+                <h3 className="text-white font-bold text-base leading-snug tracking-tight">
+                  Intelligent Workflows
+                </h3>
+                <p className="text-white/50 text-[11px] leading-relaxed mt-2">
+                  Integrate your systems, create autonomous lead scrapers, and automate repetitive tasks using custom web hooks.
+                </p>
+                <div className="mt-5 pt-4 border-t border-white/[0.06] flex items-center justify-between">
+                  <span className="text-[10px] text-white/30 font-mono">APIs / Agents</span>
+                  <span className="text-[11px] font-bold text-[#bfff00] flex items-center gap-0.5">
+                    Save Hours <ArrowUpRight size={10} />
+                  </span>
+                </div>
+              </SpotlightCard>
+            </TiltedCard>
+          </div>
+
+        </div>
+
+        {/* Dynamic Mobile Cards Overlay (Displays on smaller devices instead of floating side columns) */}
+        <div className="lg:hidden w-full max-w-md grid grid-cols-1 gap-4 mt-8">
+          <div className="bg-white/[0.02] backdrop-blur-xl border border-white/[0.08] rounded-[20px] p-5">
+            <div className="flex items-center gap-3 mb-2">
+              <div className="w-8 h-8 rounded-lg bg-[#3a8cd7]/15 flex items-center justify-center text-[#3a8cd7]">
+                <Laptop size={16} />
+              </div>
+              <h3 className="text-white font-bold text-sm">Web &amp; Custom Apps</h3>
+            </div>
+            <p className="text-white/40 text-xs">Tailored web platforms and custom software architectures built to convert.</p>
+          </div>
+          <div className="bg-white/[0.02] backdrop-blur-xl border border-white/[0.08] rounded-[20px] p-5">
+            <div className="flex items-center gap-3 mb-2">
+              <div className="w-8 h-8 rounded-lg bg-[#bfff00]/15 flex items-center justify-center text-[#bfff00]">
+                <Zap size={16} />
+              </div>
+              <h3 className="text-white font-bold text-sm">Intelligent Workflows</h3>
+            </div>
+            <p className="text-white/40 text-xs">Eliminate manual tasks with custom API integrations and active automation pipelines.</p>
+          </div>
+        </div>
+
+        {/* Premium Client Logo Strip */}
+        <div className="w-full max-w-5xl border-t border-white/[0.08] pt-10 mt-16 text-center">
+          <span className="text-[10px] font-mono tracking-[0.2em] text-white/30 uppercase block mb-6">
+            Empowering ambitious teams at
+          </span>
+          <div className="flex items-center justify-center gap-10 sm:gap-16 flex-wrap opacity-40 hover:opacity-70 transition-opacity duration-300">
             {["Google", "Microsoft", "Shopify", "Stripe", "Notion", "Slack"].map((logo, i) => (
-              <span key={i} className="text-sm font-bold tracking-tight text-black font-sans">{logo}</span>
+              <span key={i} className="text-sm font-black tracking-tight text-white font-sans uppercase">
+                {logo}
+              </span>
             ))}
           </div>
         </div>
 
-        {/* ── Bottom: diagram section ── */}
-        <div className="relative flex-1 w-full flex items-center justify-center px-6 pb-10 min-h-[340px]">
-
-          {/* Central radial glow */}
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] rounded-full pointer-events-none"
-            style={{ background: "radial-gradient(circle, rgba(58,140,215,0.12) 0%, transparent 70%)" }} />
-
-          {/* LEFT: integration icon cards */}
-          <div className="absolute left-4 sm:left-12 md:left-24 top-1/2 -translate-y-1/2 flex flex-col gap-3 z-10">
-            {[
-              { bg: "#EA4335", label: "Gmail",    letter: "M" },
-              { bg: "#34A853", label: "Sheets",   letter: "S" },
-              { bg: "#0078D4", label: "Teams",    letter: "T" },
-              { bg: "#00A4EF", label: "Outlook",  letter: "O" },
-              { bg: "#FF6900", label: "Zapier",   letter: "Z" },
-            ].map((item, i) => (
-              <div key={i} className="flex items-center gap-2.5 bg-white rounded-2xl px-3 py-2.5 shadow-md border border-black/6 hover:scale-105 transition-transform cursor-default">
-                <div className="w-8 h-8 rounded-xl flex items-center justify-center text-white text-xs font-black flex-shrink-0" style={{ background: item.bg }}>
-                  {item.letter}
-                </div>
-                <span className="text-[11px] font-semibold text-black/60 whitespace-nowrap hidden sm:block">{item.label}</span>
-              </div>
-            ))}
-          </div>
-
-          {/* CENTER: arc diagram */}
-          <div className="relative z-10 flex flex-col items-center">
-            {/* Arc SVG */}
-            <svg width="260" height="200" viewBox="0 0 260 200" fill="none" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-20">
-              <path d="M 20 180 A 120 120 0 0 1 240 180" stroke="#3a8cd7" strokeWidth="1.5" strokeDasharray="4 4"/>
-              <path d="M 50 160 A 90 90 0 0 1 210 160" stroke="#3a8cd7" strokeWidth="1" strokeDasharray="3 3"/>
-            </svg>
-
-            {/* Center hub — clients */}
-            <div className="relative w-28 h-28 rounded-full bg-white border-2 border-[#3a8cd7]/20 shadow-xl flex flex-col items-center justify-center gap-1">
-              <div className="flex -space-x-2">
-                {["#f87171","#60a5fa","#34d399"].map((c, i) => (
-                  <div key={i} className="w-7 h-7 rounded-full border-2 border-white flex-shrink-0" style={{ background: c }} />
-                ))}
-              </div>
-              <span className="text-[10px] font-semibold text-black/50 mt-1">Clients</span>
-            </div>
-
-            {/* Bottom label */}
-            <div className="mt-3 text-[10px] font-mono uppercase tracking-widest text-black/30">
-              Mirastra Platform
-            </div>
-          </div>
-
-          {/* RIGHT: output cards */}
-          <div className="absolute right-4 sm:right-12 md:right-20 top-1/2 -translate-y-1/2 flex flex-col gap-3 z-10 max-w-[200px]">
-            <div className="bg-white rounded-2xl px-4 py-3 shadow-md border border-black/6">
-              <div className="flex items-center gap-2 mb-1.5">
-                <div className="w-6 h-6 rounded-lg bg-[#3a8cd7]/15 flex items-center justify-center flex-shrink-0">
-                  <div className="w-2 h-2 rounded-full bg-[#3a8cd7]" />
-                </div>
-                <span className="text-[9px] font-mono text-black/40 uppercase tracking-wider">Web Agent</span>
-              </div>
-              <p className="text-[11px] font-semibold text-black/70 leading-snug">Website launched &amp; optimised</p>
-            </div>
-
-            <div className="bg-white rounded-2xl px-4 py-3 shadow-md border border-black/6">
-              <div className="flex items-center gap-2 mb-1.5">
-                <div className="w-6 h-6 rounded-lg bg-emerald-100 flex items-center justify-center flex-shrink-0">
-                  <div className="w-2 h-2 rounded-full bg-emerald-500" />
-                </div>
-                <span className="text-[9px] font-mono text-black/40 uppercase tracking-wider">App Dev</span>
-              </div>
-              <p className="text-[11px] font-semibold text-black/70 leading-snug">Mobile app delivered on-time</p>
-            </div>
-
-            <div className="bg-white rounded-2xl px-4 py-3 shadow-md border border-black/6">
-              <div className="flex items-center gap-2 mb-1.5">
-                <div className="w-6 h-6 rounded-lg bg-amber-100 flex items-center justify-center flex-shrink-0">
-                  <div className="w-2 h-2 rounded-full bg-amber-500" />
-                </div>
-                <span className="text-[9px] font-mono text-black/40 uppercase tracking-wider">Automation</span>
-              </div>
-              <p className="text-[11px] font-semibold text-black/70 leading-snug">Workflows automated &amp; live</p>
-            </div>
-          </div>
-
-          {/* Connector lines */}
-          <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" style={{ opacity: 0.12 }}>
-            <line x1="28%" y1="50%" x2="46%" y2="50%" stroke="#3a8cd7" strokeWidth="1" strokeDasharray="4 3"/>
-            <line x1="54%" y1="50%" x2="68%" y2="35%" stroke="#3a8cd7" strokeWidth="1" strokeDasharray="4 3"/>
-            <line x1="54%" y1="50%" x2="68%" y2="50%" stroke="#3a8cd7" strokeWidth="1" strokeDasharray="4 3"/>
-            <line x1="54%" y1="50%" x2="68%" y2="65%" stroke="#3a8cd7" strokeWidth="1" strokeDasharray="4 3"/>
-          </svg>
-
-        </div>
       </div>
 
       {/* 2. ABOUT US PREVIEW SECTION (Experience Excellence Layout) */}

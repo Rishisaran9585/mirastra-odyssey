@@ -1,6 +1,16 @@
-﻿import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState, useEffect } from "react";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import Nav from "../components/Nav";
-import { ArrowUpRight } from "lucide-react";
+import {
+  ArrowUpRight,
+  Target,
+  Compass,
+} from "lucide-react";
+import Antigravity from "../components/reactbits/Antigravity";
+import SplitText from "../components/reactbits/SplitText";
+import FadeContent from "../components/reactbits/FadeContent";
+import TiltedCard from "../components/reactbits/TiltedCard";
+import SpotlightCard from "../components/reactbits/SpotlightCard";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -17,6 +27,18 @@ export const Route = createFileRoute("/about")({
 });
 
 function About() {
+  const [isMounted, setIsMounted] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const homeTags = [
     "Web Dev",
     "Mobile Apps",
@@ -29,64 +51,140 @@ function About() {
   return (
     <main className="w-full bg-[#eeeeec] text-black min-h-screen relative font-sans overflow-hidden">
       {/* Navigation */}
-      <Nav />
+      <Nav theme={isScrolled ? "light" : "dark"} />
 
-      {/* 1. HERO SECTION — mountain style */}
-      <div className="w-full h-screen relative overflow-hidden flex flex-col bg-[#eeeeec]">
-
-        {/* TOP: text content */}
-        <div className="relative z-10 flex flex-col items-center text-center px-6 pt-24 pb-6 max-w-3xl mx-auto w-full flex-shrink-0">
-
-          {/* Pill badge */}
-          <div className="inline-flex items-center gap-2 bg-white/80 border border-black/10 rounded-full px-4 py-1.5 mb-5 shadow-sm">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#bfff00] animate-pulse flex-shrink-0" />
-            <span className="text-black/50 text-[11px] font-mono tracking-[0.15em]">Welcome to Mirastra Tech</span>
-          </div>
-
-          {/* Headline — 2 lines */}
-          <h1 className="text-5xl sm:text-6xl md:text-[64px] font-black tracking-tight text-black leading-[1.06] mb-4">
-            We craft digital<br />
-            experiences that last.
-          </h1>
-
-          {/* Subtitle */}
-          <p className="text-black/45 text-sm sm:text-base max-w-md leading-relaxed mb-6">
-            Elevate your business with bespoke digital systems, performance-driven web development, and intelligent workflow automations.
-          </p>
-
-          {/* CTA buttons */}
-          <div className="flex items-center gap-3 flex-wrap justify-center">
-            <Link
-              to="/contact"
-              className="bg-black hover:bg-zinc-800 text-white text-sm font-bold px-8 py-3 rounded-full inline-flex items-center gap-2 transition-all decoration-none cursor-pointer shadow-lg"
-            >
-              Start a Project →
-            </Link>
-            <Link
-              to="/services"
-              className="bg-white/70 hover:bg-white text-black/65 hover:text-black text-sm font-semibold px-8 py-3 rounded-full border border-black/10 inline-flex items-center gap-2 transition-all decoration-none cursor-pointer"
-            >
-              Our Services ›
-            </Link>
-          </div>
+      {/* 1. REDESIGNED HERO SECTION (Cinematic Dark Theme) */}
+      <div className="w-full min-h-screen relative overflow-hidden flex flex-col items-center justify-center bg-[#080809] text-white pt-28 pb-16 px-6 sm:px-12">
+        
+        {/* Background WebGL Particle Network */}
+        <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
+          {isMounted && (
+            <Antigravity
+              count={180}
+              magnetRadius={15}
+              ringRadius={10}
+              waveSpeed={0.2}
+              waveAmplitude={1.5}
+              particleSize={1.5}
+              color="#3a8cd7"
+              autoAnimate={true}
+              particleShape="tetrahedron"
+            />
+          )}
         </div>
 
-        {/* BOTTOM: mountain fills remaining height */}
-        <div className="relative flex-1 w-full overflow-hidden">
-          <img
-            src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1600&h=900&q=85"
-            alt="Mountain emerging from clouds"
-            className="absolute inset-0 w-full h-full select-none pointer-events-none"
-            style={{
-              objectFit: "cover",
-              objectPosition: "center 25%",
-              filter: "grayscale(100%) contrast(0.82) brightness(1.02)",
-              maskImage: "radial-gradient(ellipse 95% 90% at 50% 100%, black 35%, transparent 88%)",
-              WebkitMaskImage: "radial-gradient(ellipse 95% 90% at 50% 100%, black 35%, transparent 88%)",
-            }}
-          />
-          <div className="absolute top-0 left-0 w-full h-16 bg-gradient-to-b from-[#eeeeec] to-transparent pointer-events-none z-10" />
-          <div className="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-[#eeeeec] to-transparent pointer-events-none z-10" />
+        {/* Ambient Gradient Glows */}
+        <div className="absolute top-[-20%] left-[-10%] w-[55vw] h-[55vw] rounded-full bg-cyan-500/10 blur-[130px] pointer-events-none z-0" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-[#bfff00]/5 blur-[120px] pointer-events-none z-0" />
+
+        {/* Hero Content Wrapper */}
+        <div className="relative z-10 max-w-7xl w-full flex flex-col items-center">
+          
+          {/* Pill Badge */}
+          <FadeContent delay={0.1} y={15}>
+            <div className="inline-flex items-center gap-2 bg-white/[0.04] border border-white/[0.08] backdrop-blur-md rounded-full px-4 py-1.5 mb-6 shadow-xl">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#bfff00] animate-pulse flex-shrink-0" />
+              <span className="text-white/60 text-[10px] font-mono tracking-[0.15em] uppercase">
+                Welcome to Mirastra Tech
+              </span>
+            </div>
+          </FadeContent>
+
+          {/* Headline */}
+          <h1 className="flex flex-col items-center justify-center text-center">
+            <SplitText
+              text="WE CRAFT DIGITAL"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.05] uppercase"
+              delay={0.03}
+              duration={0.6}
+            />
+            <FadeContent delay={0.35} y={12}>
+              <span className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-instrument italic font-light tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-[#bfff00] mt-2 block">
+                experiences that last.
+              </span>
+            </FadeContent>
+          </h1>
+
+          {/* Subheading */}
+          <FadeContent delay={0.5} y={15}>
+            <p className="text-white/55 text-sm sm:text-base max-w-lg text-center leading-relaxed mt-6 mb-8 font-sans">
+              We bridge the gap between robust engineering and intuitive interface design, building digital platforms that enable growing businesses to thrive.
+            </p>
+          </FadeContent>
+
+          {/* Action Buttons */}
+          <FadeContent delay={0.6} y={15}>
+            <div className="flex items-center gap-4 flex-wrap justify-center mb-16">
+              <Link
+                to="/contact"
+                className="bg-[#bfff00] hover:bg-[#d4ff33] text-black text-xs font-bold px-8 py-3.5 rounded-full inline-flex items-center gap-2 transition-all tracking-wider uppercase shadow-lg shadow-lime-500/20 active:scale-95 cursor-pointer border-none outline-none"
+                style={{ boxShadow: "0 6px 20px rgba(191,255,0,0.25)" }}
+              >
+                Start a Project
+                <div className="w-4 h-4 rounded-full bg-black/10 flex items-center justify-center">
+                  <ArrowUpRight size={10} className="text-black" />
+                </div>
+              </Link>
+              <Link
+                to="/services"
+                className="bg-white/[0.04] hover:bg-white/[0.08] text-white text-xs font-bold px-8 py-3.5 rounded-full border border-white/[0.08] inline-flex items-center gap-2 transition-all tracking-wider uppercase cursor-pointer"
+              >
+                Our Services
+              </Link>
+            </div>
+          </FadeContent>
+
+          {/* Core Values / Cards Layout */}
+          <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mt-4">
+            
+            {/* Card 1: Our Mission */}
+            <FadeContent delay={0.7} y={20}>
+              <TiltedCard maxTilt={10} scale={1.02} className="h-full">
+                <SpotlightCard
+                  className="h-full bg-white/[0.02] backdrop-blur-xl border border-white/[0.08] rounded-[24px] p-8 shadow-2xl transition-all duration-300 hover:border-[#3a8cd7]/30"
+                  spotlightColor="rgba(58, 140, 215, 0.12)"
+                >
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-12 h-12 rounded-2xl bg-[#3a8cd7]/15 flex items-center justify-center text-[#3a8cd7]">
+                      <Target size={24} />
+                    </div>
+                    <div>
+                      <span className="text-[10px] font-mono text-white/30 uppercase tracking-widest">Pillar One</span>
+                      <h3 className="text-white font-bold text-lg leading-tight">Our Mission</h3>
+                    </div>
+                  </div>
+                  <p className="text-white/50 text-sm leading-relaxed">
+                    To accelerate business growth by delivering performant custom software, user-centric web applications, and workflow automations that run autonomously.
+                  </p>
+                </SpotlightCard>
+              </TiltedCard>
+            </FadeContent>
+
+            {/* Card 2: Our Approach */}
+            <FadeContent delay={0.8} y={20}>
+              <TiltedCard maxTilt={10} scale={1.02} className="h-full">
+                <SpotlightCard
+                  className="h-full bg-white/[0.02] backdrop-blur-xl border border-white/[0.08] rounded-[24px] p-8 shadow-2xl transition-all duration-300 hover:border-[#bfff00]/30"
+                  spotlightColor="rgba(191, 255, 0, 0.1)"
+                >
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-12 h-12 rounded-2xl bg-[#bfff00]/15 flex items-center justify-center text-[#bfff00]">
+                      <Compass size={24} />
+                    </div>
+                    <div>
+                      <span className="text-[10px] font-mono text-white/30 uppercase tracking-widest">Pillar Two</span>
+                      <h3 className="text-white font-bold text-lg leading-tight">Our Approach</h3>
+                    </div>
+                  </div>
+                  <p className="text-white/50 text-sm leading-relaxed">
+                    A detailed 7-stage software development lifecycle that bridges strategic business goals with solid engineering to ensure on-time, zero-defect delivery.
+                  </p>
+                </SpotlightCard>
+              </TiltedCard>
+            </FadeContent>
+
+          </div>
+
         </div>
 
       </div>

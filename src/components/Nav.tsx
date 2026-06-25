@@ -37,7 +37,7 @@ export default function Nav({ theme = "light" }: NavProps) {
       >
         {/* Logo */}
         <Link to="/" className="flex-shrink-0 decoration-none cursor-pointer hover:opacity-80 transition-opacity">
-          <img src={theme === "dark" ? "/mirastra_wlogo.png" : "/mirastra_logo.png"} alt="Mirastra Tech" className="w-auto object-contain" style={{ height: 25 }} />
+          <img src={theme === "dark" ? "/mirastra_wlogo.png" : "/mirastra_logo.png"} alt="Mirastra Tech" className="w-auto object-contain" style={{ height: 60 }} />
         </Link>
 
         {/* Center menu capsule — dark text on light bg */}
