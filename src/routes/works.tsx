@@ -1,346 +1,269 @@
-import { createFileRoute } from "@tanstack/react-router";
+﻿import { createFileRoute, Link } from "@tanstack/react-router";
 import Nav from "../components/Nav";
 import React, { useState } from "react";
-import {
-  ArrowUpRight,
-  Monitor,
-  Laptop,
-  Sparkles,
-  FolderGit,
-  Layout,
-  Link as LinkIcon,
-  Compass,
-} from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 export const Route = createFileRoute("/works")({
   head: () => ({
     meta: [
       { title: "Our Works — Mirastra Tech" },
-      {
-        name: "description",
-        content:
-          "Browse our portfolio of custom software, business portals, SaaS projects, e-commerce, and mobile applications.",
-      },
+      { name: "description", content: "Browse our portfolio of custom software, websites, SaaS projects, and mobile applications built by Mirastra Tech." },
     ],
   }),
   component: Works,
 });
 
-const PROJECT_CATEGORIES = [
-  { id: "all", name: "All Projects" },
-  { id: "corporate", name: "Corporate" },
-  { id: "education", name: "Education" },
-  { id: "media", name: "Media & Creative" },
-  { id: "ecommerce", name: "E-Commerce & Matrimony" },
-  { id: "travel", name: "Travel & Tourism" },
-  { id: "saas", name: "SaaS & Products" },
-];
-
 const PROJECTS = [
-  // Corporate
-  {
-    title: "Aghora Engineering Consultants",
-    category: "corporate",
-    url: "https://aghoraengineeringconsultants.com/",
-    description:
-      "Premium engineering consultancy web portal showing projects and client portfolios.",
-    bgGradient: "from-zinc-900 to-zinc-950",
-    initials: "AE",
-  },
-  {
-    title: "AliceBlue Tiger Hosting",
-    category: "corporate",
-    url: "https://aliceblue-tiger-698743.hostingersite.com/",
-    description: "Futuristic corporate hosting showcase with custom UI and speed optimization.",
-    bgGradient: "from-zinc-800 to-black",
-    initials: "AB",
-  },
-  {
-    title: "Hotpink Wasp Agency",
-    category: "corporate",
-    url: "https://hotpink-wasp-145065.hostingersite.com/",
-    description: "Modern digital strategy showcase with glassmorphism layouts and custom UI.",
-    bgGradient: "from-rose-950 to-black",
-    initials: "HW",
-  },
-  {
-    title: "Lavender Bear Corp",
-    category: "corporate",
-    url: "https://lavender-bear-754863.hostingersite.com/",
-    description: "Professional corporate directory and digital solutions landing platform.",
-    bgGradient: "from-indigo-950 to-black",
-    initials: "LB",
-  },
-  // Education
-  {
-    title: "IELTS Horizon Training",
-    category: "education",
-    url: "https://ieltshorizon.com/",
-    description:
-      "Immersive training portal with class schedules, student intake registration, and course details.",
-    bgGradient: "from-sky-950 to-zinc-950",
-    initials: "IH",
-  },
-  {
-    title: "Lime Spoonbill Academy",
-    category: "education",
-    url: "https://lime-spoonbill-743959.hostingersite.com/",
-    description: "Futuristic learning platform showcasing student custom tools and schedules.",
-    bgGradient: "from-emerald-950 to-black",
-    initials: "LS",
-  },
-  // Matrimony & E-Commerce
-  {
-    title: "Lishan Sarees Store",
-    category: "ecommerce",
-    url: "https://lishansarees.com/",
-    description:
-      "A premium luxury sarees online catalog featuring booking integrations and custom displays.",
-    bgGradient: "from-yellow-950/40 to-black",
-    initials: "LSS",
-  },
-  {
-    title: "Limegreen Antelope Matrimony",
-    category: "ecommerce",
-    url: "https://limegreen-antelope-183177.hostingersite.com/",
-    description:
-      "Next-gen custom matchmaking platform with advanced user registries and security flows.",
-    bgGradient: "from-teal-950 to-black",
-    initials: "LAM",
-  },
-  // Media & Creative
-  {
-    title: "Medai The Stage",
-    category: "media",
-    url: "https://medaithestage.com/",
-    description:
-      "Creative stage booking portal displaying theatrical workshops and artist profiles.",
-    bgGradient: "from-red-950 to-zinc-950",
-    initials: "MTS",
-  },
-  {
-    title: "Kinngs Network Platform",
-    category: "media",
-    url: "https://kinngsnetwork.com/",
-    description:
-      "Corporate digital network showcasing creator assets, events, and portfolio layouts.",
-    bgGradient: "from-amber-950/45 to-black",
-    initials: "KN",
-  },
-  {
-    title: "Grey Boar Media",
-    category: "media",
-    url: "https://grey-boar-606830.hostingersite.com/",
-    description: "Next-generation media portal displaying video shoots and social handling assets.",
-    bgGradient: "from-zinc-900 to-black",
-    initials: "GB",
-  },
-  // Travel
-  {
-    title: "Aero Safe Tours",
-    category: "travel",
-    url: "https://aerosafetours.com/",
-    description:
-      "International flight ticketing and custom tour packages portal built for reliability.",
-    bgGradient: "from-blue-950/40 to-zinc-950",
-    initials: "AST",
-  },
-  {
-    title: "First Dream Destinations",
-    category: "travel",
-    url: "https://www.firstdreamdestinations.com/",
-    description: "Modern travel registry with booking inquiries and travel guidelines.",
-    bgGradient: "from-cyan-950/40 to-black",
-    initials: "FDD",
-  },
-  // SaaS & Products
-  {
-    title: "Cornflower Blue Grasshopper",
-    category: "saas",
-    url: "https://cornflowerblue-grasshopper-952998.hostingersite.com/",
-    description:
-      "Advanced SaaS tool dashboard showcasing customer analytics, metrics, and automation modules.",
-    bgGradient: "from-indigo-950 to-zinc-950",
-    initials: "CBG",
-  },
+  { title: "Aghora Engineering", category: "Corporate", url: "https://aghoraengineeringconsultants.com/", img: new URL("../wesbite/AEC.png", import.meta.url).href },
+  { title: "Aero Safe Tours", category: "Travel", url: "https://aerosafetours.com/", img: new URL("../wesbite/Aerosafe tours.png", import.meta.url).href },
+  { title: "Aerosafe", category: "Travel", url: "#", img: new URL("../wesbite/Aerosafe.png", import.meta.url).href },
+  { title: "Automate Commentor", category: "Automation", url: "#", img: new URL("../wesbite/Automate Commentor.png", import.meta.url).href },
+  { title: "Autopost Authority", category: "SaaS", url: "#", img: new URL("../wesbite/Autopost Authority.png", import.meta.url).href },
+  { title: "Facebook Lead Builder", category: "Growth", url: "#", img: new URL("../wesbite/Facebook lead builder.png", import.meta.url).href },
+  { title: "Find You Counselling", category: "Health", url: "#", img: new URL("../wesbite/find you cousnelling center.png", import.meta.url).href },
+  { title: "FocusFlow", category: "Productivity", url: "#", img: new URL("../wesbite/focusflow.png", import.meta.url).href },
+  { title: "Friend Disconnector", category: "Utility", url: "#", img: new URL("../wesbite/Friend Disconnector.png", import.meta.url).href },
+  { title: "Group Chimp", category: "Social", url: "#", img: new URL("../wesbite/group chimp.png", import.meta.url).href },
+  { title: "IELTS Horizon", category: "Education", url: "https://ieltshorizon.com/", img: new URL("../wesbite/ielts.png", import.meta.url).href },
+  { title: "InstaLeads", category: "Marketing", url: "#", img: new URL("../wesbite/instaleads.png", import.meta.url).href },
+  { title: "KleanKlub CRM", category: "CRM", url: "#", img: new URL("../wesbite/KleanKlub crm.png", import.meta.url).href },
+  { title: "Lishan Sarees", category: "E-Commerce", url: "https://lishansarees.com/", img: new URL("../wesbite/Lishan sarees.png", import.meta.url).href },
+  { title: "Matrimony Platform", category: "Matrimony", url: "#", img: new URL("../wesbite/matrimony.png", import.meta.url).href },
+  { title: "Medai The Stage", category: "Events", url: "https://medaithestage.com/", img: new URL("../wesbite/medai.png", import.meta.url).href },
+  { title: "Mugai Technology", category: "Agency", url: "#", img: new URL("../wesbite/Mugai Technology.png", import.meta.url).href },
+  { title: "News Portal", category: "Media", url: "#", img: new URL("../wesbite/news.png", import.meta.url).href },
+  { title: "Porko Construction", category: "Construction", url: "#", img: new URL("../wesbite/Porko.png", import.meta.url).href },
+  { title: "Tamil Oviyam", category: "Lifestyle", url: "#", img: new URL("../wesbite/tamil oviyam.png", import.meta.url).href },
 ];
 
-const PRODUCT_HIGHLIGHTS = [
-  { title: "FocusFlow", desc: "SaaS Workflow automation platform targeting daily tasks." },
-  { title: "CRM System", desc: "Custom administrative pipeline tracking leads and contracts." },
-  {
-    title: "InstaLeads",
-    desc: "Chrome extension to scrape lead lists based on search parameters.",
-  },
-  { title: "GroupChimp", desc: "Automation tool for managing high-volume community updates." },
-  {
-    title: "AutoPost Authority",
-    desc: "Social media automations for scheduling and content pipelines.",
-  },
-  {
-    title: "Automate Commentor",
-    desc: "Targeted customer engagement script automating notifications.",
-  },
-  { title: "SaaS Dashboard", desc: "Beautiful analytics tool visualizing platform actions." },
-  { title: "Extensions Suite", desc: "Collection of custom productivity tools served in-browser." },
+const FEATURE_CARDS = [
+  { title: "Branding Strategy", label: "Plan the story", img: "https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?auto=format&fit=crop&w=600&h=700&q=80" },
+  { title: "Visual Identity", label: "Design systems", img: "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=600&h=700&q=80" },
+  { title: "Creative Direction", label: "Execute with precision", img: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&h=700&q=80" },
+  { title: "Art Direction", label: "Own the moment", img: "https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=600&h=700&q=80" },
+];
+
+const BRAND_IMAGES = [
+  "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=400&h=520&q=80",
+  "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&h=520&q=80",
+  "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&h=520&q=80",
 ];
 
 function Works() {
-  const [activeCategory, setActiveCategory] = useState("all");
-
-  const filteredProjects =
-    activeCategory === "all" ? PROJECTS : PROJECTS.filter((p) => p.category === activeCategory);
+  const [hoveredProject, setHoveredProject] = useState<number | null>(null);
 
   return (
-    <main className="w-full bg-black text-white min-h-screen relative font-sans p-3 sm:p-5 md:p-6 overflow-hidden">
-      {/* Navigation */}
-      <Nav />
+    <main className="w-full bg-[#f0f0ee] text-black min-h-screen font-sans overflow-hidden">
+      <Nav theme="dark" />
 
-      {/* Outer Panel Container (Kontra Minimal Frame) */}
-      <div className="w-full min-h-[92vh] rounded-[24px] md:rounded-[40px] border border-white/10 relative overflow-hidden flex flex-col justify-between pt-24 pb-8 px-6 sm:px-12 md:px-20 bg-black">
-        {/* Soft layout lines */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:5rem_5rem] pointer-events-none" />
+      <section className="w-full min-h-[85vh] grid grid-cols-1 md:grid-cols-[1.4fr_1fr] bg-[#111] relative overflow-hidden">
+        <div className="relative min-h-[60vw] md:min-h-0">
+          <img
+            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&h=900&q=85"
+            alt="Portfolio hero"
+            className="absolute inset-0 w-full h-full object-cover object-center"
+            style={{ filter: "brightness(0.75) contrast(1.05)" }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-transparent" />
 
-        {/* 1. HERO SHIELD: Kontra Architectural Language */}
-        <div className="flex-1 flex flex-col justify-center py-16 relative z-10">
-          <p className="text-[10px] tracking-[0.25em] text-white/40 uppercase font-mono mb-4">
-            PORTFOLIO SHOWCASE
-          </p>
+          <div className="absolute bottom-6 left-6 z-10">
+            <div className="bg-black/70 backdrop-blur-md border border-white/15 rounded-[14px] p-4 max-w-[220px]">
+              <p className="text-white/40 text-[9px] font-mono uppercase tracking-widest mb-1">Source of Bold Ideas</p>
+              <p className="text-[#bfff00] font-black text-3xl leading-none tracking-tight">14+</p>
+              <p className="text-white/40 text-[9px] mt-1">Projects Delivered</p>
+            </div>
+          </div>
 
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 w-full">
-            <h1 className="text-4xl sm:text-6xl md:text-8xl font-serif tracking-tight leading-[1.05] max-w-[800px] uppercase font-light">
-              Mirastra Builds <br />
-              <span className="font-sans font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-white/80 to-white/30">
-                Bold Visions
-              </span>{" "}
-              <br />
-              For the Future
+          <div className="absolute bottom-6 left-[120px] z-10 bg-[#bfff00] rounded-full px-5 py-2 flex items-center gap-3">
+            <span className="text-black font-black text-sm">85%</span>
+            <span className="text-black/60 text-[10px] font-semibold">Client Retention</span>
+          </div>
+        </div>
+
+        <div className="flex flex-col justify-between p-8 sm:p-12 md:p-14 relative z-10">
+          <div className="flex justify-end">
+            <span className="text-white/35 text-[10px] font-mono uppercase tracking-[0.2em]">Portfolio 2026</span>
+          </div>
+          <div>
+            <h1 className="text-white font-black leading-[0.92] uppercase" style={{ fontSize: "clamp(36px,5.5vw,72px)", letterSpacing: "-1px" }}>
+              CREATIVE<br />BRANDING<br />AGENCY
             </h1>
-
-            <div className="text-right max-w-xs">
-              <p className="text-white/60 text-xs sm:text-sm leading-relaxed font-mono">
-                MSME-registered tech partner serving startups, SaaS products, and small business
-                portfolios globally.
-              </p>
-            </div>
+            <p className="text-white/40 text-xs leading-relaxed mt-5 max-w-[260px]">
+              We create immersive brand systems and digital experiences for ambitious companies who want to be remembered.
+            </p>
           </div>
 
-          {/* Filtering Tabs */}
-          <div className="flex flex-wrap gap-2 mt-12 pb-2 border-b border-white/10">
-            {PROJECT_CATEGORIES.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => setActiveCategory(cat.id)}
-                className={`px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all border outline-none cursor-pointer ${
-                  activeCategory === cat.id
-                    ? "bg-white text-black border-white"
-                    : "bg-transparent text-white/60 border-white/10 hover:border-white/20 hover:text-white"
-                }`}
-              >
-                {cat.name}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* 2. PROJECT LIVE PREVIEW GRID (Kontra Mockups style) */}
-        <div className="w-full z-20 mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((proj, idx) => (
-            <a
-              key={idx}
-              href={proj.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-zinc-950 border border-white/10 rounded-2xl overflow-hidden hover:border-white/30 transition-all flex flex-col justify-between shadow-2xl group cursor-pointer text-white decoration-none"
-            >
-              {/* Chrome Browser Top bar mockup */}
-              <div className="bg-zinc-900 px-4 py-2 border-b border-white/5 flex items-center justify-between">
-                <div className="flex gap-1">
-                  <div className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/60" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/60" />
-                </div>
-                <span className="text-[9px] font-mono text-white/40 truncate max-w-[180px]">
-                  {proj.url.replace("https://", "").replace("www.", "")}
-                </span>
-                <LinkIcon
-                  size={10}
-                  className="text-white/30 group-hover:text-white transition-colors"
-                />
-              </div>
-
-              {/* Card Body Display */}
-              <div
-                className={`p-8 bg-gradient-to-br ${proj.bgGradient} aspect-video flex flex-col justify-between relative`}
-              >
-                {/* Large Background Letters */}
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
-                  <span className="text-[8vw] font-black opacity-[0.03] tracking-tighter text-white uppercase font-sans">
-                    {proj.initials}
-                  </span>
-                </div>
-
-                <div className="flex justify-between items-start z-10 relative">
-                  <span className="text-[10px] bg-white/10 text-white/70 border border-white/10 rounded px-2 py-0.5 uppercase tracking-widest font-mono">
-                    {proj.category}
-                  </span>
-                  <div className="w-8 h-8 rounded-full bg-black/60 backdrop-blur border border-white/10 flex items-center justify-center text-white/80 group-hover:text-white group-hover:scale-105 transition-all">
-                    <ArrowUpRight size={14} />
-                  </div>
-                </div>
-
-                <div className="z-10 relative">
-                  <h3 className="text-white font-bold text-lg leading-tight tracking-tight font-serif group-hover:text-[#ffffff] transition-colors">
-                    {proj.title}
-                  </h3>
-                  <p className="text-white/60 text-xs mt-2 leading-relaxed">{proj.description}</p>
-                </div>
-              </div>
-            </a>
-          ))}
-        </div>
-      </div>
-
-      {/* 3. PRODUCT & SOLUTIONS SECTION (Kontra Linear List Grid) */}
-      <section className="w-full mt-16 md:mt-24 px-4 sm:px-8 md:px-12 py-12 border-t border-white/10 z-10 relative">
-        <span className="text-white/40 text-xs font-semibold uppercase tracking-[0.2em] font-mono mb-4 block">
-          In-House Solutions
-        </span>
-        <h2 className="text-3xl sm:text-4xl font-serif uppercase tracking-tight text-white mb-12">
-          Product Highlights
-        </h2>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-          {PRODUCT_HIGHLIGHTS.map((prod, idx) => (
-            <div
-              key={idx}
-              className="border border-white/10 bg-[#0e0e0e] rounded-xl p-6 flex flex-col justify-between min-h-[140px] hover:border-white/20 transition-colors"
-            >
-              <div className="w-8 h-8 rounded bg-white/5 flex items-center justify-center text-white/50 mb-4">
-                <FolderGit size={14} />
-              </div>
-              <div>
-                <h4 className="text-white font-bold text-sm font-mono">{prod.title}</h4>
-                <p className="text-white/50 text-[11px] leading-relaxed mt-2">{prod.desc}</p>
-              </div>
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-wrap gap-2">
+              {["Works","Services","About","Contact"].map((item, i) => (
+                <span key={i} className="text-white/35 text-[10px] font-mono uppercase tracking-wider hover:text-white cursor-pointer transition-colors">{item}</span>
+              ))}
             </div>
-          ))}
+            <Link to="/contact" className="self-start inline-flex items-center gap-2 bg-[#3a8cd7] text-white text-xs font-black px-6 py-3 rounded-full transition-all decoration-none cursor-pointer hover:bg-[#2b7abf]" style={{ boxShadow: "0 4px 16px rgba(58,140,215,0.25)" }}>
+              Start a Project <ArrowUpRight size={12} />
+            </Link>
+          </div>
+
+          <div className="absolute top-6 right-6 w-9 h-9 rounded-full border border-white/20 flex items-center justify-center">
+            <ArrowUpRight size={14} className="text-white/50" />
+          </div>
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="w-full mt-24 border-t border-white/10 pt-12 pb-8 px-6 sm:px-12 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-6">
-        <div>
-          <span className="text-base font-bold tracking-wider uppercase text-white font-sans">
-            Mirastra Tech
-          </span>
-          <p className="text-xs text-white/40 mt-2 font-mono">
-            Building the Future. Beyond Limits.
+
+      <section className="w-full bg-white py-16 border-t border-black/6">
+        <div className="text-center mb-10 px-6">
+          <h2 className="font-black uppercase text-black" style={{ fontSize: "clamp(28px,4vw,64px)", letterSpacing: "-1.2px", lineHeight: "0.95" }}>
+            EVERYTHING YOUR BRAND NEEDS TO GROW
+          </h2>
+          <p className="mx-auto mt-4 text-[11px] uppercase tracking-[0.32em] text-black/40" style={{ maxWidth: "34rem", letterSpacing: "0.18em", lineHeight: "1.8" }}>
+            Reload offers strategic branding, visual identity, and creative direction built to cut through noise and deliver results. From storytelling to execution, we design systems that grow with your business.
           </p>
         </div>
-        <p className="text-xs text-white/30 font-mono">
-          &copy; 2026 Mirastra Tech. MSME-registered. Serving Clients Worldwide.
-        </p>
+
+        <div className="relative overflow-hidden">
+          <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-white to-transparent pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-white to-transparent pointer-events-none" />
+          <div className="flex gap-6 px-6 sm:px-10 md:px-14 overflow-x-auto pb-6" style={{ scrollSnapType: "x mandatory", WebkitOverflowScrolling: "touch" }}>
+            {FEATURE_CARDS.map((card, idx) => (
+              <article key={idx} className="snap-start min-w-[320px] sm:min-w-[360px] lg:min-w-[420px] rounded-[30px] overflow-hidden border border-black/10 bg-[#1b0706] shadow-[0_30px_80px_rgba(0,0,0,0.18)]" style={{ scrollSnapAlign: "start" }}>
+                <div className="relative h-[420px] overflow-hidden bg-slate-900">
+                  <img src={card.img} alt={card.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" style={{ filter: "brightness(0.65) contrast(1.1)" }} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+                  <div className="absolute left-6 top-6 rounded-full border border-white/20 bg-black/50 px-3 py-2 text-[10px] uppercase tracking-[0.28em] text-white/70 backdrop-blur-sm">
+                    {card.label}
+                  </div>
+                </div>
+                <div className="p-6 pb-8">
+                  <p className="text-white/50 text-[11px] uppercase tracking-[0.28em] mb-4">{card.label}</p>
+                  <h3 className="text-white font-black text-3xl" style={{ lineHeight: "0.95" }}>{card.title}</h3>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" className="relative w-full bg-white text-black overflow-hidden border-t border-black/10">
+        <div className="relative max-w-7xl mx-auto px-6 sm:px-10 md:px-16 py-24">
+          <div className="grid gap-10 xl:grid-cols-[0.95fr_1.05fr] items-start">
+            <div className="space-y-6">
+              <p className="text-[10px] uppercase tracking-[0.35em] text-[#22c55e]/90">Featured Works</p>
+              <div>
+                <h2 className="font-black uppercase tracking-[-0.04em] text-black" style={{ fontSize: "clamp(3rem,5vw,5rem)", lineHeight: "0.92" }}>
+                  WE TURN IDEAS INTO VISUAL<br />STATEMENTS
+                </h2>
+                <p className="mt-4 text-black/60 uppercase tracking-[0.28em] leading-[1.4] text-sm">
+                  FROM VISION TO DELIVERY —<br />IMPACT THAT LASTS
+                </p>
+              </div>
+
+              <p className="max-w-xl text-black/60 leading-7">
+                Every website and platform shown here is crafted with a crisp black, white, and green palette — designed to feel premium, modern, and instantly memorable.
+              </p>
+
+              <div className="flex flex-wrap gap-3">
+                {[
+                  "Branding",
+                  "UI/UX",
+                  "SaaS",
+                  "E-Commerce",
+                ].map((tag) => (
+                  <span key={tag} className="rounded-full border border-black/10 bg-black/5 px-4 py-2 text-[10px] uppercase tracking-[0.28em] text-black/70">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="relative overflow-hidden rounded-[32px] border border-black/10 bg-black/5 shadow-[0_20px_60px_rgba(0,0,0,0.08)]">
+                <img
+                  src={PROJECTS[0].img}
+                  alt={PROJECTS[0].title}
+                  className="h-[520px] w-full object-cover transition duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
+                <div className="absolute left-6 bottom-6 right-6 rounded-[24px] border border-white/20 bg-black/70 p-6 backdrop-blur-xl">
+                  <p className="text-[10px] uppercase tracking-[0.3em] text-white/70">{PROJECTS[0].category}</p>
+                  <h3 className="mt-3 text-2xl font-black text-white leading-tight">{PROJECTS[0].title}</h3>
+                </div>
+              </div>
+              <div className="grid gap-4">
+                <div className="relative overflow-hidden rounded-[28px] border border-black/10 bg-[#f2fdf6] shadow-[0_20px_60px_rgba(34,38,49,0.06)]">
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,197,94,0.12),transparent_30%)]" />
+                  <div className="relative flex min-h-[250px] flex-col justify-center p-8 text-center">
+                    <span className="text-[10px] uppercase tracking-[0.32em] text-black/50">Explore the world’s</span>
+                    <h3 className="mt-4 text-2xl font-black uppercase leading-tight text-black">leading designers</h3>
+                    <p className="mt-4 text-sm text-black/60">A premium showcase of clean digital work for ambitious brands.</p>
+                    <span className="mt-6 inline-flex w-full justify-center rounded-full border border-[#d1fae5] bg-[#dcfce7] px-5 py-3 text-[10px] uppercase tracking-[0.3em] text-[#166534] transition hover:bg-[#bbf7d0]">
+                      Explore Now
+                    </span>
+                  </div>
+                </div>
+                <div className="relative overflow-hidden rounded-[28px] border border-black/10 bg-white shadow-[0_20px_60px_rgba(34,38,49,0.06)]">
+                  <img
+                    src={PROJECTS[7].img}
+                    alt={PROJECTS[7].title}
+                    className="h-[250px] w-full object-cover transition duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                  <div className="absolute left-6 bottom-6 right-6 rounded-[20px] border border-white/80 bg-black/70 p-4 backdrop-blur-xl">
+                    <p className="text-[10px] uppercase tracking-[0.28em] text-white/70">{PROJECTS[7].category}</p>
+                    <h4 className="mt-2 text-xl font-black text-white leading-tight">{PROJECTS[7].title}</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-16 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+            {PROJECTS.map((proj, idx) => (
+              <a
+                key={idx}
+                href={proj.url}
+                target="_blank"
+                rel="noreferrer"
+                className="group overflow-hidden rounded-[28px] border border-black/10 bg-white shadow-[0_20px_40px_rgba(34,38,49,0.05)] transition hover:border-[#22c55e]/40 hover:shadow-[0_30px_80px_rgba(34,197,94,0.12)]"
+              >
+                <div className="relative h-[260px] overflow-hidden">
+                  <img
+                    src={proj.img}
+                    alt={proj.title}
+                    className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                  <div className="absolute left-4 bottom-4 rounded-full bg-white/90 px-3 py-2 text-[10px] uppercase tracking-[0.28em] text-black shadow-sm">
+                    {proj.category}
+                  </div>
+                </div>
+                <div className="p-5">
+                  <h3 className="text-lg font-black text-black">{proj.title}</h3>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <footer className="w-full bg-black relative overflow-hidden border-t border-white/5">
+        <div className="relative w-full overflow-hidden select-none" style={{ lineHeight: 0.85 }}>
+          <h2 className="font-black text-center w-full px-4" style={{ fontSize: "clamp(72px, 18vw, 260px)", letterSpacing: "-0.03em", paddingBottom: "0.05em", background: "linear-gradient(180deg, rgba(255,255,255,0.13) 0%, rgba(255,255,255,0.02) 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+            Mirastra
+          </h2>
+          <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-black to-transparent pointer-events-none" />
+        </div>
+        <div className="relative z-10 border-t border-white/6 px-8 sm:px-12 md:px-16 py-10">
+          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+            <img src="/mirastra_wlogo.png" alt="Mirastra Tech" className="h-8 w-auto object-contain" />
+            <div className="flex items-center gap-6">
+              {["Works","Services","About","Contact"].map((item, i) => (
+                <Link key={i} to={`/${item.toLowerCase()}`} className="text-white/30 text-xs hover:text-white transition-colors decoration-none">{item}</Link>
+              ))}
+            </div>
+            <p className="text-white/20 text-[10px] font-mono">© 2026 Mirastra Tech — MSME Registered</p>
+          </div>
+        </div>
       </footer>
     </main>
   );

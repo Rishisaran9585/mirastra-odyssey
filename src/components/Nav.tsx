@@ -2,7 +2,11 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 
-export default function Nav() {
+interface NavProps {
+  theme?: "light" | "dark";
+}
+
+export default function Nav({ theme = "light" }: NavProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -33,20 +37,24 @@ export default function Nav() {
       >
         {/* Logo */}
         <Link to="/" className="flex-shrink-0 decoration-none cursor-pointer hover:opacity-80 transition-opacity">
-          <img src="/mirastra_logo.png" alt="Mirastra Tech" className="w-auto object-contain" style={{ height: 25 }} />
+          <img src={theme === "dark" ? "/mirastra_wlogo.png" : "/mirastra_logo.png"} alt="Mirastra Tech" className="w-auto object-contain" style={{ height: 25 }} />
         </Link>
 
         {/* Center menu capsule — dark text on light bg */}
-        <div className="hidden md:flex bg-black/5 backdrop-blur-md border border-black/10 rounded-full px-2 py-1 items-center gap-1">
+        <div className={`hidden md:flex ${
+          theme === "dark" ? "bg-white/10 border-white/15" : "bg-black/5 border-black/10"
+        } backdrop-blur-md border rounded-full px-2 py-1 items-center gap-1`}>
           {menuItems.map((item) => (
             <Link
               key={item.label}
               to={item.to}
-              className="px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider text-black/50 hover:text-black hover:bg-black/5 transition-all cursor-pointer decoration-none"
+              className={`px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider ${
+                theme === "dark" ? "text-white/60 hover:text-white hover:bg-white/10" : "text-black/50 hover:text-black hover:bg-black/5"
+              } transition-all cursor-pointer decoration-none`}
               activeProps={{
                 style: {
-                  backgroundColor: "rgba(0,0,0,0.08)",
-                  color: "#000",
+                  backgroundColor: theme === "dark" ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.08)",
+                  color: theme === "dark" ? "#fff" : "#000",
                 },
               }}
             >
@@ -59,7 +67,9 @@ export default function Nav() {
         <div className="hidden md:block">
           <Link
             to="/contact"
-            className="bg-black text-white hover:bg-zinc-800 text-xs font-semibold px-6 py-2.5 rounded-full transition-colors cursor-pointer uppercase tracking-wider decoration-none"
+            className={`${
+              theme === "dark" ? "bg-white text-black hover:bg-white/90" : "bg-black text-white hover:bg-zinc-800"
+            } text-xs font-semibold px-6 py-2.5 rounded-full transition-colors cursor-pointer uppercase tracking-wider decoration-none`}
           >
             Let's Talk
           </Link>
@@ -68,7 +78,9 @@ export default function Nav() {
         {/* Mobile hamburger */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden text-black hover:opacity-60 p-2 cursor-pointer bg-transparent border-none outline-none"
+          className={`md:hidden ${
+            theme === "dark" ? "text-white" : "text-black"
+          } hover:opacity-60 p-2 cursor-pointer bg-transparent border-none outline-none`}
         >
           {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
         </button>

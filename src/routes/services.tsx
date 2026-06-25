@@ -369,6 +369,110 @@ function Services() {
         </div>
       </section>
 
+      {/* ── CRAFTING INTRO + AUTO-SCROLL CARDS ── */}
+      <section className="w-full bg-[#0a0a0a] py-20 overflow-hidden border-t border-white/5">
+        <div className="max-w-6xl mx-auto px-6 sm:px-10 md:px-14 mb-14">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-end">
+            {/* Left: image visual */}
+            <div className="relative rounded-[20px] overflow-hidden min-h-[320px] md:min-h-[380px] bg-[#111]">
+              <img
+                src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=700&h=600&q=80"
+                alt="Mirastra team at work"
+                className="w-full h-full object-cover absolute inset-0"
+                style={{ filter: "brightness(0.6) saturate(0.8)" }}
+              />
+              {/* Lime overlay tint at bottom */}
+              <div className="absolute inset-0 pointer-events-none"
+                style={{ background: "linear-gradient(to top, rgba(191,255,0,0.08) 0%, transparent 60%)" }} />
+              {/* Bottom label */}
+              <div className="absolute bottom-5 left-5 z-10">
+                <div className="w-10 h-px bg-[#bfff00] mb-3" />
+                <p className="text-white/50 text-[10px] font-mono uppercase tracking-widest">Mirastra Tech · Est. 2026</p>
+              </div>
+              {/* Top-right stat chip */}
+              <div className="absolute top-5 right-5 z-10 bg-black/50 backdrop-blur-md border border-white/15 rounded-[14px] px-4 py-3">
+                <p className="text-[#bfff00] font-black text-xl leading-none">14+</p>
+                <p className="text-white/40 text-[9px] mt-1 font-mono uppercase tracking-wider">Projects Live</p>
+              </div>
+            </div>
+            {/* Right: headline + body + CTA */}
+            <div>
+              <h2 className="text-4xl sm:text-5xl font-black text-white leading-[1.05] mb-5"
+                style={{ letterSpacing: "-1.5px" }}>
+                Crafting Meaningful<br />
+                Brands &amp; Intuitive<br />
+                <span className="text-[#bfff00]">Digital Experiences</span><br />
+                That Stand Out
+              </h2>
+              <p className="text-white/40 text-sm leading-relaxed max-w-sm mb-7">
+                At Mirastra, a full-service tech agency, we're passionate about crafting visually
+                compelling identities and immersive digital experiences. With a strategic approach,
+                we help businesses stand out and connect with their audience.
+              </p>
+              <Link to="/contact"
+                className="inline-flex items-center gap-3 bg-[#bfff00] hover:bg-[#d4ff33] text-black text-sm font-black px-7 py-3 rounded-full transition-all decoration-none cursor-pointer"
+                style={{ boxShadow: "0 6px 20px rgba(191,255,0,0.3)" }}>
+                <span className="w-6 h-6 rounded-full bg-black flex items-center justify-center flex-shrink-0">
+                  <ArrowUpRight size={12} className="text-[#bfff00]" />
+                </span>
+                Start with us
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Auto-scrolling image cards strip */}
+        <div className="relative overflow-hidden">
+          {/* Left fade */}
+          <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
+          {/* Right fade */}
+          <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
+
+          {/* Scrolling track */}
+          <div
+            className="flex gap-4"
+            style={{ animation: "serviceScroll 28s linear infinite", width: "max-content" }}
+          >
+            {/* Duplicate the card set twice for seamless loop */}
+            {[...Array(2)].map((_, setIdx) => (
+              [
+                { img: "https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=500&h=640&q=80", label: "Website Dev" },
+                { img: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=500&h=640&q=80", label: "Web Apps" },
+                { img: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=500&h=640&q=80", label: "Mobile Apps" },
+                { img: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=500&h=640&q=80", label: "Custom Software" },
+                { img: "https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?auto=format&fit=crop&w=500&h=640&q=80", label: "Digital Marketing" },
+                { img: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=500&h=640&q=80", label: "Automation" },
+                { img: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=500&h=640&q=80", label: "UI/UX Design" },
+              ].map((card, i) => (
+                <div key={`${setIdx}-${i}`}
+                  className="relative flex-shrink-0 rounded-[20px] overflow-hidden group cursor-default"
+                  style={{ width: "220px", height: "300px" }}>
+                  <img
+                    src={card.img}
+                    alt={card.label}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    style={{ filter: "brightness(0.75) saturate(0.9)" }}
+                  />
+                  {/* Label chip bottom-left */}
+                  <div className="absolute bottom-3 left-3 bg-black/60 backdrop-blur-sm border border-white/15 rounded-full px-3 py-1.5">
+                    <span className="text-white text-[10px] font-semibold tracking-wide">{card.label}</span>
+                  </div>
+                  {/* Lime top-right dot */}
+                  <div className="absolute top-3 right-3 w-2.5 h-2.5 rounded-full bg-[#bfff00]" />
+                </div>
+              ))
+            ))}
+          </div>
+
+          <style>{`
+            @keyframes serviceScroll {
+              0%   { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
+          `}</style>
+        </div>
+      </section>
+
       {/* ── SERVICES HEADING + HOVER CARDS ── */}
       <section className="w-full bg-[#f0f0ee] py-20 px-6 sm:px-10 md:px-14 border-t border-black/6">
         <div className="max-w-7xl mx-auto">
@@ -489,54 +593,221 @@ function Services() {
         </div>
       </section>
 
-      {/* ── STANDARDS ── */}
-      <section className="w-full py-24 px-6 sm:px-10 md:px-16 border-t border-white/8">
-        <div className="text-center mb-14">
-          <div className="inline-flex items-center gap-2 border border-white/20 rounded-full px-4 py-1.5 mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#bfff00]" />
-            <span className="text-white/55 text-[11px] font-mono tracking-[0.15em]">Trust Markers</span>
-          </div>
-          <h2 className="text-4xl sm:text-5xl font-black text-white leading-[1.04] mb-4" style={{ letterSpacing: "-1.5px" }}>Industry Standards &amp;<br />Proven Results</h2>
-          <p className="text-white/40 text-sm max-w-md mx-auto leading-relaxed">We maintain professional standards at every layer — from registration to delivery.</p>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto mb-10">
-          {STANDARDS.map((s,i) => (
-            <div key={i} className="bg-white text-black rounded-[20px] p-6 flex flex-col items-center text-center hover:scale-[1.02] transition-transform duration-300 cursor-default">
-              <span className="text-4xl mb-3">{s.badge}</span>
-              <p className="font-black text-base leading-tight mb-1">{s.title}</p>
-              <p className="text-black/45 text-xs leading-snug mb-3">{s.sub}</p>
-              <div className="w-full border-t border-black/8 pt-3"><span className="text-[10px] font-semibold text-black/40 uppercase tracking-widest">{s.stat}</span></div>
+      {/* ── STANDARDS — stats dashboard style ── */}
+      <section className="w-full py-16 px-6 sm:px-10 md:px-16 border-t border-black/6 bg-[#f0f0ee]">
+        <div className="max-w-5xl mx-auto flex flex-col gap-4">
+
+          {/* ── Top card: globe + statement + 3 big stats ── */}
+          <div className="rounded-[24px] border border-black/8 bg-white overflow-hidden">
+
+            {/* Upper row: globe label left, statement right */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-8 pb-4">
+              {/* Left: globe icon + label + social dots */}
+              <div className="flex flex-col gap-5">
+                <div className="flex items-center gap-3">
+                  <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+                    <circle cx="14" cy="14" r="12" stroke="rgba(0,0,0,0.25)" strokeWidth="1.5" fill="none"/>
+                    <ellipse cx="14" cy="14" rx="6" ry="12" stroke="rgba(0,0,0,0.15)" strokeWidth="1" fill="none"/>
+                    <line x1="2" y1="14" x2="26" y2="14" stroke="rgba(0,0,0,0.15)" strokeWidth="1"/>
+                    <line x1="4" y1="8" x2="24" y2="8" stroke="rgba(0,0,0,0.08)" strokeWidth="1"/>
+                    <line x1="4" y1="20" x2="24" y2="20" stroke="rgba(0,0,0,0.08)" strokeWidth="1"/>
+                  </svg>
+                  <div>
+                    <p className="text-black/45 text-[11px] font-mono leading-tight">We support people from all</p>
+                    <p className="text-black/45 text-[11px] font-mono leading-tight">over the world</p>
+                  </div>
+                </div>
+                {/* Social icon dots */}
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-full bg-[#bfff00] flex items-center justify-center">
+                    <svg className="w-4 h-4" fill="black" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622z"/></svg>
+                  </div>
+                  <div className="w-8 h-8 rounded-full bg-black/8 border border-black/10 flex items-center justify-center">
+                    <svg className="w-3.5 h-3.5" fill="black" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                  </div>
+                  <div className="w-8 h-8 rounded-full bg-black/8 border border-black/10 flex items-center justify-center">
+                    <svg className="w-3.5 h-3.5" fill="black" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right: bold statement */}
+              <div>
+                <p className="text-black font-bold text-xl sm:text-2xl leading-[1.2]" style={{ letterSpacing: "-0.5px" }}>
+                  We're a <span className="text-black">results-driven tech agency passionate</span>{" "}
+                  <span className="text-black/35">about building impactful digital products that drive growth for our clients</span>
+                </p>
+              </div>
             </div>
-          ))}
-        </div>
-        <div className="text-center">
-          <Link to="/contact" className="inline-flex items-center gap-2 border border-white/20 rounded-full px-7 py-3 text-sm text-white/60 hover:text-white hover:border-white/40 transition-all decoration-none cursor-pointer">
-            Download Performance Report <ArrowUpRight size={13} />
-          </Link>
+
+            {/* Divider */}
+            <div className="mx-8 h-px bg-black/6" />
+
+            {/* Stats row */}
+            <div className="grid grid-cols-3 divide-x divide-black/6 px-8 py-8">
+              {[
+                { value: "14+",  label: "Projects Done",    sub: "Live & delivered" },
+                { value: "100%", label: "Successful Rating", sub: "On-time delivery" },
+                { value: "8+",   label: "Service Domains",  sub: "End-to-end stack" },
+              ].map((stat, i) => (
+                <div key={i} className="flex flex-col px-4 first:pl-0 last:pr-0">
+                  <span className="text-black font-black leading-none mb-3"
+                    style={{ fontSize: "clamp(42px,6vw,72px)", fontFamily: "'Courier New','Lucida Console',monospace", letterSpacing: "-2px" }}>
+                    {stat.value}
+                  </span>
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="w-2 h-2 rounded-full bg-[#bfff00] flex-shrink-0" />
+                    <span className="text-black/50 text-xs font-medium">{stat.label}</span>
+                  </div>
+                  <div className="h-px bg-black/10 mb-2" />
+                  <span className="text-black/30 text-[10px] font-mono">{stat.sub}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* ── Bottom row ── */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+            {/* Left: tenure statement */}
+            <div className="rounded-[24px] border border-black/8 bg-white p-8 flex flex-col justify-between min-h-[200px]">
+              <div>
+                <p className="text-black font-black leading-[0.95]"
+                  style={{ fontSize: "clamp(42px,6vw,72px)", letterSpacing: "-2px" }}>
+                  Over <span className="text-[#bfff00]" style={{ WebkitTextStroke: "1px #111" }}>1</span><br />year
+                </p>
+                <p className="text-black/35 text-sm mt-3">become the partners</p>
+              </div>
+              <Link to="/contact"
+                className="self-start inline-flex items-center gap-2 bg-black hover:bg-zinc-800 text-white text-xs font-bold px-5 py-2.5 rounded-full transition-all decoration-none cursor-pointer mt-6">
+                <ArrowUpRight size={13} /> Start a project
+              </Link>
+            </div>
+
+            {/* Right: circular tech icon grid */}
+            <div className="rounded-[24px] border border-black/8 bg-white p-6 flex items-center justify-center">
+              <div className="grid grid-cols-3 gap-3">
+                {[
+                  { label: "React",   bg: "#61dafb18", icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="2.5" fill="#61dafb"/><ellipse cx="12" cy="12" rx="10" ry="3.5" fill="none" stroke="#61dafb" strokeWidth="1.2"/><ellipse cx="12" cy="12" rx="10" ry="3.5" fill="none" stroke="#61dafb" strokeWidth="1.2" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="3.5" fill="none" stroke="#61dafb" strokeWidth="1.2" transform="rotate(120 12 12)"/></svg> },
+                  { label: "Node",    bg: "#33993318", icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="#339933"><path d="M12 2L2 7v10l10 5 10-5V7L12 2z"/></svg> },
+                  { label: "AWS",     bg: "#ff990018", icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="#ff9900"><path d="M12 2L2 8v8l10 6 10-6V8L12 2z"/></svg> },
+                  { label: "Flutter", bg: "#54c5f818", icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="#54c5f8"><path d="M14 2L4 12l3 3 10-10-3-3zM10 16l4 4-3 3L4 16l3-3 3 3z"/></svg> },
+                  { label: "Mongo",   bg: "#47a24818", icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="#47a248"><path d="M12 2C9 2 7 6 7 10c0 3.5 2 6 5 7v3h1v-3c3-1 5-3.5 5-7 0-4-2-8-6-8z"/></svg> },
+                  { label: "Next",    bg: "#00000010", icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="black"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm-1.5 14.5V8l7 8.5H10.5z"/></svg> },
+                  { label: "Vite",    bg: "#646cff18", icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="#646cff"><path d="M12 2l10 18H2L12 2z"/></svg> },
+                  { label: "TS",      bg: "#3178c618", icon: <svg className="w-5 h-5" viewBox="0 0 24 24"><rect width="24" height="24" rx="3" fill="#3178c6"/><text x="4" y="18" fontSize="10" fontWeight="bold" fill="white">TS</text></svg> },
+                  { label: "PG",      bg: "#4169e118", icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="6" rx="8" ry="3" fill="#4169e1"/><path d="M4 6v12c0 1.66 3.58 3 8 3s8-1.34 8-3V6" fill="none" stroke="#4169e1" strokeWidth="1.5"/></svg> },
+                ].map((tech, i) => (
+                  <div key={i}
+                    className="w-16 h-16 rounded-full flex flex-col items-center justify-center gap-1 hover:scale-110 transition-transform duration-200 cursor-default"
+                    style={{ background: tech.bg, border: "1px solid rgba(0,0,0,0.06)" }}>
+                    {tech.icon}
+                    <span className="text-[8px] font-mono text-black/40">{tech.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+          </div>
         </div>
       </section>
-
       {/* ── FAQ ── */}
-      <section className="w-full py-24 px-6 sm:px-10 md:px-16 border-t border-white/8">
+      <section className="w-full py-20 px-6 sm:px-10 md:px-16 bg-[#eeeeec]">
         <div className="max-w-3xl mx-auto">
-          <div className="mb-12 text-center">
-            <h2 className="text-4xl sm:text-5xl font-black text-white leading-[1.04] mb-3" style={{ letterSpacing: "-1.5px" }}>Questions &amp; Answers</h2>
-            <p className="text-white/40 text-sm">Everything you need to know before we start.</p>
+
+          {/* Header */}
+          <div className="flex flex-col items-center mb-12 text-center">
+            <div className="inline-flex items-center gap-2 bg-white border border-black/10 rounded-full px-4 py-1.5 mb-6 shadow-sm">
+              <span className="text-black/40 text-[10px] font-mono tracking-[0.15em] uppercase">010</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#bfff00]" />
+              <span className="text-black/40 text-[10px] font-mono tracking-[0.15em] uppercase">FAQs</span>
+            </div>
+            <h2
+              className="text-5xl sm:text-6xl font-black text-black leading-[1.0]"
+              style={{ letterSpacing: "-2px", fontFamily: "'Georgia', serif" }}
+            >
+              Common Questions
+            </h2>
           </div>
+
+          {/* FAQ items */}
           <div className="flex flex-col gap-3">
-            {FAQS.map((faq,idx) => (
-              <div key={idx} className="bg-[#111] border border-white/8 rounded-[16px] overflow-hidden">
-                <button onClick={() => setActiveFaq(activeFaq === idx ? null : idx)}
-                  className="w-full p-5 text-left flex justify-between items-center bg-transparent border-none outline-none cursor-pointer">
-                  <span className="font-semibold text-sm text-white pr-4">{faq.q}</span>
-                  <ChevronDown size={16} className={`text-white/40 flex-shrink-0 transition-transform duration-300 ${activeFaq === idx ? "rotate-180 text-[#bfff00]" : ""}`} />
-                </button>
-                {activeFaq === idx && (
-                  <div className="px-5 pb-5 text-xs text-white/50 leading-relaxed border-t border-white/6"><div className="pt-4">{faq.a}</div></div>
-                )}
-              </div>
-            ))}
+            {FAQS.map((faq, idx) => {
+              const isOpen = activeFaq === idx;
+              return (
+                <div
+                  key={idx}
+                  className="bg-white rounded-[18px] overflow-hidden transition-all duration-300"
+                  style={{
+                    boxShadow: isOpen
+                      ? "0 0 0 1.5px rgba(100,120,255,0.5), 0 4px 20px rgba(100,120,255,0.10)"
+                      : "0 1px 3px rgba(0,0,0,0.06)",
+                    border: isOpen ? "none" : "1px solid rgba(0,0,0,0.07)",
+                  }}
+                >
+                  <button
+                    onClick={() => setActiveFaq(isOpen ? null : idx)}
+                    className="w-full px-6 py-5 flex items-center gap-4 bg-transparent border-none outline-none cursor-pointer text-left"
+                  >
+                    {/* Number */}
+                    <span className="text-black/25 text-xs font-mono w-4 flex-shrink-0 text-right">
+                      {idx + 1}
+                    </span>
+                    {/* Question */}
+                    <span
+                      className="flex-1 text-black leading-snug pr-4"
+                      style={{
+                        fontSize: "clamp(14px,1.8vw,16px)",
+                        fontWeight: isOpen ? 700 : 500,
+                      }}
+                    >
+                      {faq.q}
+                    </span>
+                    {/* +/× button */}
+                    <div
+                      className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-200"
+                      style={{
+                        background: isOpen ? "white" : "#111",
+                        border: isOpen ? "1.5px solid rgba(100,120,255,0.4)" : "none",
+                      }}
+                    >
+                      {isOpen ? (
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                          <path d="M1 1L11 11M11 1L1 11" stroke="#666" strokeWidth="1.8" strokeLinecap="round"/>
+                        </svg>
+                      ) : (
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                          <path d="M6 1V11M1 6H11" stroke="white" strokeWidth="1.8" strokeLinecap="round"/>
+                        </svg>
+                      )}
+                    </div>
+                  </button>
+
+                  {/* Answer — slides open */}
+                  {isOpen && (
+                    <div className="px-6 pb-6 pl-[3.25rem]">
+                      <p className="text-black/45 text-sm leading-[1.8]">{faq.a}</p>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
+
+          {/* Bottom CTA */}
+          <div className="text-center mt-12">
+            <p className="text-black/40 text-sm mb-2">Have any other questions?</p>
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 text-black text-sm font-semibold underline underline-offset-4 decoration-black/30 hover:decoration-black transition-all decoration-none cursor-pointer"
+            >
+              Contact Us
+              <div className="w-5 h-5 rounded-full border border-black/20 flex items-center justify-center">
+                <ArrowUpRight size={10} className="text-black/50" />
+              </div>
+            </Link>
+          </div>
+
         </div>
       </section>
 
