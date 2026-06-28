@@ -1,7 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import Nav from "../components/Nav";
-import React, { useState } from "react";
-import { ArrowUpRight } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { ArrowUpRight, Laptop, Code, Zap, Star, CheckCircle } from "lucide-react";
+import Antigravity from "../components/reactbits/Antigravity";
+import SplitText from "../components/reactbits/SplitText";
+import FadeContent from "../components/reactbits/FadeContent";
+import TiltedCard from "../components/reactbits/TiltedCard";
+import SpotlightCard from "../components/reactbits/SpotlightCard";
+import StarBorder from "../components/reactbits/StarBorder";
+import CountUp from "../components/reactbits/CountUp";
 
 export const Route = createFileRoute("/works")({
   head: () => ({
@@ -51,64 +58,243 @@ const BRAND_IMAGES = [
 
 function Works() {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   return (
     <main className="w-full bg-[#f0f0ee] text-black min-h-screen font-sans overflow-hidden">
       <Nav theme="dark" />
 
-      <section className="w-full min-h-[85vh] grid grid-cols-1 md:grid-cols-[1.4fr_1fr] bg-[#111] relative overflow-hidden">
-        <div className="relative min-h-[60vw] md:min-h-0">
-          <img
-            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&h=900&q=85"
-            alt="Portfolio hero"
-            className="absolute inset-0 w-full h-full object-cover object-center"
-            style={{ filter: "brightness(0.75) contrast(1.05)" }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-transparent" />
-
-          <div className="absolute bottom-6 left-6 z-10">
-            <div className="bg-black/70 backdrop-blur-md border border-white/15 rounded-[14px] p-4 max-w-[220px]">
-              <p className="text-white/40 text-[9px] font-mono uppercase tracking-widest mb-1">Source of Bold Ideas</p>
-              <p className="text-[#bfff00] font-black text-3xl leading-none tracking-tight">14+</p>
-              <p className="text-white/40 text-[9px] mt-1">Projects Delivered</p>
-            </div>
-          </div>
-
-          <div className="absolute bottom-6 left-[120px] z-10 bg-[#bfff00] rounded-full px-5 py-2 flex items-center gap-3">
-            <span className="text-black font-black text-sm">85%</span>
-            <span className="text-black/60 text-[10px] font-semibold">Client Retention</span>
-          </div>
+      {/* ── HERO ── */}
+      <section className="w-full min-h-screen relative overflow-hidden flex flex-col justify-between bg-[#050508]" style={{ minHeight: "100svh" }}>
+        
+        {/* Background WebGL Particle Network */}
+        <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
+          {isMounted && (
+            <Antigravity
+              count={180}
+              magnetRadius={16}
+              ringRadius={12}
+              waveSpeed={0.3}
+              waveAmplitude={1.8}
+              particleSize={1.4}
+              color="#3a8cd7"
+              autoAnimate={true}
+            />
+          )}
         </div>
 
-        <div className="flex flex-col justify-between p-8 sm:p-12 md:p-14 relative z-10">
-          <div className="flex justify-end">
-            <span className="text-white/35 text-[10px] font-mono uppercase tracking-[0.2em]">Portfolio 2026</span>
-          </div>
-          <div>
-            <h1 className="text-white font-black leading-[0.92] uppercase" style={{ fontSize: "clamp(36px,5.5vw,72px)", letterSpacing: "-1px" }}>
-              CREATIVE<br />BRANDING<br />AGENCY
+        {/* Ambient Gradient Glows */}
+        <div className="absolute top-[-10%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-cyan-500/10 blur-[130px] pointer-events-none z-0" />
+        <div className="absolute bottom-[-10%] left-[-10%] w-[45vw] h-[45vw] rounded-full bg-purple-500/10 blur-[120px] pointer-events-none z-0" />
+        <div className="absolute top-[30%] left-[20%] w-[35vw] h-[35vw] rounded-full bg-[#bfff00]/5 blur-[100px] pointer-events-none z-0" />
+
+        {/* Grid Overlay */}
+        <div className="absolute inset-0 z-0 pointer-events-none opacity-10">
+          <svg className="w-full h-full" aria-hidden="true">
+            <defs>
+              <pattern id="works-grid" width="48" height="48" patternUnits="userSpaceOnUse">
+                <path d="M 48 0 L 0 0 0 48" fill="none" stroke="rgba(58,140,215,0.3)" strokeWidth="0.5" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#works-grid)" />
+          </svg>
+        </div>
+
+        {/* Hero Content Wrapper */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 md:px-14 pt-24 pb-4 flex-grow flex flex-col justify-center">
+          
+          {/* Top Pill Tag */}
+          <FadeContent delay={0.1} y={15}>
+            <div className="inline-flex items-center gap-2 bg-white/[0.04] border border-white/[0.08] backdrop-blur-md rounded-full px-4 py-1.5 mb-4">
+              <span className="w-2 h-2 rounded-full bg-[#3a8cd7] animate-pulse" />
+              <span className="text-white/60 text-[10px] font-mono tracking-[0.15em] uppercase">
+                PRODUCTION REGISTRY &amp; BUILDS
+              </span>
+            </div>
+          </FadeContent>
+
+          {/* Title & Subtitle */}
+          <div className="max-w-4xl mb-6">
+            <h1 className="text-[clamp(30px,5vw,60px)] font-black text-white leading-[0.95] tracking-tight uppercase flex flex-col gap-1">
+              <span className="block overflow-hidden">
+                <SplitText
+                  text="WE CONSTRUCT"
+                  delay={0.012}
+                  duration={0.4}
+                />
+              </span>
+              <span className="block overflow-hidden text-[#bfff00]">
+                <SplitText
+                  text="HIGH-PERFORMANCE"
+                  delay={0.012}
+                  duration={0.4}
+                />
+              </span>
+              <span className="italic font-light tracking-wide font-instrument block mt-1 lowercase text-white">
+                digital products.
+              </span>
             </h1>
-            <p className="text-white/40 text-xs leading-relaxed mt-5 max-w-[260px]">
-              We create immersive brand systems and digital experiences for ambitious companies who want to be remembered.
-            </p>
+
+            <FadeContent delay={0.3} y={15}>
+              <p className="text-white/50 text-xs sm:text-sm leading-relaxed max-w-xl mt-3">
+                Explore our catalog of custom-built web systems, software architectures, chrome extensions, automation scripts, and conversion funnels deployed worldwide.
+              </p>
+            </FadeContent>
+
+            {/* CTAs */}
+            <FadeContent delay={0.4} y={15}>
+              <div className="flex items-center gap-4 mt-5 flex-wrap">
+                <Link to="/contact">
+                  <StarBorder color="#3a8cd7" speed={3.5} borderRadius="9999px" borderWidth={1.5} className="cursor-pointer">
+                    <span className="inline-flex items-center bg-[#3a8cd7] text-white text-xs font-black px-7 py-3 rounded-full hover:bg-white hover:text-black transition-colors duration-300">
+                      Deploy Your Project
+                    </span>
+                  </StarBorder>
+                </Link>
+                <button
+                  onClick={() => {
+                    const projectsSection = document.getElementById("projects") || document.querySelector("section.py-16");
+                    projectsSection?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                  className="bg-white/5 hover:bg-white/10 border border-white/10 text-white text-xs font-semibold px-7 py-3.5 rounded-full transition-all duration-300 cursor-pointer"
+                >
+                  Explore Live Registry
+                </button>
+              </div>
+            </FadeContent>
           </div>
 
-          <div className="flex flex-col gap-4">
-            <div className="flex flex-wrap gap-2">
-              {["Works","Services","About","Contact"].map((item, i) => (
-                <span key={i} className="text-white/35 text-[10px] font-mono uppercase tracking-wider hover:text-white cursor-pointer transition-colors">{item}</span>
-              ))}
-            </div>
-            <Link to="/contact" className="self-start inline-flex items-center gap-2 bg-[#3a8cd7] text-white text-xs font-black px-6 py-3 rounded-full transition-all decoration-none cursor-pointer hover:bg-[#2b7abf]" style={{ boxShadow: "0 4px 16px rgba(58,140,215,0.25)" }}>
-              Start a Project <ArrowUpRight size={12} />
-            </Link>
-          </div>
+          {/* Asymmetrical Dashboard/Mockup Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full mt-4">
+            
+            {/* Card 1: Code Console */}
+            <FadeContent delay={0.5} y={20}>
+              <TiltedCard maxTilt={10} scale={1.02}>
+                <SpotlightCard
+                  className="bg-white/[0.02] backdrop-blur-xl border border-white/[0.08] hover:border-[#3a8cd7]/20 rounded-[24px] p-6 shadow-2xl transition-all duration-300 min-h-[200px] flex flex-col justify-between"
+                  spotlightColor="rgba(58, 140, 215, 0.08)"
+                >
+                  <div className="flex flex-col gap-3">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-1.5">
+                        <span className="w-2.5 h-2.5 rounded-full bg-red-500/50" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/50" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/50" />
+                      </div>
+                      <span className="text-[9px] font-mono text-white/35">src/App.tsx</span>
+                    </div>
+                    <div className="font-mono text-[9px] text-white/50 space-y-1 mt-1">
+                      <p className="text-[#3a8cd7]">const deployment = &#123;</p>
+                      <p className="pl-3">client: "Worldwide",</p>
+                      <p className="pl-3">status: "100%_Success",</p>
+                      <p className="pl-3">onTime: true,</p>
+                      <p className="text-[#3a8cd7]">&#125;;</p>
+                    </div>
+                  </div>
+                  <div className="pt-3 border-t border-white/[0.05] flex justify-between items-center text-[10px] text-white/35 font-mono">
+                    <span>STATUS</span>
+                    <span className="text-emerald-400 flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      COMPILING
+                    </span>
+                  </div>
+                </SpotlightCard>
+              </TiltedCard>
+            </FadeContent>
 
-          <div className="absolute top-6 right-6 w-9 h-9 rounded-full border border-white/20 flex items-center justify-center">
-            <ArrowUpRight size={14} className="text-white/50" />
+            {/* Card 2: Metrics Dashboard */}
+            <FadeContent delay={0.6} y={20}>
+              <TiltedCard maxTilt={10} scale={1.02}>
+                <SpotlightCard
+                  className="bg-white/[0.02] backdrop-blur-xl border border-white/[0.08] hover:border-[#3a8cd7]/20 rounded-[24px] p-6 shadow-2xl transition-all duration-300 min-h-[200px] flex flex-col justify-between"
+                  spotlightColor="rgba(58, 140, 215, 0.08)"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="w-10 h-10 rounded-xl bg-[#3a8cd7]/10 flex items-center justify-center text-[#3a8cd7]">
+                        <CheckCircle size={18} />
+                      </div>
+                      <span className="text-[9px] font-mono text-white/40 tracking-wider">OUTCOMES</span>
+                    </div>
+                    <div className="flex items-baseline gap-1 mt-1">
+                      <span className="text-3xl font-black text-white leading-none tracking-tight">
+                        <CountUp to={14} duration={1400} />+
+                      </span>
+                      <span className="text-[10px] text-white/40 font-mono">LIVE PROJECTS</span>
+                    </div>
+                    <p className="text-white/45 text-[11px] leading-relaxed mt-2">
+                      Successfully delivered scalable systems, from startup MVPs to enterprise platforms.
+                    </p>
+                  </div>
+                  <div className="pt-3 border-t border-white/[0.05] flex justify-between items-center text-[10px] text-white/35 font-mono">
+                    <span>COMPLIANCE</span>
+                    <span className="text-white/60">100% On-Time</span>
+                  </div>
+                </SpotlightCard>
+              </TiltedCard>
+            </FadeContent>
+
+            {/* Card 3: Stack Integrations */}
+            <FadeContent delay={0.7} y={20}>
+              <TiltedCard maxTilt={10} scale={1.02}>
+                <SpotlightCard
+                  className="bg-white/[0.02] backdrop-blur-xl border border-white/[0.08] hover:border-[#3a8cd7]/20 rounded-[24px] p-6 shadow-2xl transition-all duration-300 min-h-[200px] flex flex-col justify-between"
+                  spotlightColor="rgba(58, 140, 215, 0.08)"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="w-10 h-10 rounded-xl bg-[#3a8cd7]/10 flex items-center justify-center text-[#3a8cd7]">
+                        <Code size={18} />
+                      </div>
+                      <span className="text-[9px] font-mono text-white/40 tracking-wider">TECHNOLOGIES</span>
+                    </div>
+                    <div className="flex flex-wrap gap-1.5 mt-2">
+                      {["React", "Node", "TypeScript", "Next.js", "Flutter", "Tailwind"].map((t, i) => (
+                        <span key={i} className="text-[9px] font-semibold bg-white/5 border border-white/8 text-white/50 rounded-full px-2 py-0.5">{t}</span>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="pt-3 border-t border-white/[0.05] flex justify-between items-center text-[10px] text-white/35 font-mono">
+                    <span>ARCHITECTURES</span>
+                    <span className="text-white/60">Custom Built</span>
+                  </div>
+                </SpotlightCard>
+              </TiltedCard>
+            </FadeContent>
+
           </div>
         </div>
+
+        {/* Bottom System Status Bar */}
+        <div className="relative z-10 w-full border-t border-white/5 bg-black/40 backdrop-blur-md py-5 px-6 sm:px-10 md:px-14">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-xs">
+            <div className="flex flex-wrap items-center gap-x-8 gap-y-2 text-white/45 font-mono">
+              <div className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                <span>REGISTRY STATUS: MSME Registered</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span>ESTABLISHED: 2026</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span>DELIVERY METRICS:</span>
+                <span className="text-white font-black">
+                  <CountUp to={85} duration={1200} />% Client Retention
+                </span>
+              </div>
+            </div>
+            <div className="text-white/35 font-mono text-[10px] md:text-right w-full md:w-auto">
+              SYSTEM // ACTIVE_BUILDS_ONLINE
+            </div>
+          </div>
+        </div>
+
       </section>
+
 
 
       <section className="w-full bg-white py-16 border-t border-black/6">

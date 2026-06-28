@@ -1,7 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import Nav from "../components/Nav";
-import React, { useState } from "react";
-import { ArrowUpRight, ChevronDown } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { ArrowUpRight, ChevronDown, Laptop, Code, Zap, Star } from "lucide-react";
+import Antigravity from "../components/reactbits/Antigravity";
+import SplitText from "../components/reactbits/SplitText";
+import FadeContent from "../components/reactbits/FadeContent";
+import TiltedCard from "../components/reactbits/TiltedCard";
+import SpotlightCard from "../components/reactbits/SpotlightCard";
+import StarBorder from "../components/reactbits/StarBorder";
+import CountUp from "../components/reactbits/CountUp";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
@@ -272,102 +279,241 @@ function AccordionCards() {
 function Services() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   return (
     <main className="w-full bg-black text-white min-h-screen font-sans overflow-hidden">
-      <Nav />
+      <Nav theme="dark" />
 
       {/* ── HERO ── */}
-      <section className="w-full min-h-screen relative overflow-hidden flex items-stretch" style={{ minHeight: "100svh" }}>
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0" style={{ background: "#050507" }} />
-          <svg className="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true" style={{ opacity: 0.22 }}>
-            <defs><pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M 48 0 L 0 0 0 48" fill="none" stroke="rgba(191,255,0,0.3)" strokeWidth="0.5" /></pattern></defs>
-            <rect width="100%" height="100%" fill="url(#grid)" />
-          </svg>
-          <svg className="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" style={{ opacity: 0.18 }}>
-            <path d="M0 200 H400 V350 H900 V200 H1440" fill="none" stroke="#bfff00" strokeWidth="1" strokeDasharray="6 3" />
-            <path d="M0 520 H250 V420 H700 V520 H1100 V620 H1440" fill="none" stroke="#bfff00" strokeWidth="1" strokeDasharray="8 4" />
-            <path d="M700 0 V220 H1000 V380 H1300 V220 H1440" fill="none" stroke="#bfff00" strokeWidth="1" strokeDasharray="6 4" />
-            {([[400, 200], [900, 200], [250, 420], [700, 420], [1100, 520], [1000, 220], [1300, 220]] as [number, number][]).map(([cx, cy], i) => (
-              <g key={i}><circle cx={cx} cy={cy} r="4" fill="#bfff00" opacity="0.5" /><circle cx={cx} cy={cy} r="8" fill="none" stroke="#bfff00" strokeWidth="0.8" opacity="0.25" /></g>
-            ))}
-          </svg>
-          <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 50% 60% at 50% 50%, rgba(191,255,0,0.10) 0%, transparent 68%)" }} />
-          <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(100deg, rgba(5,5,7,0.88) 0%, rgba(5,5,7,0.55) 38%, rgba(5,5,7,0.10) 60%, rgba(5,5,7,0.55) 100%)" }} />
-          <div className="absolute bottom-0 left-0 w-full h-48 pointer-events-none" style={{ background: "linear-gradient(to top, #050507 0%, transparent 100%)" }} />
+      <section className="w-full min-h-screen relative overflow-hidden flex flex-col justify-between bg-[#050508]" style={{ minHeight: "100svh" }}>
+        
+        {/* Background WebGL Particle Network */}
+        <div className="absolute inset-0 z-0 pointer-events-none opacity-45">
+          {isMounted && (
+            <Antigravity
+              count={200}
+              magnetRadius={18}
+              ringRadius={10}
+              waveSpeed={0.3}
+              waveAmplitude={1.5}
+              particleSize={1.5}
+              color="#bfff00"
+              autoAnimate={true}
+            />
+          )}
         </div>
 
-        <div className="relative z-10 w-full flex flex-col md:flex-row items-end justify-between px-6 sm:px-10 md:px-14 pt-28 pb-12 gap-8">
-          <div className="flex flex-col justify-between flex-1 max-w-xl min-h-[calc(100svh-160px)]">
-            <div>
-              <div className="inline-flex items-center gap-2 bg-white/8 border border-white/15 rounded-full px-4 py-1.5 mb-8">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#bfff00] animate-pulse" />
-                <span className="text-white/60 text-[11px] font-mono tracking-[0.15em]">Tech-Driven Agency</span>
-              </div>
-              <h1 className="text-[clamp(52px,7vw,88px)] font-black text-white leading-[0.97]" style={{ letterSpacing: "-3px" }}>
-                Your Digital<br /><span className="text-[#bfff00]">Sprint Team</span><br />On Demand
-              </h1>
-              <p className="text-white/45 text-sm leading-relaxed max-w-sm mt-6">
-                From discovery to deployment, we plug into your stack to prototype, validate, and launch digital experiences your users actually love.
+        {/* Ambient Gradient Glows */}
+        <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-purple-500/10 blur-[130px] pointer-events-none z-0" />
+        <div className="absolute bottom-[20%] right-[-10%] w-[45vw] h-[45vw] rounded-full bg-cyan-500/10 blur-[120px] pointer-events-none z-0" />
+        <div className="absolute top-[40%] left-[30%] w-[35vw] h-[35vw] rounded-full bg-[#bfff00]/5 blur-[100px] pointer-events-none z-0" />
+
+        {/* Grid Overlay */}
+        <div className="absolute inset-0 z-0 pointer-events-none opacity-10">
+          <svg className="w-full h-full" aria-hidden="true">
+            <defs>
+              <pattern id="services-grid" width="48" height="48" patternUnits="userSpaceOnUse">
+                <path d="M 48 0 L 0 0 0 48" fill="none" stroke="rgba(191,255,0,0.4)" strokeWidth="0.5" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#services-grid)" />
+          </svg>
+        </div>
+
+        {/* Hero Content */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 md:px-14 pt-24 pb-4 flex-grow flex flex-col justify-center">
+          
+          {/* Tagline Badge */}
+          <FadeContent delay={0.1} y={15}>
+            <div className="inline-flex items-center gap-2 bg-white/[0.04] border border-white/[0.08] backdrop-blur-md rounded-full px-4 py-1.5 mb-4">
+              <span className="w-2 h-2 rounded-full bg-[#bfff00] animate-pulse" />
+              <span className="text-white/60 text-[10px] font-mono tracking-[0.15em] uppercase">
+                ENGINEERING &amp; ARCHITECTURE
+              </span>
+            </div>
+          </FadeContent>
+
+          {/* Headline & Subtitle */}
+          <div className="max-w-4xl mb-6">
+            <h1 className="text-[clamp(30px,5vw,60px)] font-black text-white leading-[0.95] tracking-tight uppercase flex flex-col gap-1">
+              <span className="block overflow-hidden">
+                <SplitText
+                  text="WE BUILD &amp; DEPLOY"
+                  delay={0.012}
+                  duration={0.4}
+                />
+              </span>
+              <span className="block overflow-hidden text-[#bfff00]">
+                <SplitText
+                  text="HIGH-PERFORMANCE"
+                  delay={0.012}
+                  duration={0.4}
+                />
+              </span>
+              <span className="italic font-light tracking-wide font-instrument block mt-1 lowercase text-white">
+                digital ecosystems.
+              </span>
+            </h1>
+            <FadeContent delay={0.3} y={15}>
+              <p className="text-white/50 text-xs sm:text-sm leading-relaxed max-w-xl mt-3">
+                From high-converting web apps and custom enterprise tools to browser extensions, automation pipelines, and marketing funnels. We construct modern software optimized to scale.
               </p>
-              <div className="flex items-center gap-3 mt-8 flex-wrap">
-                <Link to="/works" className="bg-white/10 hover:bg-white/15 text-white text-sm font-semibold px-7 py-3 rounded-full border border-white/20 transition-all decoration-none cursor-pointer">Explore Services</Link>
-                <Link to="/contact" className="bg-[#bfff00] hover:bg-[#d4ff33] text-black text-sm font-bold px-7 py-3 rounded-full transition-all decoration-none cursor-pointer" style={{ boxShadow: "0 6px 20px rgba(191,255,0,0.30)" }}>View Pricing Plans</Link>
+            </FadeContent>
+
+            {/* CTAs */}
+            <FadeContent delay={0.4} y={15}>
+              <div className="flex items-center gap-4 mt-5 flex-wrap">
+                <Link to="/contact">
+                  <StarBorder color="#bfff00" speed={3.5} borderRadius="9999px" borderWidth={1.5} className="cursor-pointer">
+                    <span className="inline-flex items-center bg-[#bfff00] text-black text-xs font-black px-7 py-3 rounded-full hover:bg-white transition-colors duration-300">
+                      Book a Discovery Call
+                    </span>
+                  </StarBorder>
+                </Link>
+                <button
+                  onClick={() => {
+                    const pricingSection = document.getElementById("pricing-section") || document.querySelector("section.py-20");
+                    pricingSection?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                  className="bg-white/5 hover:bg-white/10 border border-white/10 text-white text-xs font-semibold px-7 py-3.5 rounded-full transition-all duration-300 cursor-pointer"
+                >
+                  Explore Capabilities
+                </button>
               </div>
-            </div>
-            <div className="flex items-stretch gap-3 mt-auto pt-16 flex-wrap">
-              {[{ label: "Happy people", value: "14+", sub: "Clients Launched" }, { label: "KPI Improvement", value: "100%", sub: "On-Time Delivery" }, { label: "Client Retention", value: "92%", sub: "Satisfaction Rate" }].map((s, i) => (
-                <div key={i} className="flex-1 min-w-[110px] bg-white/6 border border-white/10 rounded-[16px] px-4 py-4 backdrop-blur-sm">
-                  <p className="text-[10px] text-white/35 font-mono uppercase tracking-wider mb-2">{s.label}</p>
-                  <p className="text-3xl font-black text-white leading-none tracking-tight">{s.value}</p>
-                  <p className="text-[10px] text-white/35 mt-1">{s.sub}</p>
-                </div>
-              ))}
-            </div>
+            </FadeContent>
           </div>
 
-          <div className="hidden lg:flex flex-col items-center gap-4 pb-16 self-end">
-            {["f", "in", "𝕏"].map((s, i) => (
-              <a key={i} href="#" className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-white/40 hover:text-white hover:border-white/40 transition-all text-xs font-bold">{s}</a>
-            ))}
-          </div>
 
-          <div className="hidden md:flex flex-col gap-3 w-[220px] lg:w-[260px] flex-shrink-0 self-start mt-16">
-            <div className="bg-[#111]/90 border border-white/10 rounded-[20px] overflow-hidden backdrop-blur-md">
-              <div className="flex items-center justify-between px-4 pt-4 pb-2">
-                <span className="text-[10px] text-white/40 font-mono uppercase tracking-wider">Mirastra</span>
-                <span className="text-[10px] text-white/40 font-mono uppercase tracking-wider">SAAS</span>
-              </div>
-              <div className="mx-3 rounded-[12px] overflow-hidden h-[100px] bg-[#0a0a0a] border border-white/8 flex flex-col justify-start p-3 gap-1.5">
-                <div className="flex items-center gap-1.5 mb-1">
-                  <div className="w-2 h-2 rounded-full bg-red-500/60" /><div className="w-2 h-2 rounded-full bg-yellow-500/60" /><div className="w-2 h-2 rounded-full bg-[#bfff00]/60" />
-                </div>
-                <div className="h-1.5 w-3/4 bg-[#bfff00]/25 rounded-full" />
-                <div className="h-1.5 w-full bg-white/10 rounded-full" />
-                <div className="h-1.5 w-5/6 bg-white/8 rounded-full" />
-                <div className="h-1.5 w-2/3 bg-[#bfff00]/18 rounded-full" />
-              </div>
-              <div className="px-4 pt-4 pb-3">
-                <p className="text-4xl font-black text-white leading-none tracking-tight">14+</p>
-                <p className="text-[11px] text-white/40 mt-1 leading-snug">Projects successfully launched worldwide</p>
-              </div>
-            </div>
-            <div className="bg-[#111]/90 border border-white/10 rounded-[20px] p-5 backdrop-blur-md">
-              <p className="text-4xl font-black text-white leading-none tracking-tight mb-1">8+</p>
-              <p className="text-[11px] text-white/40 mb-4">Trusted Services</p>
-              <div className="flex flex-wrap gap-1.5">
-                {["React", "Node", "Flutter", "AWS", "Firebase", "Mongo"].map((t, i) => (
-                  <span key={i} className="text-[9px] font-semibold bg-white/6 border border-white/8 text-white/50 rounded-full px-2 py-0.5">{t}</span>
-                ))}
-              </div>
-            </div>
-            <Link to="/contact" className="w-full bg-[#bfff00] hover:bg-[#d4ff33] text-black text-sm font-black py-3.5 rounded-full text-center transition-all decoration-none cursor-pointer" style={{ boxShadow: "0 6px 20px rgba(191,255,0,0.25)" }}>
-              Book a Call
-            </Link>
+          {/* Capabilities Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full mt-4">
+            
+            {/* Sector 1: Software & Apps */}
+            <FadeContent delay={0.5} y={20}>
+              <TiltedCard maxTilt={10} scale={1.02}>
+                <SpotlightCard
+                  className="bg-white/[0.02] backdrop-blur-xl border border-white/[0.08] hover:border-[#bfff00]/20 rounded-[24px] p-6 shadow-2xl transition-all duration-300 min-h-[190px] flex flex-col justify-between"
+                  spotlightColor="rgba(191, 255, 0, 0.08)"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="w-10 h-10 rounded-xl bg-[#bfff00]/10 flex items-center justify-center text-[#bfff00]">
+                        <Laptop size={18} />
+                      </div>
+                      <span className="text-[9px] font-mono text-white/40 tracking-wider">SECTOR 01</span>
+                    </div>
+                    <h3 className="text-white font-bold text-base leading-snug tracking-tight">
+                      Software &amp; Web Apps
+                    </h3>
+                    <p className="text-white/45 text-[11px] leading-relaxed mt-2">
+                      SaaS architectures, custom billing engines, responsive business sites, and multi-tenant portals.
+                    </p>
+                  </div>
+                  <div className="mt-4 pt-3 border-t border-white/[0.05] flex justify-between items-center text-[10px] text-white/35 font-mono">
+                    <span>STACK</span>
+                    <span className="text-white/60">React / Node / Next.js</span>
+                  </div>
+                </SpotlightCard>
+              </TiltedCard>
+            </FadeContent>
+
+            {/* Sector 2: Automation & Intelligence */}
+            <FadeContent delay={0.6} y={20}>
+              <TiltedCard maxTilt={10} scale={1.02}>
+                <SpotlightCard
+                  className="bg-white/[0.02] backdrop-blur-xl border border-white/[0.08] hover:border-[#bfff00]/20 rounded-[24px] p-6 shadow-2xl transition-all duration-300 min-h-[190px] flex flex-col justify-between"
+                  spotlightColor="rgba(191, 255, 0, 0.08)"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="w-10 h-10 rounded-xl bg-[#bfff00]/10 flex items-center justify-center text-[#bfff00]">
+                        <Zap size={18} />
+                      </div>
+                      <span className="text-[9px] font-mono text-white/40 tracking-wider">SECTOR 02</span>
+                    </div>
+                    <h3 className="text-white font-bold text-base leading-snug tracking-tight">
+                      Automation &amp; Extensions
+                    </h3>
+                    <p className="text-white/45 text-[11px] leading-relaxed mt-2">
+                      Chrome &amp; Edge extensions, automated scraping engines, internal workflow bots, and script architecture.
+                    </p>
+                  </div>
+                  <div className="mt-4 pt-3 border-t border-white/[0.05] flex justify-between items-center text-[10px] text-white/35 font-mono">
+                    <span>STACK</span>
+                    <span className="text-white/60">Python / Puppeteer / APIs</span>
+                  </div>
+                </SpotlightCard>
+              </TiltedCard>
+            </FadeContent>
+
+            {/* Sector 3: Digital Marketing & Funnels */}
+            <FadeContent delay={0.7} y={20}>
+              <TiltedCard maxTilt={10} scale={1.02}>
+                <SpotlightCard
+                  className="bg-white/[0.02] backdrop-blur-xl border border-white/[0.08] hover:border-[#bfff00]/20 rounded-[24px] p-6 shadow-2xl transition-all duration-300 min-h-[190px] flex flex-col justify-between"
+                  spotlightColor="rgba(191, 255, 0, 0.08)"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="w-10 h-10 rounded-xl bg-[#bfff00]/10 flex items-center justify-center text-[#bfff00]">
+                        <Star size={18} />
+                      </div>
+                      <span className="text-[9px] font-mono text-white/40 tracking-wider">SECTOR 03</span>
+                    </div>
+                    <h3 className="text-white font-bold text-base leading-snug tracking-tight">
+                      Growth &amp; Analytics
+                    </h3>
+                    <p className="text-white/45 text-[11px] leading-relaxed mt-2">
+                      High-converting landing pages, Meta/Google ad networks, custom dashboards, and SEO frameworks.
+                    </p>
+                  </div>
+                  <div className="mt-4 pt-3 border-t border-white/[0.05] flex justify-between items-center text-[10px] text-white/35 font-mono">
+                    <span>STACK</span>
+                    <span className="text-white/60">SEO / Ads / Funnels</span>
+                  </div>
+                </SpotlightCard>
+              </TiltedCard>
+            </FadeContent>
+
           </div>
         </div>
+
+        {/* Bottom System Status Bar */}
+        <div className="relative z-10 w-full border-t border-white/5 bg-black/40 backdrop-blur-md py-5 px-6 sm:px-10 md:px-14">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-xs">
+            <div className="flex flex-wrap items-center gap-x-8 gap-y-2 text-white/45 font-mono">
+              <div className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                <span>REGISTRY: MSME Registered</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span>ESTABLISHED: 2026</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span>ACTIVE DEPLOYMENTS:</span>
+                <span className="text-white font-black">
+                  <CountUp to={14} duration={1200} />+ Projects
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span>ON-TIME SLA:</span>
+                <span className="text-white font-black">
+                  <CountUp to={100} duration={1200} />%
+                </span>
+              </div>
+            </div>
+            <div className="text-white/35 font-mono text-[10px] md:text-right w-full md:w-auto">
+              STATUS // ALL_SYSTEMS_OPERATIONAL
+            </div>
+          </div>
+        </div>
+
       </section>
+
 
       {/* ── CRAFTING INTRO + AUTO-SCROLL CARDS ── */}
       <section className="w-full bg-[#0a0a0a] py-20 overflow-hidden border-t border-white/5">

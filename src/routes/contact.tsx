@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import Nav from "../components/Nav";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Mail,
   Phone,
@@ -13,6 +13,11 @@ import {
   ArrowRight,
   ArrowUpRight,
 } from "lucide-react";
+import Antigravity from "../components/reactbits/Antigravity";
+import SplitText from "../components/reactbits/SplitText";
+import FadeContent from "../components/reactbits/FadeContent";
+import StarBorder from "../components/reactbits/StarBorder";
+
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -37,6 +42,11 @@ function Contact() {
     message: "",
   });
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -62,14 +72,143 @@ function Contact() {
   return (
     <main className="w-full bg-black text-white min-h-screen relative font-sans p-3 sm:p-5 md:p-6 overflow-hidden">
       {/* Navigation */}
-      <Nav />
+      <Nav theme="dark" />
+
+      {/* ── HERO ── */}
+      <section className="w-full min-h-screen relative overflow-hidden flex flex-col justify-between bg-[#050508] mb-8" style={{ minHeight: "100svh" }}>
+        
+        {/* Background WebGL Particle Network */}
+        <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
+          {isMounted && (
+            <Antigravity
+              count={180}
+              magnetRadius={16}
+              ringRadius={12}
+              waveSpeed={0.3}
+              waveAmplitude={1.8}
+              particleSize={1.4}
+              color="#c084fc"
+              autoAnimate={true}
+            />
+          )}
+        </div>
+
+        {/* Ambient Gradient Glows */}
+        <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-purple-500/10 blur-[130px] pointer-events-none z-0" />
+        <div className="absolute bottom-[20%] right-[-10%] w-[45vw] h-[45vw] rounded-full bg-cyan-500/10 blur-[120px] pointer-events-none z-0" />
+
+        {/* Grid Overlay */}
+        <div className="absolute inset-0 z-0 pointer-events-none opacity-10">
+          <svg className="w-full h-full" aria-hidden="true">
+            <defs>
+              <pattern id="contact-grid" width="48" height="48" patternUnits="userSpaceOnUse">
+                <path d="M 48 0 L 0 0 0 48" fill="none" stroke="rgba(192,132,252,0.3)" strokeWidth="0.5" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#contact-grid)" />
+          </svg>
+        </div>
+
+        {/* Hero Content Wrapper */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 md:px-14 pt-32 pb-8 flex-grow flex flex-col justify-center">
+          
+          {/* Top Pill Tag */}
+          <FadeContent delay={0.1} y={15}>
+            <div className="inline-flex items-center gap-2 bg-white/[0.04] border border-white/[0.08] backdrop-blur-md rounded-full px-4 py-1.5 mb-4">
+              <span className="w-2 h-2 rounded-full bg-[#c084fc] animate-pulse" />
+              <span className="text-white/60 text-[10px] font-mono tracking-[0.15em] uppercase">
+                COMMISSION A BUILD
+              </span>
+            </div>
+          </FadeContent>
+
+          {/* Title & Subtitle */}
+          <div className="max-w-4xl mb-6">
+            <h1 className="text-[clamp(30px,5vw,60px)] font-black text-white leading-[0.95] tracking-tight uppercase flex flex-col gap-1">
+              <span className="block overflow-hidden">
+                <SplitText
+                  text="LET'S CONSTRUCT"
+                  delay={0.012}
+                  duration={0.4}
+                />
+              </span>
+              <span className="block overflow-hidden text-[#bfff00]">
+                <SplitText
+                  text="YOUR NEXT PLATFORM"
+                  delay={0.012}
+                  duration={0.4}
+                />
+              </span>
+              <span className="italic font-light tracking-wide font-instrument block mt-1 lowercase text-white">
+                together.
+              </span>
+            </h1>
+            <FadeContent delay={0.3} y={15}>
+              <p className="text-white/50 text-xs sm:text-sm leading-relaxed max-w-xl mt-3">
+                Have a project scope, an extension idea, or a manual workflow that needs automation? Connect with our team to map specs, outline sprints, and compile custom code.
+              </p>
+            </FadeContent>
+
+            {/* CTAs */}
+            <FadeContent delay={0.4} y={15}>
+              <div className="flex items-center gap-4 mt-5 flex-wrap">
+                <button
+                  onClick={() => {
+                    const consoleElement = document.getElementById("contact-console");
+                    consoleElement?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                  className="cursor-pointer bg-transparent border-none p-0"
+                >
+                  <StarBorder color="#c084fc" speed={3.5} borderRadius="9999px" borderWidth={1.5}>
+                    <span className="inline-flex items-center bg-[#c084fc] text-white text-xs font-black px-7 py-3.5 rounded-full hover:bg-white hover:text-black transition-colors duration-300">
+                      Begin Project Draft
+                    </span>
+                  </StarBorder>
+                </button>
+                <button
+                  onClick={() => {
+                    const consoleElement = document.getElementById("contact-console");
+                    consoleElement?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                  className="bg-white/5 hover:bg-white/10 border border-white/10 text-white text-xs font-semibold px-7 py-3.5 rounded-full transition-all duration-300 cursor-pointer"
+                >
+                  View Form Console
+                </button>
+              </div>
+            </FadeContent>
+          </div>
+        </div>
+
+        {/* Bottom System Status Bar */}
+        <div className="relative z-10 w-full border-t border-white/5 bg-black/40 backdrop-blur-md py-5 px-6 sm:px-10 md:px-14">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-xs">
+            <div className="flex flex-wrap items-center gap-x-8 gap-y-2 text-white/45 font-mono">
+              <div className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                <span>SPECIFICATION PIPELINE: OPEN</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span>ESTABLISHED: 2026</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span>COMPILER STATUS: READY</span>
+              </div>
+            </div>
+            <div className="text-white/35 font-mono text-[10px] md:text-right w-full md:w-auto">
+              SECURE // SSL_ENCRYPTED_CONNECTION
+            </div>
+          </div>
+        </div>
+
+      </section>
 
       {/* Background Glowing Lights */}
       <div className="absolute top-[30%] right-[20%] w-[350px] h-[350px] rounded-full bg-sky-900/10 blur-[130px] pointer-events-none" />
       <div className="absolute bottom-[10%] left-[10%] w-[300px] h-[300px] rounded-full bg-purple-900/10 blur-[120px] pointer-events-none" />
 
       {/* Outer Panel Container (Contact Panel) */}
-      <div className="w-full min-h-[92vh] rounded-[24px] md:rounded-[40px] border border-white/10 relative overflow-hidden flex flex-col justify-between pt-24 pb-8 px-6 sm:px-12 md:px-20 bg-[#060608]">
+      <div id="contact-console" className="w-full rounded-[24px] md:rounded-[40px] border border-white/10 relative overflow-hidden flex flex-col justify-between pt-16 pb-8 px-6 sm:px-12 md:px-20 bg-[#060608]">
+
         {/* Grid lines */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
 

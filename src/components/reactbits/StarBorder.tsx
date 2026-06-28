@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useId } from "react";
 
 interface StarBorderProps {
   children: React.ReactNode;
@@ -24,8 +24,9 @@ const StarBorder: React.FC<StarBorderProps> = ({
   borderWidth = 1,
   thickness = 24,
 }) => {
-  const idRef = useRef(`sb-${Math.random().toString(36).slice(2, 8)}`);
-  const id = idRef.current;
+  const reactId = useId();
+  const id = `sb-${reactId.replace(/:/g, "")}`;
+
 
   useEffect(() => {
     if (document.getElementById(`style-${id}`)) return;
