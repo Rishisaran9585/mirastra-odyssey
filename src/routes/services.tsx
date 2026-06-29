@@ -223,49 +223,67 @@ const ACCORDION_ITEMS = [
 function AccordionCards() {
   const [active, setActive] = useState<number>(3);
   return (
-    <div className="flex gap-3 h-[340px] md:h-[380px]">
+    <div className="flex flex-col md:flex-row gap-3 min-h-[460px] md:h-[380px]">
       {ACCORDION_ITEMS.map((item, i) => {
         const isActive = active === i;
         return (
           <div
             key={i}
             onMouseEnter={() => setActive(i)}
-            className="relative flex flex-col justify-between rounded-[20px] overflow-hidden cursor-pointer flex-shrink-0"
+            onClick={() => setActive(i)}
+            className={`relative flex flex-col justify-between rounded-[20px] overflow-hidden cursor-pointer transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+              isActive
+                ? "flex-grow h-[260px] md:h-full md:flex-[4_1_0%] p-6 md:p-7"
+                : "h-[72px] md:h-full md:flex-[1_1_0%] md:min-w-[60px] p-5 md:p-7"
+            }`}
             style={{
-              flex: isActive ? "4 1 0%" : "1 1 0%",
               background: item.bg,
-              transition: "flex 0.5s cubic-bezier(0.4,0,0.2,1)",
-              padding: "28px 24px",
-              minWidth: "60px",
             }}
           >
-            {/* Title — always visible, clips when narrow */}
-            <h3
-              className="font-black leading-[1.0] uppercase whitespace-pre-line overflow-hidden flex-shrink-0"
-              style={{
-                color: item.textColor,
-                fontSize: isActive ? "clamp(22px,2.8vw,36px)" : "clamp(11px,1.4vw,18px)",
-                letterSpacing: isActive ? "-0.5px" : "0px",
-                transition: "font-size 0.4s ease",
-              }}
-            >
-              {item.title}
-            </h3>
+            {/* Title / Header */}
+            <div className="flex justify-between items-center md:block">
+              <h3
+                className={`font-black uppercase tracking-tight transition-all duration-300 md:whitespace-pre-line ${
+                  isActive
+                    ? "text-lg sm:text-xl md:text-[2rem] md:leading-[1.0]"
+                    : "text-sm sm:text-base md:text-[11px] lg:text-[13px] md:leading-[1.1]"
+                }`}
+                style={{
+                  color: item.textColor,
+                  letterSpacing: isActive ? "-0.5px" : "0px",
+                }}
+              >
+                <span className="md:hidden">{item.title.replace(/\n/g, " ")}</span>
+                <span className="hidden md:inline">{item.title}</span>
+              </h3>
+              
+              {!isActive && (
+                <div className="md:hidden w-6 h-6 rounded-full flex items-center justify-center border transition-all duration-300"
+                  style={{
+                    borderColor: item.textColor,
+                    opacity: 0.3
+                  }}>
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                    <path d="M5 1V9M1 5H9" stroke={item.textColor} strokeWidth="1.5" strokeLinecap="round"/>
+                  </svg>
+                </div>
+              )}
+            </div>
 
             {/* Body + visual — only visible when active */}
             <div
-              style={{
-                opacity: isActive ? 1 : 0,
-                transition: "opacity 0.3s ease",
-                pointerEvents: isActive ? "auto" : "none",
-              }}
+              className={`transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+                isActive ? "opacity-100 mt-4 md:mt-0" : "opacity-0 h-0 overflow-hidden pointer-events-none"
+              }`}
             >
               <div className="flex items-end justify-between gap-4">
-                <p className="text-xs leading-relaxed max-w-[200px]" style={{ color: item.bodyColor }}>
+                <p className="text-xs sm:text-sm md:text-xs leading-relaxed max-w-[240px] md:max-w-[200px]" style={{ color: item.bodyColor }}>
                   {item.body}
                 </p>
                 {item.visual && (
-                  <div className="flex-shrink-0">{item.visual}</div>
+                  <div className="scale-75 sm:scale-90 md:scale-100 origin-bottom-right flex-shrink-0">
+                    {item.visual}
+                  </div>
                 )}
               </div>
             </div>
@@ -797,13 +815,13 @@ function Services() {
             <div className="mx-8 h-px bg-black/6" />
 
             {/* Stats row */}
-            <div className="grid grid-cols-3 divide-x divide-black/6 px-8 py-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-black/6 px-8 py-4 md:py-8">
               {[
                 { value: "14+", label: "Projects Done", sub: "Live & delivered" },
                 { value: "100%", label: "Successful Rating", sub: "On-time delivery" },
                 { value: "8+", label: "Service Domains", sub: "End-to-end stack" },
               ].map((stat, i) => (
-                <div key={i} className="flex flex-col px-4 first:pl-0 last:pr-0">
+                <div key={i} className="flex flex-col py-6 md:py-0 md:px-4 first:pt-0 last:pb-0 md:first:pl-0 md:last:pr-0">
                   <span className="text-black font-black leading-none mb-3"
                     style={{ fontSize: "clamp(42px,6vw,72px)", fontFamily: "'Courier New','Lucida Console',monospace", letterSpacing: "-2px" }}>
                     {stat.value}
@@ -1074,11 +1092,10 @@ function Services() {
               </div>
               <div className="flex items-center gap-3">
                 {[
-                  { href: "#", icon: <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg> },
-                  { href: "#", icon: <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" /></svg> },
-                  { href: "#", icon: <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" /></svg> },
+                  { href: "https://www.facebook.com/profile.php?id=61590068837109", icon: <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1V12h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z"/></svg> },
+                  { href: "https://www.instagram.com/mirastratech/", icon: <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg> },
                 ].map((s, i) => (
-                  <a key={i} href={s.href} className="w-8 h-8 rounded-lg bg-white/5 border border-white/8 flex items-center justify-center text-white/40 hover:text-white hover:bg-white/10 hover:border-white/15 transition-all duration-200">{s.icon}</a>
+                  <a key={i} href={s.href} target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-lg bg-white/5 border border-white/8 flex items-center justify-center text-white/40 hover:text-white hover:bg-white/10 hover:border-white/15 transition-all duration-200">{s.icon}</a>
                 ))}
               </div>
             </div>
@@ -1108,9 +1125,7 @@ function Services() {
                 <p className="text-white/60 text-[11px] font-semibold uppercase tracking-[0.18em]">Company</p>
                 <Link to="/about" className="text-white/28 text-xs hover:text-white/70 transition-colors decoration-none leading-snug">About Us</Link>
                 <Link to="/works" className="text-white/28 text-xs hover:text-white/70 transition-colors decoration-none leading-snug">Our Works</Link>
-                <span className="text-white/28 text-xs leading-snug cursor-default">Blog</span>
                 <Link to="/contact" className="text-white/28 text-xs hover:text-white/70 transition-colors decoration-none leading-snug">Contact</Link>
-                <span className="text-white/28 text-xs leading-snug cursor-default">Careers</span>
               </div>
               {/* Legal Column */}
               <div className="flex flex-col gap-3">
