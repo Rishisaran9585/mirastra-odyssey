@@ -1092,33 +1092,41 @@ function About() {
 
             {/* Nav columns */}
             <div className="md:col-span-7 grid grid-cols-2 sm:grid-cols-4 gap-8">
-              {[
-                {
-                  heading: "Services",
-                  links: ["Website Development", "Web Applications", "Mobile Apps", "Custom Software", "Browser Extensions"],
-                },
-                {
-                  heading: "Solutions",
-                  links: ["Automation", "Digital Marketing", "QA Testing", "UI/UX Design", "Consulting"],
-                },
-                {
-                  heading: "Company",
-                  links: ["About Us", "Our Works", "Blog", "Contact", "Careers"],
-                },
-                {
-                  heading: "Legal",
-                  links: ["Privacy Policy", "Terms of Service", "Refund Policy", "Cookie Policy"],
-                },
-              ].map((col, ci) => (
-                <div key={ci} className="flex flex-col gap-3">
-                  <p className="text-white/60 text-[11px] font-semibold uppercase tracking-[0.18em] font-mono">{col.heading}</p>
-                  {col.links.map((link, li) => (
-                    <a key={li} href="#" className="text-white/28 text-xs hover:text-white/70 transition-colors decoration-none leading-snug">
-                      {link}
-                    </a>
-                  ))}
-                </div>
-              ))}
+              {/* Services Column */}
+              <div className="flex flex-col gap-3">
+                <p className="text-white/60 text-[11px] font-semibold uppercase tracking-[0.18em] font-mono">Services</p>
+                <Link to="/services" className="text-white/28 text-xs hover:text-white/70 transition-colors decoration-none leading-snug">Website Development</Link>
+                <Link to="/services" className="text-white/28 text-xs hover:text-white/70 transition-colors decoration-none leading-snug">Web Applications</Link>
+                <Link to="/services" className="text-white/28 text-xs hover:text-white/70 transition-colors decoration-none leading-snug">Mobile Apps</Link>
+                <Link to="/services" className="text-white/28 text-xs hover:text-white/70 transition-colors decoration-none leading-snug">Custom Software</Link>
+                <Link to="/services" className="text-white/28 text-xs hover:text-white/70 transition-colors decoration-none leading-snug">Browser Extensions</Link>
+              </div>
+              {/* Solutions Column */}
+              <div className="flex flex-col gap-3">
+                <p className="text-white/60 text-[11px] font-semibold uppercase tracking-[0.18em] font-mono">Solutions</p>
+                <Link to="/services" className="text-white/28 text-xs hover:text-white/70 transition-colors decoration-none leading-snug">Automation</Link>
+                <Link to="/services" className="text-white/28 text-xs hover:text-white/70 transition-colors decoration-none leading-snug">Digital Marketing</Link>
+                <Link to="/services" className="text-white/28 text-xs hover:text-white/70 transition-colors decoration-none leading-snug">QA Testing</Link>
+                <Link to="/services" className="text-white/28 text-xs hover:text-white/70 transition-colors decoration-none leading-snug">UI/UX Design</Link>
+                <Link to="/contact" className="text-white/28 text-xs hover:text-white/70 transition-colors decoration-none leading-snug">Consulting</Link>
+              </div>
+              {/* Company Column */}
+              <div className="flex flex-col gap-3">
+                <p className="text-white/60 text-[11px] font-semibold uppercase tracking-[0.18em] font-mono">Company</p>
+                <Link to="/about" className="text-white/28 text-xs hover:text-white/70 transition-colors decoration-none leading-snug">About Us</Link>
+                <Link to="/works" className="text-white/28 text-xs hover:text-white/70 transition-colors decoration-none leading-snug">Our Works</Link>
+                <span className="text-white/28 text-xs leading-snug cursor-default">Blog</span>
+                <Link to="/contact" className="text-white/28 text-xs hover:text-white/70 transition-colors decoration-none leading-snug">Contact</Link>
+                <span className="text-white/28 text-xs leading-snug cursor-default">Careers</span>
+              </div>
+              {/* Legal Column */}
+              <div className="flex flex-col gap-3">
+                <p className="text-white/60 text-[11px] font-semibold uppercase tracking-[0.18em] font-mono">Legal</p>
+                <span className="text-white/28 text-xs leading-snug cursor-default">Privacy Policy</span>
+                <span className="text-white/28 text-xs leading-snug cursor-default">Terms of Service</span>
+                <span className="text-white/28 text-xs leading-snug cursor-default">Refund Policy</span>
+                <span className="text-white/28 text-xs leading-snug cursor-default">Cookie Policy</span>
+              </div>
             </div>
 
             {/* Right contact links */}

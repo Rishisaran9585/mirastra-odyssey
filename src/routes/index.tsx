@@ -65,7 +65,7 @@ function Index() {
       <Nav theme={isScrolled ? "light" : "dark"} />
 
       {/* 1. REDESIGNED HERO SECTION (Cinematic Dark Theme) */}
-      <div className="w-full min-h-screen relative overflow-hidden flex flex-col items-center justify-center bg-[#070708] text-white pt-28 pb-16 px-6 sm:px-12">
+      <div className="w-full min-h-screen relative overflow-hidden flex flex-col items-center justify-center bg-[#070708] text-white pt-20 sm:pt-28 pb-16 px-6 sm:px-12">
         
         {/* Background WebGL Particle Network */}
         <div className="absolute inset-0 z-0 pointer-events-none opacity-50">
@@ -95,7 +95,7 @@ function Index() {
         <div className="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-[#bfff00]/5 blur-[120px] pointer-events-none z-0" />
 
         {/* Hero Content Wrapper */}
-        <div className="relative z-10 max-w-7xl w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="relative z-10 max-w-7xl w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* Left Column: Floating Card (Web / App / Custom Dev) */}
           <div className="hidden lg:flex lg:col-span-3 justify-center">
@@ -130,7 +130,7 @@ function Index() {
           </div>
 
           {/* Center Column: Main Headline + CTAs */}
-          <div className="lg:col-span-6 flex flex-col items-center text-center">
+          <div className="lg:col-span-6 flex flex-col items-center text-center w-full">
             
             {/* Pill Badge */}
             <FadeContent delay={0.1} y={15}>
@@ -143,15 +143,17 @@ function Index() {
             </FadeContent>
 
             {/* Headline */}
-            <h1 className="flex flex-col items-center justify-center text-center">
-              <SplitText
-                text="ACCELERATE DIGITAL GROWTH"
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.05] uppercase"
-                delay={0.02}
-                duration={0.6}
-              />
+            <h1 className="flex flex-col items-center justify-center text-center w-full">
+              <div className="w-full flex justify-center">
+                <SplitText
+                  text="ACCELERATE DIGITAL GROWTH"
+                  className="text-[clamp(28px,8vw,72px)] font-black tracking-tight text-white leading-[1.05] uppercase justify-center"
+                  delay={0.02}
+                  duration={0.6}
+                />
+              </div>
               <FadeContent delay={0.35} y={12}>
-                <span className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-instrument italic font-light tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-[#bfff00] mt-2 block">
+                <span className="text-[clamp(22px,6.5vw,60px)] font-instrument italic font-light tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-[#bfff00] mt-2 block text-center w-full">
                   beyond boundaries.
                 </span>
               </FadeContent>
@@ -159,7 +161,7 @@ function Index() {
 
             {/* Subheading */}
             <FadeContent delay={0.5} y={15}>
-              <p className="text-white/55 text-sm sm:text-base max-w-lg leading-relaxed mt-6 mb-8 font-sans">
+              <p className="text-white/55 text-sm sm:text-base max-w-sm sm:max-w-lg leading-relaxed mt-4 sm:mt-6 mb-6 sm:mb-8 font-sans mx-auto">
                 Mirastra Tech is a registered studio crafting high-converting websites, custom software, and intelligent workflows that run like a well-oiled machine.
               </p>
             </FadeContent>
@@ -222,7 +224,7 @@ function Index() {
         </div>
 
         {/* Dynamic Mobile Cards Overlay (Displays on smaller devices instead of floating side columns) */}
-        <div className="lg:hidden w-full max-w-md grid grid-cols-1 gap-4 mt-8">
+        <div className="lg:hidden w-full max-w-sm sm:max-w-md grid grid-cols-1 gap-4 mt-6">
           <div className="bg-white/[0.02] backdrop-blur-xl border border-white/[0.08] rounded-[20px] p-5">
             <div className="flex items-center gap-3 mb-2">
               <div className="w-8 h-8 rounded-lg bg-[#3a8cd7]/15 flex items-center justify-center text-[#3a8cd7]">
@@ -1274,33 +1276,41 @@ function Index() {
 
             {/* Nav columns */}
             <div className="md:col-span-7 grid grid-cols-2 sm:grid-cols-4 gap-8">
-              {[
-                {
-                  heading: "Services",
-                  links: ["Website Development", "Web Applications", "Mobile Apps", "Custom Software", "Browser Extensions"],
-                },
-                {
-                  heading: "Solutions",
-                  links: ["Automation", "Digital Marketing", "QA Testing", "UI/UX Design", "Consulting"],
-                },
-                {
-                  heading: "Company",
-                  links: ["About Us", "Our Works", "Blog", "Contact", "Careers"],
-                },
-                {
-                  heading: "Legal",
-                  links: ["Privacy Policy", "Terms of Service", "Refund Policy", "Cookie Policy"],
-                },
-              ].map((col, ci) => (
-                <div key={ci} className="flex flex-col gap-3">
-                  <p className="text-white/60 text-[11px] font-semibold uppercase tracking-[0.18em]">{col.heading}</p>
-                  {col.links.map((link, li) => (
-                    <a key={li} href="#" className="text-white/28 text-xs hover:text-white/70 transition-colors decoration-none leading-snug">
-                      {link}
-                    </a>
-                  ))}
-                </div>
-              ))}
+              {/* Services Column */}
+              <div className="flex flex-col gap-3">
+                <p className="text-white/60 text-[11px] font-semibold uppercase tracking-[0.18em]">Services</p>
+                <Link to="/services" className="text-white/28 text-xs hover:text-white/70 transition-colors decoration-none leading-snug">Website Development</Link>
+                <Link to="/services" className="text-white/28 text-xs hover:text-white/70 transition-colors decoration-none leading-snug">Web Applications</Link>
+                <Link to="/services" className="text-white/28 text-xs hover:text-white/70 transition-colors decoration-none leading-snug">Mobile Apps</Link>
+                <Link to="/services" className="text-white/28 text-xs hover:text-white/70 transition-colors decoration-none leading-snug">Custom Software</Link>
+                <Link to="/services" className="text-white/28 text-xs hover:text-white/70 transition-colors decoration-none leading-snug">Browser Extensions</Link>
+              </div>
+              {/* Solutions Column */}
+              <div className="flex flex-col gap-3">
+                <p className="text-white/60 text-[11px] font-semibold uppercase tracking-[0.18em]">Solutions</p>
+                <Link to="/services" className="text-white/28 text-xs hover:text-white/70 transition-colors decoration-none leading-snug">Automation</Link>
+                <Link to="/services" className="text-white/28 text-xs hover:text-white/70 transition-colors decoration-none leading-snug">Digital Marketing</Link>
+                <Link to="/services" className="text-white/28 text-xs hover:text-white/70 transition-colors decoration-none leading-snug">QA Testing</Link>
+                <Link to="/services" className="text-white/28 text-xs hover:text-white/70 transition-colors decoration-none leading-snug">UI/UX Design</Link>
+                <Link to="/contact" className="text-white/28 text-xs hover:text-white/70 transition-colors decoration-none leading-snug">Consulting</Link>
+              </div>
+              {/* Company Column */}
+              <div className="flex flex-col gap-3">
+                <p className="text-white/60 text-[11px] font-semibold uppercase tracking-[0.18em]">Company</p>
+                <Link to="/about" className="text-white/28 text-xs hover:text-white/70 transition-colors decoration-none leading-snug">About Us</Link>
+                <Link to="/works" className="text-white/28 text-xs hover:text-white/70 transition-colors decoration-none leading-snug">Our Works</Link>
+                <span className="text-white/28 text-xs leading-snug cursor-default">Blog</span>
+                <Link to="/contact" className="text-white/28 text-xs hover:text-white/70 transition-colors decoration-none leading-snug">Contact</Link>
+                <span className="text-white/28 text-xs leading-snug cursor-default">Careers</span>
+              </div>
+              {/* Legal Column */}
+              <div className="flex flex-col gap-3">
+                <p className="text-white/60 text-[11px] font-semibold uppercase tracking-[0.18em]">Legal</p>
+                <span className="text-white/28 text-xs leading-snug cursor-default">Privacy Policy</span>
+                <span className="text-white/28 text-xs leading-snug cursor-default">Terms of Service</span>
+                <span className="text-white/28 text-xs leading-snug cursor-default">Refund Policy</span>
+                <span className="text-white/28 text-xs leading-snug cursor-default">Cookie Policy</span>
+              </div>
             </div>
 
             {/* Right: two icon buttons */}
