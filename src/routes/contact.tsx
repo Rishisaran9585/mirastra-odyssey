@@ -48,7 +48,7 @@ function Contact() {
     setIsMounted(true);
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formState.name || !formState.email || !formState.message) {
       setStatus("error");
@@ -56,17 +56,49 @@ function Contact() {
       return;
     }
     setStatus("sending");
-    // Simulate API request
-    setTimeout(() => {
-      setStatus("success");
-      setFormState({
-        name: "",
-        email: "",
-        projectType: "Website",
-        budget: "₹10,000 - ₹25,000",
-        message: "",
+
+    try {
+      const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "YOUR_ACCESS_KEY_HERE";
+      
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify({
+          access_key: accessKey,
+          name: formState.name,
+          email: formState.email,
+          project_type: formState.projectType,
+          budget: formState.budget,
+          message: formState.message,
+          from_name: "Mirastra Contact Form",
+          subject: `New Lead: ${formState.name} (${formState.projectType})`,
+        }),
       });
-    }, 1800);
+
+      const result = await response.json();
+
+      if (result.success) {
+        setStatus("success");
+        setFormState({
+          name: "",
+          email: "",
+          projectType: "Website",
+          budget: "₹10,000 - ₹25,000",
+          message: "",
+        });
+      } else {
+        console.error("Web3Forms error:", result);
+        setStatus("error");
+        setTimeout(() => setStatus("idle"), 4000);
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 4000);
+    }
   };
 
   return (
@@ -81,14 +113,21 @@ function Contact() {
         <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
           {isMounted && (
             <Antigravity
-              count={180}
-              magnetRadius={16}
-              ringRadius={12}
-              waveSpeed={0.3}
-              waveAmplitude={1.8}
-              particleSize={1.4}
-              color="#c084fc"
+              count={300}
+              magnetRadius={6}
+              ringRadius={7}
+              waveSpeed={0.4}
+              waveAmplitude={1}
+              particleSize={1.5}
+              lerpSpeed={0.15}
+              color="#5227FF"
               autoAnimate={true}
+              particleVariance={1}
+              rotationSpeed={0}
+              depthFactor={1}
+              pulseSpeed={3}
+              particleShape="capsule"
+              fieldStrength={10}
             />
           )}
         </div>

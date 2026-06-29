@@ -139,13 +139,51 @@ const SERVICES = [
 export default function ServicesPortfolioContact() {
   const [formState, setFormState] = useState({ name: "", email: "", details: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "error">("idle");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (formState.name && formState.email) {
-      setSubmitted(true);
-      setFormState({ name: "", email: "", details: "" });
-      setTimeout(() => setSubmitted(false), 5000);
+    if (!formState.name || !formState.email) {
+      return;
+    }
+    
+    setStatus("sending");
+
+    try {
+      const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "YOUR_ACCESS_KEY_HERE";
+
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify({
+          access_key: accessKey,
+          name: formState.name,
+          email: formState.email,
+          message: formState.details || "No project details provided.",
+          from_name: "Mirastra Portfolio Page Contact Form",
+          subject: `New Lead: ${formState.name} (Portfolio Page)`,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setSubmitted(true);
+        setFormState({ name: "", email: "", details: "" });
+        setStatus("idle");
+        setTimeout(() => setSubmitted(false), 5000);
+      } else {
+        console.error("Web3Forms error:", result);
+        setStatus("error");
+        setTimeout(() => setStatus("idle"), 4000);
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 4000);
     }
   };
 
@@ -570,8 +608,8 @@ export default function ServicesPortfolioContact() {
                     </div>
 
                     <div className="pt-4">
-                      <CTAButton type="submit" theme="white">
-                        Send Message →
+                      <CTAButton type="submit" theme="white" disabled={status === "sending"}>
+                        {status === "sending" ? "Sending..." : "Send Message →"}
                       </CTAButton>
                     </div>
                   </form>

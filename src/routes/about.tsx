@@ -60,15 +60,21 @@ function About() {
         <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
           {isMounted && (
             <Antigravity
-              count={180}
-              magnetRadius={15}
-              ringRadius={10}
-              waveSpeed={0.2}
-              waveAmplitude={1.5}
+              count={300}
+              magnetRadius={6}
+              ringRadius={7}
+              waveSpeed={0.4}
+              waveAmplitude={1}
               particleSize={1.5}
-              color="#3a8cd7"
+              lerpSpeed={0.15}
+              color="#5227FF"
               autoAnimate={true}
-              particleShape="tetrahedron"
+              particleVariance={1}
+              rotationSpeed={0}
+              depthFactor={1}
+              pulseSpeed={3}
+              particleShape="capsule"
+              fieldStrength={10}
             />
           )}
         </div>

@@ -36,7 +36,15 @@ export default function Nav({ theme = "light" }: NavProps) {
         }`}
       >
         {/* Logo */}
-        <Link to="/" className="flex-shrink-0 decoration-none cursor-pointer hover:opacity-80 transition-opacity">
+        <Link
+          to="/"
+          onClick={() => {
+            if (window.location.pathname === "/") {
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+          }}
+          className="flex-shrink-0 decoration-none cursor-pointer hover:opacity-80 transition-opacity"
+        >
           <img src={theme === "dark" ? "/mirastra_wlogo.png" : "/mirastra_logo.png"} alt="Mirastra Tech" className="w-auto object-contain" style={{ height: 60 }} />
         </Link>
 
@@ -48,6 +56,11 @@ export default function Nav({ theme = "light" }: NavProps) {
             <Link
               key={item.label}
               to={item.to}
+              onClick={() => {
+                if (window.location.pathname === item.to) {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }
+              }}
               className={`px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider ${
                 theme === "dark" ? "text-white/60 hover:text-white hover:bg-white/10" : "text-black/50 hover:text-black hover:bg-black/5"
               } transition-all cursor-pointer decoration-none`}
@@ -99,6 +112,11 @@ export default function Nav({ theme = "light" }: NavProps) {
             <Link
               key={item.label}
               to={item.to}
+              onClick={() => {
+                if (window.location.pathname === item.to) {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }
+              }}
               className="px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider text-white/60 hover:text-white hover:bg-white/8 transition-all cursor-pointer decoration-none"
               activeProps={{
                 style: {
@@ -128,7 +146,12 @@ export default function Nav({ theme = "light" }: NavProps) {
             <Link
               key={item.label}
               to={item.to}
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={() => {
+                setMobileMenuOpen(false);
+                if (window.location.pathname === item.to) {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }
+              }}
               className="text-white text-2xl font-light hover:text-white/60 tracking-widest uppercase cursor-pointer transition-colors decoration-none"
               activeProps={{ style: { fontWeight: "600", borderBottom: "2px solid white" } }}
             >

@@ -241,7 +241,7 @@ function AccordionCards() {
           >
             {/* Title — always visible, clips when narrow */}
             <h3
-              className="font-black leading-[1.0] uppercase whitespace-pre-line overflow-hidden"
+              className="font-black leading-[1.0] uppercase whitespace-pre-line overflow-hidden flex-shrink-0"
               style={{
                 color: item.textColor,
                 fontSize: isActive ? "clamp(22px,2.8vw,36px)" : "clamp(11px,1.4vw,18px)",
@@ -296,14 +296,21 @@ function Services() {
         <div className="absolute inset-0 z-0 pointer-events-none opacity-45">
           {isMounted && (
             <Antigravity
-              count={200}
-              magnetRadius={18}
-              ringRadius={10}
-              waveSpeed={0.3}
-              waveAmplitude={1.5}
+              count={300}
+              magnetRadius={6}
+              ringRadius={7}
+              waveSpeed={0.4}
+              waveAmplitude={1}
               particleSize={1.5}
+              lerpSpeed={0.15}
               color="#bfff00"
               autoAnimate={true}
+              particleVariance={1}
+              rotationSpeed={0}
+              depthFactor={1}
+              pulseSpeed={3}
+              particleShape="capsule"
+              fieldStrength={10}
             />
           )}
         </div>

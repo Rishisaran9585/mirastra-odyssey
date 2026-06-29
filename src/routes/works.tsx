@@ -75,14 +75,21 @@ function Works() {
         <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
           {isMounted && (
             <Antigravity
-              count={180}
-              magnetRadius={16}
-              ringRadius={12}
-              waveSpeed={0.3}
-              waveAmplitude={1.8}
-              particleSize={1.4}
-              color="#3a8cd7"
+              count={300}
+              magnetRadius={6}
+              ringRadius={7}
+              waveSpeed={0.4}
+              waveAmplitude={1}
+              particleSize={1.5}
+              lerpSpeed={0.15}
+              color="#5227FF"
               autoAnimate={true}
+              particleVariance={1}
+              rotationSpeed={0}
+              depthFactor={1}
+              pulseSpeed={3}
+              particleShape="capsule"
+              fieldStrength={10}
             />
           )}
         </div>
